@@ -41,7 +41,7 @@ export default function Edit({ course }: Props) {
             <div className="max-w-4xl mx-auto space-y-6">
                 <Link
                     href="/admin/courses"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-900"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-neutral-900"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Back to Courses</span>
@@ -49,8 +49,8 @@ export default function Edit({ course }: Props) {
 
                 <form onSubmit={handleSubmit} className="space-y-8">
                     {/* General Settings */}
-                    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs space-y-4">
-                        <h2 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+                    <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-xs space-y-4">
+                        <h2 className="text-sm font-bold text-neutral-900 dark:text-white uppercase tracking-wider">
                             Course Settings
                         </h2>
 
@@ -61,7 +61,7 @@ export default function Edit({ course }: Props) {
                                     type="text"
                                     value={data.slug}
                                     onChange={(e) => setData('slug', e.target.value)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950 font-mono"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950 font-mono"
                                     required
                                 />
                                 {errors.slug && <div className="text-xs text-red-500 mt-1">{errors.slug}</div>}
@@ -73,7 +73,7 @@ export default function Edit({ course }: Props) {
                                     type="text"
                                     value={data.color}
                                     onChange={(e) => setData('color', e.target.value)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950 font-mono"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950 font-mono"
                                 />
                             </div>
 
@@ -83,7 +83,7 @@ export default function Edit({ course }: Props) {
                                     type="number"
                                     value={data.order}
                                     onChange={(e) => setData('order', parseInt(e.target.value) || 0)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
                         </div>
@@ -94,7 +94,7 @@ export default function Edit({ course }: Props) {
                                     type="checkbox"
                                     checked={data.is_published}
                                     onChange={(e) => setData('is_published', e.target.checked)}
-                                    className="rounded border-slate-300 text-emerald-600"
+                                    className="rounded border-neutral-300 text-primary-600"
                                 />
                                 <span>Published (Visible to students)</span>
                             </label>
@@ -104,10 +104,10 @@ export default function Edit({ course }: Props) {
                     {/* Dual Translations Panel */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* English Content */}
-                        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs space-y-4">
+                        <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-xs space-y-4">
                             <div className="flex items-center gap-2">
                                 <span className="text-base">🇬🇧</span>
-                                <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                                <h3 className="text-sm font-bold text-neutral-900 dark:text-white">
                                     English Translation
                                 </h3>
                             </div>
@@ -118,7 +118,7 @@ export default function Edit({ course }: Props) {
                                     type="text"
                                     value={data.en_title}
                                     onChange={(e) => setData('en_title', e.target.value)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950"
                                     required
                                 />
                             </div>
@@ -129,16 +129,16 @@ export default function Edit({ course }: Props) {
                                     value={data.en_description}
                                     onChange={(e) => setData('en_description', e.target.value)}
                                     rows={3}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
                         </div>
 
                         {/* Khmer Content */}
-                        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs space-y-4">
+                        <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-xs space-y-4">
                             <div className="flex items-center gap-2">
                                 <span className="text-base">🇰🇭</span>
-                                <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                                <h3 className="text-sm font-bold text-neutral-900 dark:text-white">
                                     Khmer Translation (ភាសាខ្មែរ)
                                 </h3>
                             </div>
@@ -149,7 +149,7 @@ export default function Edit({ course }: Props) {
                                     type="text"
                                     value={data.km_title}
                                     onChange={(e) => setData('km_title', e.target.value)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
 
@@ -159,7 +159,7 @@ export default function Edit({ course }: Props) {
                                     value={data.km_description}
                                     onChange={(e) => setData('km_description', e.target.value)}
                                     rows={3}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
                         </div>
@@ -169,7 +169,7 @@ export default function Edit({ course }: Props) {
                         <button
                             type="submit"
                             disabled={processing}
-                            className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm disabled:opacity-50"
+                            className="flex items-center gap-2 px-6 py-2.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm disabled:opacity-50"
                         >
                             <Save className="w-4 h-4" />
                             <span>Save Changes</span>

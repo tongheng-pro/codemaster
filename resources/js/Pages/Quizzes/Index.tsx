@@ -20,10 +20,10 @@ export default function Index({ quizzes = [] }: Props) {
                         <HelpCircle className="w-3.5 h-3.5" />
                         <span>Assessment</span>
                     </div>
-                    <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                    <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
                         {t('quizzes.title')}
                     </h1>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                    <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
                         {t('quizzes.subtitle')}
                     </p>
                 </div>
@@ -33,7 +33,7 @@ export default function Index({ quizzes = [] }: Props) {
                         <Link
                             key={quiz.id}
                             href={`/quizzes/${quiz.slug}`}
-                            className="group p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-purple-500/60 shadow-xs hover:shadow-xl hover:shadow-purple-500/5 transition-all flex flex-col justify-between"
+                            className="group p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-purple-500/60 shadow-xs hover:shadow-xl hover: transition-all flex flex-col justify-between"
                         >
                             <div>
                                 <div className="flex items-center justify-between mb-3">
@@ -41,22 +41,22 @@ export default function Index({ quizzes = [] }: Props) {
                                         {quiz.questions_count || 0} Questions
                                     </span>
                                     {quiz.user_attempt && quiz.user_attempt.passed && (
-                                        <span className="flex items-center gap-1 text-xs text-emerald-600 font-semibold">
+                                        <span className="flex items-center gap-1 text-xs text-primary-600 font-semibold">
                                             <CheckCircle2 className="w-4 h-4" />
                                             <span>{quiz.user_attempt.percentage}%</span>
                                         </span>
                                     )}
                                 </div>
 
-                                <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                                <h3 className="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                                     {quiz.title}
                                 </h3>
-                                <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 leading-relaxed line-clamp-2">
+                                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed line-clamp-2">
                                     {quiz.description}
                                 </p>
                             </div>
 
-                            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-purple-600 dark:text-purple-400">
+                            <div className="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-xs font-semibold text-purple-600 dark:text-purple-400">
                                 <span>Passing: {quiz.pass_percentage}%</span>
                                 <div className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                                     <span>Take Quiz</span>

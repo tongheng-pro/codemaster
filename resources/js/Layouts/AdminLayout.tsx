@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { useTranslation } from '@/Hooks/useTranslation';
 import LanguageSwitcher from '@/Components/LanguageSwitcher';
+import ThemeToggle from '@/Components/ThemeToggle';
 import { PageProps } from '@/Types';
 import {
     LayoutDashboard,
@@ -41,22 +42,22 @@ export default function AdminLayout({ title, children }: Props) {
     ];
 
     return (
-        <div className="min-h-screen flex bg-slate-100 dark:bg-slate-950 font-sans">
+        <div className="min-h-screen flex bg-neutral-50 dark:bg-neutral-950 font-sans">
             <Head title={`Admin: ${title}`} />
 
             {/* Sidebar Desktop & Mobile */}
             <aside
                 className={cn(
-                    'fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 flex flex-col transition-transform duration-200 lg:static lg:translate-x-0',
+                    'fixed inset-y-0 left-0 z-50 w-64 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border-r border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300 flex flex-col transition-transform duration-200 lg:static lg:translate-x-0',
                     sidebarOpen ? 'translate-x-0' : '-translate-x-full'
                 )}
             >
-                <div className="p-4 flex items-center justify-between border-b border-slate-800">
+                <div className="p-4 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800">
                     <div className="flex items-center gap-2">
-                        <img src="/images/dynosure-logo.png" alt="CodeMaster" className="w-8 h-8 rounded-lg bg-white object-cover" />
+                        <img src="/images/dynosures-logo.png" alt="CodeMaster" className="w-8 h-8 object-contain" />
                         <div>
-                            <div className="font-bold text-sm text-white">CodeMaster</div>
-                            <div className="text-[10px] text-amber-400 font-mono tracking-wider uppercase">
+                            <div className="font-semibold text-sm text-neutral-900 dark:text-white">CodeMaster</div>
+                            <div className="text-[10px] text-neutral-500 font-medium tracking-wider uppercase">
                                 Admin Panel
                             </div>
                         </div>
@@ -64,7 +65,7 @@ export default function AdminLayout({ title, children }: Props) {
                     <button
                         type="button"
                         onClick={() => setSidebarOpen(false)}
-                        className="lg:hidden p-1 text-slate-400 hover:text-white"
+                        className="lg:hidden p-1 text-neutral-400 hover:text-neutral-900 dark:hover:text-white"
                     >
                         <X className="w-5 h-5" />
                     </button>
@@ -73,7 +74,7 @@ export default function AdminLayout({ title, children }: Props) {
                 <div className="p-3">
                     <Link
                         href="/"
-                        className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors mb-4"
+                        className="flex items-center gap-2 px-3 py-2 text-xs font-medium text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors mb-4"
                     >
                         <ArrowLeft className="w-3.5 h-3.5" />
                         <span>Return to Main Site</span>
@@ -91,8 +92,8 @@ export default function AdminLayout({ title, children }: Props) {
                                     className={cn(
                                         'flex items-center gap-2.5 px-3 py-2 rounded-lg font-medium transition-colors',
                                         isActive
-                                            ? 'bg-emerald-600 text-white shadow-xs'
-                                            : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                                            ? 'bg-primary-600 text-white'
+                                            : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800'
                                     )}
                                 >
                                     <Icon className="w-4 h-4" />
@@ -103,12 +104,12 @@ export default function AdminLayout({ title, children }: Props) {
                     </nav>
                 </div>
 
-                <div className="mt-auto p-4 border-t border-slate-800 text-xs text-slate-400 flex items-center justify-between">
+                <div className="mt-auto p-4 border-t border-neutral-200 dark:border-neutral-800 text-xs text-neutral-500 flex items-center justify-between">
                     <div>
-                        <div className="text-white font-medium truncate max-w-[120px]">
+                        <div className="text-neutral-900 dark:text-white font-medium truncate max-w-[120px]">
                             {auth.user?.name}
                         </div>
-                        <div className="text-[10px] text-emerald-400">Administrator</div>
+                        <div className="text-[10px] text-primary-400">Administrator</div>
                     </div>
                     <LanguageSwitcher />
                 </div>
@@ -123,18 +124,19 @@ export default function AdminLayout({ title, children }: Props) {
 
             {/* Admin Content Area */}
             <div className="flex-1 flex flex-col min-w-0">
-                <header className="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-4 sm:px-8 flex items-center justify-between">
+                <header className="h-16 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-neutral-200 dark:border-neutral-800 px-4 sm:px-8 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <button
                             type="button"
                             onClick={() => setSidebarOpen(true)}
-                            className="lg:hidden p-2 rounded-lg text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+                            className="lg:hidden p-2 rounded-lg text-neutral-600 hover:bg-neutral-100 dark:text-neutral-300 dark:hover:bg-neutral-800"
                         >
                             <Menu className="w-5 h-5" />
                         </button>
-                        <h1 className="text-lg font-bold text-slate-800 dark:text-white">{title}</h1>
+                        <h1 className="text-lg font-bold text-neutral-800 dark:text-white">{title}</h1>
                     </div>
                     <div className="flex items-center gap-3">
+                        <ThemeToggle />
                         <LanguageSwitcher />
                     </div>
                 </header>

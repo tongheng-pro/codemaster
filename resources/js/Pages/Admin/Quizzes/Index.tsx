@@ -28,21 +28,21 @@ export default function Index({ quizzes = [] }: Props) {
         <AdminLayout title={t('admin.manage_quizzes')}>
             <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-neutral-500">
                         Create skill quizzes, configure question types, and set correct answers.
                     </p>
                     <Link
                         href="/admin/quizzes/create"
-                        className="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
+                        className="flex items-center gap-1.5 px-4 py-2 bg-primary-600 hover:bg-primary-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
                     >
                         <Plus className="w-4 h-4" />
                         <span>Add Quiz</span>
                     </Link>
                 </div>
 
-                <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-xs">
+                <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden shadow-xs">
                     <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase font-semibold">
+                        <thead className="bg-neutral-50 dark:bg-neutral-800/60 border-b border-neutral-200 dark:border-neutral-800 text-neutral-500 uppercase font-semibold">
                             <tr>
                                 <th className="p-4">Quiz Title</th>
                                 <th className="p-4">Course</th>
@@ -52,21 +52,21 @@ export default function Index({ quizzes = [] }: Props) {
                                 <th className="p-4 text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
                             {quizzes.map((q) => (
-                                <tr key={q.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                                    <td className="p-4 font-bold text-slate-900 dark:text-white">
+                                <tr key={q.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-800/40">
+                                    <td className="p-4 font-bold text-neutral-900 dark:text-white">
                                         {q.en_title}
                                     </td>
-                                    <td className="p-4 text-slate-600">{q.course_title}</td>
-                                    <td className="p-4 font-mono text-slate-500">{q.slug}</td>
+                                    <td className="p-4 text-neutral-600">{q.course_title}</td>
+                                    <td className="p-4 font-mono text-neutral-500">{q.slug}</td>
                                     <td className="p-4 font-bold text-purple-600">{q.questions_count} questions</td>
                                     <td className="p-4 font-mono">{q.pass_percentage}%</td>
                                     <td className="p-4 text-right">
                                         <div className="flex items-center justify-end gap-2">
                                             <Link
                                                 href={`/quizzes/${q.slug}`}
-                                                className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 text-slate-600"
+                                                className="p-1.5 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 text-neutral-600"
                                                 target="_blank"
                                                 title="View Quiz"
                                             >

@@ -30,16 +30,16 @@ export default function Index({ exercises = [] }: Props) {
                             <Terminal className="w-3.5 h-3.5" />
                             <span>Practice</span>
                         </div>
-                        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                        <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
                             {t('exercises.title')}
                         </h1>
-                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                        <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
                             {t('exercises.subtitle')}
                         </p>
                     </div>
 
                     {/* Language Filter */}
-                    <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-slate-800/70 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <div className="flex items-center gap-1.5 p-1 bg-neutral-100 dark:bg-neutral-800/70 rounded-xl border border-neutral-200 dark:border-neutral-800">
                         {languages.map((lang) => (
                             <button
                                 key={lang}
@@ -48,8 +48,8 @@ export default function Index({ exercises = [] }: Props) {
                                 className={cn(
                                     'px-3 py-1 rounded-lg text-xs font-medium uppercase font-mono transition-colors',
                                     selectedLang === lang
-                                        ? 'bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 shadow-xs font-bold'
-                                        : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                                        ? 'bg-white dark:bg-neutral-900 text-blue-600 dark:text-blue-400 shadow-xs font-bold'
+                                        : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200'
                                 )}
                             >
                                 {lang}
@@ -63,7 +63,7 @@ export default function Index({ exercises = [] }: Props) {
                         <Link
                             key={ex.id}
                             href={`/exercises/${ex.slug}`}
-                            className="group p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-blue-500/60 shadow-xs hover:shadow-xl hover:shadow-blue-500/5 transition-all flex flex-col justify-between"
+                            className="group p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-blue-500/60 shadow-xs hover:shadow-xl hover: transition-all flex flex-col justify-between"
                         >
                             <div>
                                 <div className="flex items-center justify-between mb-3">
@@ -71,26 +71,26 @@ export default function Index({ exercises = [] }: Props) {
                                         {ex.language}
                                     </span>
                                     <div className="flex items-center gap-2">
-                                        <span className="text-[11px] font-medium text-slate-400 capitalize">
+                                        <span className="text-[11px] font-medium text-neutral-400 capitalize">
                                             {ex.difficulty}
                                         </span>
                                         {ex.has_passed && (
-                                            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
+                                            <CheckCircle2 className="w-4 h-4 text-green-500" />
                                         )}
                                     </div>
                                 </div>
 
-                                <h3 className="font-bold text-lg text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                <h3 className="font-bold text-lg text-neutral-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                                     {ex.title}
                                 </h3>
                                 {ex.course_title && (
-                                    <p className="text-xs text-slate-400 mt-1">
-                                        Part of: <span className="text-slate-600 dark:text-slate-300 font-medium">{ex.course_title}</span>
+                                    <p className="text-xs text-neutral-400 mt-1">
+                                        Part of: <span className="text-neutral-600 dark:text-neutral-300 font-medium">{ex.course_title}</span>
                                     </p>
                                 )}
                             </div>
 
-                            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-semibold text-blue-600 dark:text-blue-400">
+                            <div className="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-xs font-semibold text-blue-600 dark:text-blue-400">
                                 <span>{ex.points} Points</span>
                                 <div className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                                     <span>{t('exercises.solve_challenge')}</span>

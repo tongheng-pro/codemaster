@@ -182,25 +182,25 @@ export default function Review({ book, chapters, pages }: Props) {
 
             <div className="max-w-[1600px] mx-auto px-4 sm:px-6 py-6">
                 {/* Top Action Bar */}
-                <div className="flex flex-wrap items-center justify-between gap-4 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm mb-6">
+                <div className="flex flex-wrap items-center justify-between gap-4 bg-white dark:bg-neutral-900 p-4 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm mb-6">
                     <div className="flex items-center gap-3">
                         <Link
                             href="/admin/books"
-                            className="p-2 rounded-xl text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                            className="p-2 rounded-xl text-neutral-500 hover:text-neutral-900 dark:hover:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
                         >
                             <ArrowLeft className="w-5 h-5" />
                         </Link>
                         <div>
                             <div className="flex items-center gap-2">
-                                <h1 className="font-extrabold text-lg text-slate-900 dark:text-white">
+                                <h1 className="font-extrabold text-lg text-neutral-900 dark:text-white">
                                     {book.en_title}
                                 </h1>
-                                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono">
+                                <span className="text-xs px-2 py-0.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 font-mono">
                                     {book.total_pages} Pages
                                 </span>
                             </div>
-                            <div className="text-xs text-slate-400">
-                                Status: <span className="font-semibold text-teal-600 uppercase">{book.status}</span>
+                            <div className="text-xs text-neutral-400">
+                                Status: <span className="font-semibold text-primary-600 uppercase">{book.status}</span>
                             </div>
                         </div>
                     </div>
@@ -209,9 +209,9 @@ export default function Review({ book, chapters, pages }: Props) {
                         <button
                             type="button"
                             onClick={handleTranslateBook}
-                            className="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                            className="px-3.5 py-2 rounded-xl bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-neutral-700 dark:text-neutral-200 text-xs font-semibold flex items-center gap-1.5 transition-colors"
                         >
-                            <Globe className="w-4 h-4 text-teal-500" />
+                            <Globe className="w-4 h-4 text-primary-500" />
                             <span>Translate Book to Khmer</span>
                         </button>
 
@@ -222,7 +222,7 @@ export default function Review({ book, chapters, pages }: Props) {
                                 'px-4 py-2 rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5',
                                 book.is_published
                                     ? 'bg-amber-600 hover:bg-amber-700 text-white'
-                                    : 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                                    : 'bg-primary-600 hover:bg-primary-700 text-white'
                             )}
                         >
                             <CheckCircle2 className="w-4 h-4" />
@@ -234,22 +234,22 @@ export default function Review({ book, chapters, pages }: Props) {
                 {/* Split-Screen Review Workspace */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                     {/* Left Pane: Original Page Text & OCR Viewer (5 Columns) */}
-                    <div className="lg:col-span-5 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-4 sticky top-6">
-                        <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3 mb-3">
+                    <div className="lg:col-span-5 bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm p-4 sticky top-6">
+                        <div className="flex items-center justify-between border-b border-neutral-100 dark:border-neutral-800 pb-3 mb-3">
                             <div className="flex items-center gap-2">
-                                <FileText className="w-4 h-4 text-teal-600" />
-                                <span className="font-bold text-sm text-slate-900 dark:text-white">
+                                <FileText className="w-4 h-4 text-primary-600" />
+                                <span className="font-bold text-sm text-neutral-900 dark:text-white">
                                     Original Source Page
                                 </span>
                             </div>
 
                             {/* Page Selector */}
                             <div className="flex items-center gap-2">
-                                <label className="text-xs text-slate-500 font-medium">Page:</label>
+                                <label className="text-xs text-neutral-500 font-medium">Page:</label>
                                 <select
                                     value={selectedPageNum}
                                     onChange={(e) => setSelectedPageNum(Number(e.target.value))}
-                                    className="px-2 py-1 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs font-mono font-bold text-slate-900 dark:text-white focus:outline-none"
+                                    className="px-2 py-1 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-xs font-mono font-bold text-neutral-900 dark:text-white focus:outline-none"
                                 >
                                     {pages.map((p) => (
                                         <option key={p.page_number} value={p.page_number}>
@@ -261,15 +261,15 @@ export default function Review({ book, chapters, pages }: Props) {
                         </div>
 
                         {/* Mode Switcher */}
-                        <div className="flex gap-1 mb-3 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl text-xs">
+                        <div className="flex gap-1 mb-3 bg-neutral-100 dark:bg-neutral-800 p-1 rounded-xl text-xs">
                             <button
                                 type="button"
                                 onClick={() => setPageViewMode('extracted')}
                                 className={cn(
                                     'flex-1 py-1 rounded-lg font-medium transition-colors',
                                     pageViewMode === 'extracted'
-                                        ? 'bg-white dark:bg-slate-700 text-teal-600 dark:text-teal-400 shadow-xs'
-                                        : 'text-slate-500 hover:text-slate-900'
+                                        ? 'bg-white dark:bg-neutral-700 text-primary-600 dark:text-primary-400 shadow-xs'
+                                        : 'text-neutral-500 hover:text-neutral-900'
                                 )}
                             >
                                 Extracted Text
@@ -280,8 +280,8 @@ export default function Review({ book, chapters, pages }: Props) {
                                 className={cn(
                                     'flex-1 py-1 rounded-lg font-medium transition-colors',
                                     pageViewMode === 'ocr'
-                                        ? 'bg-white dark:bg-slate-700 text-teal-600 dark:text-teal-400 shadow-xs'
-                                        : 'text-slate-500 hover:text-slate-900'
+                                        ? 'bg-white dark:bg-neutral-700 text-primary-600 dark:text-primary-400 shadow-xs'
+                                        : 'text-neutral-500 hover:text-neutral-900'
                                 )}
                             >
                                 OCR Text
@@ -293,8 +293,8 @@ export default function Review({ book, chapters, pages }: Props) {
                                     className={cn(
                                         'flex-1 py-1 rounded-lg font-medium transition-colors',
                                         pageViewMode === 'image'
-                                            ? 'bg-white dark:bg-slate-700 text-teal-600 dark:text-teal-400 shadow-xs'
-                                            : 'text-slate-500 hover:text-slate-900'
+                                            ? 'bg-white dark:bg-neutral-700 text-primary-600 dark:text-primary-400 shadow-xs'
+                                            : 'text-neutral-500 hover:text-neutral-900'
                                     )}
                                 >
                                     Page Snapshot
@@ -303,7 +303,7 @@ export default function Review({ book, chapters, pages }: Props) {
                         </div>
 
                         {/* Page Content Display */}
-                        <div className="h-[calc(100vh-18rem)] overflow-y-auto rounded-xl border border-slate-100 dark:border-slate-800/80 bg-slate-50 dark:bg-slate-950 p-4 text-xs font-mono leading-relaxed">
+                        <div className="h-[calc(100vh-18rem)] overflow-y-auto rounded-xl border border-neutral-100 dark:border-neutral-800/80 bg-neutral-50 dark:bg-neutral-950 p-4 text-xs font-mono leading-relaxed">
                             {pageViewMode === 'image' && activePage?.page_image_url ? (
                                 <img
                                     src={activePage.page_image_url}
@@ -311,11 +311,11 @@ export default function Review({ book, chapters, pages }: Props) {
                                     className="w-full rounded-lg shadow-sm"
                                 />
                             ) : pageViewMode === 'ocr' ? (
-                                <div className="whitespace-pre-wrap text-slate-700 dark:text-slate-300">
+                                <div className="whitespace-pre-wrap text-neutral-700 dark:text-neutral-300">
                                     {activePage?.ocr_text || '(No separate OCR text; direct text extraction was clean)'}
                                 </div>
                             ) : (
-                                <div className="whitespace-pre-wrap text-slate-700 dark:text-slate-300">
+                                <div className="whitespace-pre-wrap text-neutral-700 dark:text-neutral-300">
                                     {activePage?.extracted_text || '(Empty page content)'}
                                 </div>
                             )}
@@ -325,32 +325,32 @@ export default function Review({ book, chapters, pages }: Props) {
                     {/* Right Pane: Structured Chapters, Sections, & Content Blocks (7 Columns) */}
                     <div className="lg:col-span-7 space-y-6">
                         {chapters.length === 0 ? (
-                            <div className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 text-center text-slate-400">
+                            <div className="bg-white dark:bg-neutral-900 p-8 rounded-2xl border border-neutral-200 dark:border-neutral-800 text-center text-neutral-400">
                                 No chapters structured yet. Wait for processing to complete or click Reprocess.
                             </div>
                         ) : (
                             chapters.map((chap) => (
                                 <div
                                     key={chap.id}
-                                    className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-6 space-y-6"
+                                    className="bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm p-6 space-y-6"
                                 >
                                     {/* Chapter Header */}
-                                    <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+                                    <div className="flex items-center justify-between border-b border-neutral-100 dark:border-neutral-800 pb-4">
                                         <div>
-                                            <span className="text-xs font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wider">
+                                            <span className="text-xs font-bold text-primary-600 dark:text-primary-400 uppercase tracking-wider">
                                                 Chapter {chap.chapter_number}
                                             </span>
-                                            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+                                            <h2 className="text-lg font-bold text-neutral-900 dark:text-white">
                                                 {chap.en_title}
                                             </h2>
                                             {chap.km_title && (
-                                                <div className="text-xs text-slate-500 mt-0.5">
+                                                <div className="text-xs text-neutral-500 mt-0.5">
                                                     {chap.km_title}
                                                 </div>
                                             )}
                                         </div>
 
-                                        <span className="text-xs font-mono text-slate-400">
+                                        <span className="text-xs font-mono text-neutral-400">
                                             Pages {chap.start_page} &ndash; {chap.end_page}
                                         </span>
                                     </div>
@@ -360,18 +360,18 @@ export default function Review({ book, chapters, pages }: Props) {
                                         {chap.sections.map((sec) => (
                                             <div
                                                 key={sec.id}
-                                                className="rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 p-4 space-y-4"
+                                                className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-800/40 p-4 space-y-4"
                                             >
                                                 <div className="flex items-center justify-between">
                                                     <div>
-                                                        <span className="text-xs font-bold text-teal-600 dark:text-teal-400 mr-2 font-mono">
+                                                        <span className="text-xs font-bold text-primary-600 dark:text-primary-400 mr-2 font-mono">
                                                             {sec.section_number}
                                                         </span>
-                                                        <span className="font-bold text-sm text-slate-900 dark:text-white">
+                                                        <span className="font-bold text-sm text-neutral-900 dark:text-white">
                                                             {sec.en_title}
                                                         </span>
                                                         {sec.km_title && (
-                                                            <div className="text-xs text-slate-400 ml-6">
+                                                            <div className="text-xs text-neutral-400 ml-6">
                                                                 {sec.km_title}
                                                             </div>
                                                         )}
@@ -382,7 +382,7 @@ export default function Review({ book, chapters, pages }: Props) {
                                                             <button
                                                                 type="button"
                                                                 onClick={() => setSelectedPageNum(sec.page_number!)}
-                                                                className="text-[11px] font-mono px-2 py-0.5 rounded bg-white dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-600 hover:border-teal-500"
+                                                                className="text-[11px] font-mono px-2 py-0.5 rounded bg-white dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-600 hover:border-primary-500"
                                                             >
                                                                 Page {sec.page_number}
                                                             </button>
@@ -391,7 +391,7 @@ export default function Review({ book, chapters, pages }: Props) {
                                                         <button
                                                             type="button"
                                                             onClick={() => handleTranslateSection(sec.id)}
-                                                            className="text-[11px] font-semibold text-teal-600 dark:text-teal-400 hover:underline flex items-center gap-1"
+                                                            className="text-[11px] font-semibold text-primary-600 dark:text-primary-400 hover:underline flex items-center gap-1"
                                                         >
                                                             <Globe className="w-3 h-3" />
                                                             <span>Translate</span>
@@ -412,20 +412,20 @@ export default function Review({ book, chapters, pages }: Props) {
                                                                     'rounded-xl p-3 text-xs transition-all border',
                                                                     block.needs_review
                                                                         ? 'border-amber-400 bg-amber-50/40 dark:bg-amber-950/20'
-                                                                        : 'border-slate-200 dark:border-slate-700/60 bg-white dark:bg-slate-900'
+                                                                        : 'border-neutral-200 dark:border-neutral-700/60 bg-white dark:bg-neutral-900'
                                                                 )}
                                                             >
                                                                 {/* Block Meta & Type Header */}
-                                                                <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-slate-100 dark:border-slate-800">
+                                                                <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-neutral-100 dark:border-neutral-800">
                                                                     <div className="flex items-center gap-2">
-                                                                        <span className="font-mono uppercase font-bold text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-teal-600 dark:text-teal-400">
+                                                                        <span className="font-mono uppercase font-bold text-[10px] px-1.5 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-primary-600 dark:text-primary-400">
                                                                             {block.type}
                                                                         </span>
                                                                         {block.page_number && (
                                                                             <button
                                                                                 type="button"
                                                                                 onClick={() => setSelectedPageNum(block.page_number!)}
-                                                                                className="font-mono text-[10px] text-slate-400 hover:text-teal-600"
+                                                                                className="font-mono text-[10px] text-neutral-400 hover:text-primary-600"
                                                                             >
                                                                                 p.{block.page_number}
                                                                             </button>
@@ -441,7 +441,7 @@ export default function Review({ book, chapters, pages }: Props) {
                                                                     <button
                                                                         type="button"
                                                                         onClick={() => handleSelectEditBlock(block)}
-                                                                        className="text-slate-400 hover:text-teal-600 flex items-center gap-1 text-[11px]"
+                                                                        className="text-neutral-400 hover:text-primary-600 flex items-center gap-1 text-[11px]"
                                                                     >
                                                                         <Edit3 className="w-3 h-3" />
                                                                         <span>{isEditing ? 'Editing' : 'Edit'}</span>
@@ -453,13 +453,13 @@ export default function Review({ book, chapters, pages }: Props) {
                                                                     <div className="space-y-3 pt-1">
                                                                         <div className="grid grid-cols-2 gap-2">
                                                                             <div>
-                                                                                <label className="block text-[10px] font-bold uppercase text-slate-400 mb-1">
+                                                                                <label className="block text-[10px] font-bold uppercase text-neutral-400 mb-1">
                                                                                     Type
                                                                                 </label>
                                                                                 <select
                                                                                     value={blockForm.type}
                                                                                     onChange={(e) => setBlockForm({ ...blockForm, type: e.target.value })}
-                                                                                    className="w-full px-2 py-1 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                                                                                    className="w-full px-2 py-1 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-xs text-neutral-900 dark:text-white"
                                                                                 >
                                                                                     <option value="paragraph">Paragraph</option>
                                                                                     <option value="heading">Heading</option>
@@ -480,35 +480,35 @@ export default function Review({ book, chapters, pages }: Props) {
                                                                                     id={`nr_${block.id}`}
                                                                                     checked={blockForm.needs_review}
                                                                                     onChange={(e) => setBlockForm({ ...blockForm, needs_review: e.target.checked })}
-                                                                                    className="rounded text-teal-600"
+                                                                                    className="rounded text-primary-600"
                                                                                 />
-                                                                                <label htmlFor={`nr_${block.id}`} className="text-xs text-slate-600 dark:text-slate-400">
+                                                                                <label htmlFor={`nr_${block.id}`} className="text-xs text-neutral-600 dark:text-neutral-400">
                                                                                     Needs manual review
                                                                                 </label>
                                                                             </div>
                                                                         </div>
 
                                                                         <div>
-                                                                            <label className="block text-[10px] font-bold uppercase text-slate-400 mb-1">
+                                                                            <label className="block text-[10px] font-bold uppercase text-neutral-400 mb-1">
                                                                                 English Content
                                                                             </label>
                                                                             <textarea
                                                                                 rows={3}
                                                                                 value={blockForm.en_content}
                                                                                 onChange={(e) => setBlockForm({ ...blockForm, en_content: e.target.value })}
-                                                                                className="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white font-mono"
+                                                                                className="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-xs text-neutral-900 dark:text-white font-mono"
                                                                             />
                                                                         </div>
 
                                                                         <div>
-                                                                            <label className="block text-[10px] font-bold uppercase text-slate-400 mb-1">
+                                                                            <label className="block text-[10px] font-bold uppercase text-neutral-400 mb-1">
                                                                                 Khmer Translation
                                                                             </label>
                                                                             <textarea
                                                                                 rows={3}
                                                                                 value={blockForm.km_content}
                                                                                 onChange={(e) => setBlockForm({ ...blockForm, km_content: e.target.value })}
-                                                                                className="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white"
+                                                                                className="w-full px-2.5 py-1.5 rounded-lg border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-xs text-neutral-900 dark:text-white"
                                                                             />
                                                                         </div>
 
@@ -516,7 +516,7 @@ export default function Review({ book, chapters, pages }: Props) {
                                                                             <button
                                                                                 type="button"
                                                                                 onClick={() => setEditingBlockId(null)}
-                                                                                className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-100 text-xs"
+                                                                                className="px-2.5 py-1 rounded-lg border border-neutral-200 dark:border-neutral-700 text-neutral-500 hover:bg-neutral-100 text-xs"
                                                                             >
                                                                                 Cancel
                                                                             </button>
@@ -524,7 +524,7 @@ export default function Review({ book, chapters, pages }: Props) {
                                                                                 type="button"
                                                                                 disabled={isSavingBlock}
                                                                                 onClick={() => handleSaveBlock(block.id)}
-                                                                                className="px-3 py-1 rounded-lg bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs flex items-center gap-1 shadow-sm"
+                                                                                className="px-3 py-1 rounded-lg bg-primary-600 hover:bg-primary-700 text-white font-semibold text-xs flex items-center gap-1 shadow-sm"
                                                                             >
                                                                                 <Save className="w-3 h-3" />
                                                                                 <span>{isSavingBlock ? 'Saving...' : 'Save Block'}</span>
@@ -534,16 +534,16 @@ export default function Review({ book, chapters, pages }: Props) {
                                                                 ) : (
                                                                     /* Preview Mode */
                                                                     <div className="space-y-1.5">
-                                                                        <div className="text-slate-800 dark:text-slate-200 font-sans whitespace-pre-line leading-relaxed">
+                                                                        <div className="text-neutral-800 dark:text-neutral-200 font-sans whitespace-pre-line leading-relaxed">
                                                                             {block.en_content}
                                                                         </div>
                                                                         {block.km_content && (
-                                                                            <div className="text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800 pt-1 text-[11px] leading-relaxed">
+                                                                            <div className="text-neutral-500 dark:text-neutral-400 border-t border-neutral-100 dark:border-neutral-800 pt-1 text-[11px] leading-relaxed">
                                                                                 {block.km_content}
                                                                             </div>
                                                                         )}
                                                                         {isSaved && (
-                                                                            <div className="text-[10px] text-emerald-500 flex items-center gap-1">
+                                                                            <div className="text-[10px] text-primary-500 flex items-center gap-1">
                                                                                 <Check className="w-3 h-3" />
                                                                                 <span>Saved successfully</span>
                                                                             </div>

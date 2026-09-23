@@ -46,32 +46,32 @@ export default function Index({ users, filters }: Props) {
         <AdminLayout title={t('admin.manage_users')}>
             <div className="space-y-6">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-neutral-500">
                         View learners, assign administrative roles, and monitor progress.
                     </p>
                     <form onSubmit={handleSearch} className="flex gap-2">
                         <div className="relative">
-                            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                            <Search className="w-4 h-4 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
                             <input
                                 type="text"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                                 placeholder="Search by name or email..."
-                                className="pl-9 pr-4 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-white dark:bg-slate-900 w-64"
+                                className="pl-9 pr-4 py-1.5 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-white dark:bg-neutral-900 w-64"
                             />
                         </div>
                         <button
                             type="submit"
-                            className="px-4 py-1.5 bg-slate-900 dark:bg-slate-800 text-white rounded-xl text-xs font-semibold"
+                            className="px-4 py-1.5 bg-neutral-900 dark:bg-neutral-800 text-white rounded-xl text-xs font-semibold"
                         >
                             Filter
                         </button>
                     </form>
                 </div>
 
-                <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-xs">
+                <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden shadow-xs">
                     <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase font-semibold">
+                        <thead className="bg-neutral-50 dark:bg-neutral-800/60 border-b border-neutral-200 dark:border-neutral-800 text-neutral-500 uppercase font-semibold">
                             <tr>
                                 <th className="p-4">User</th>
                                 <th className="p-4">Role</th>
@@ -82,12 +82,12 @@ export default function Index({ users, filters }: Props) {
                                 <th className="p-4 text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
                             {users.data.map((u) => (
-                                <tr key={u.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
+                                <tr key={u.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-800/40">
                                     <td className="p-4">
-                                        <div className="font-bold text-slate-900 dark:text-white">{u.name}</div>
-                                        <div className="text-slate-400 font-mono text-[11px]">{u.email}</div>
+                                        <div className="font-bold text-neutral-900 dark:text-white">{u.name}</div>
+                                        <div className="text-neutral-400 font-mono text-[11px]">{u.email}</div>
                                     </td>
                                     <td className="p-4">
                                         <button
@@ -96,7 +96,7 @@ export default function Index({ users, filters }: Props) {
                                             className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase transition-colors ${
                                                 u.role === 'admin'
                                                     ? 'bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300'
-                                                    : 'bg-slate-100 dark:bg-slate-800 text-slate-600'
+                                                    : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-600'
                                             }`}
                                             title="Click to toggle role"
                                         >
@@ -104,17 +104,17 @@ export default function Index({ users, filters }: Props) {
                                         </button>
                                     </td>
                                     <td className="p-4 font-mono uppercase">{u.locale}</td>
-                                    <td className="p-4 font-mono font-semibold text-emerald-600">
+                                    <td className="p-4 font-mono font-semibold text-primary-600">
                                         {u.lesson_progress_count}
                                     </td>
-                                    <td className="p-4 font-mono text-slate-600">
+                                    <td className="p-4 font-mono text-neutral-600">
                                         {u.exercise_attempts_count} &bull; {u.quiz_attempts_count}
                                     </td>
                                     <td className="p-4">
                                         <span
                                             className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
                                                 u.is_active
-                                                    ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300'
+                                                    ? 'bg-primary-100 text-primary-800 dark:bg-primary-950 dark:text-primary-300'
                                                     : 'bg-red-100 text-red-800 dark:bg-red-950 dark:text-red-300'
                                             }`}
                                         >
@@ -125,7 +125,7 @@ export default function Index({ users, filters }: Props) {
                                         <button
                                             type="button"
                                             onClick={() => toggleStatus(u.id)}
-                                            className="px-2.5 py-1 rounded-lg border text-xs font-semibold hover:bg-slate-100 transition-colors"
+                                            className="px-2.5 py-1 rounded-lg border text-xs font-semibold hover:bg-neutral-100 transition-colors"
                                         >
                                             {u.is_active ? 'Disable' : 'Enable'}
                                         </button>

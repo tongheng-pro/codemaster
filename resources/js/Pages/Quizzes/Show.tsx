@@ -94,18 +94,18 @@ export default function Show({ quiz }: Props) {
         <AppLayout title={`${quiz.title} - ${t('quizzes.title')}`}>
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 {!isFinished ? (
-                    <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl space-y-8">
+                    <div className="rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-10 shadow-xl space-y-8">
                         {/* Header & Progress Bar */}
                         <div>
-                            <div className="flex items-center justify-between text-xs font-semibold text-slate-500 mb-2">
-                                <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">
+                            <div className="flex items-center justify-between text-xs font-semibold text-neutral-500 mb-2">
+                                <span className="font-mono text-primary-600 dark:text-primary-400 font-bold">
                                     {t('quizzes.question_progress', { current: currentIndex + 1, total: totalQuestions })}
                                 </span>
                                 <span>{progressPercentage}%</span>
                             </div>
-                            <div className="w-full h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div className="w-full h-2 bg-neutral-100 dark:bg-neutral-800 rounded-full overflow-hidden">
                                 <div
-                                    className="h-full bg-emerald-500 rounded-full transition-all duration-300"
+                                    className="h-full bg-primary-500 rounded-full transition-all duration-300"
                                     style={{ width: `${progressPercentage}%` }}
                                 />
                             </div>
@@ -114,12 +114,12 @@ export default function Show({ quiz }: Props) {
                         {/* Question Content */}
                         {currentQuestion && (
                             <div className="space-y-6">
-                                <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-snug font-sans">
+                                <h2 className="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white leading-snug font-sans">
                                     {currentQuestion.question_text}
                                 </h2>
 
                                 {currentQuestion.code_snippet && (
-                                    <pre className="p-4 rounded-xl bg-slate-900 text-slate-100 text-xs sm:text-sm font-mono overflow-x-auto border border-slate-800">
+                                    <pre className="p-4 rounded-xl bg-neutral-900 text-neutral-100 text-xs sm:text-sm font-mono overflow-x-auto border border-neutral-800">
                                         <code>{currentQuestion.code_snippet}</code>
                                     </pre>
                                 )}
@@ -136,16 +136,16 @@ export default function Show({ quiz }: Props) {
                                                 className={cn(
                                                     'w-full text-left p-4 rounded-xl border text-sm font-medium transition-all flex items-center gap-3',
                                                     isSelected
-                                                        ? 'border-emerald-500 bg-emerald-50/60 dark:bg-emerald-950/40 text-emerald-950 dark:text-emerald-200 shadow-xs ring-2 ring-emerald-500/20'
-                                                        : 'border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800/60 text-slate-700 dark:text-slate-200'
+                                                        ? 'border-primary-500 bg-primary-50/60 dark:bg-primary-950/40 text-primary-950 dark:text-primary-200 shadow-xs ring-2 ring-primary-500/20'
+                                                        : 'border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800/60 text-neutral-700 dark:text-neutral-200'
                                                 )}
                                             >
                                                 <div
                                                     className={cn(
                                                         'w-5 h-5 rounded-full border flex items-center justify-center shrink-0 transition-colors',
                                                         isSelected
-                                                            ? 'border-emerald-600 bg-emerald-600 text-white'
-                                                            : 'border-slate-300 dark:border-slate-600'
+                                                            ? 'border-primary-600 bg-primary-600 text-white'
+                                                            : 'border-neutral-300 dark:border-neutral-600'
                                                     )}
                                                 >
                                                     {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
@@ -159,12 +159,12 @@ export default function Show({ quiz }: Props) {
                         )}
 
                         {/* Stepper Buttons */}
-                        <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                        <div className="pt-6 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
                             <button
                                 type="button"
                                 onClick={() => setCurrentIndex((idx) => Math.max(0, idx - 1))}
                                 disabled={currentIndex === 0}
-                                className="px-4 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                                className="px-4 py-2 text-xs font-semibold rounded-xl border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-300 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
                             >
                                 {t('common.previous')}
                             </button>
@@ -174,7 +174,7 @@ export default function Show({ quiz }: Props) {
                                     type="button"
                                     onClick={() => setCurrentIndex((idx) => idx + 1)}
                                     disabled={!selectedAnswers[currentQuestion?.id || 0]}
-                                    className="px-6 py-2.5 text-xs font-bold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm shadow-emerald-500/20 flex items-center gap-1.5"
+                                    className="px-6 py-2.5 text-xs font-bold rounded-xl bg-primary-600 hover:bg-primary-500 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm flex items-center gap-1.5"
                                 >
                                     <span>{t('common.next')}</span>
                                     <ArrowRight className="w-4 h-4" />
@@ -184,7 +184,7 @@ export default function Show({ quiz }: Props) {
                                     type="button"
                                     onClick={handleSubmit}
                                     disabled={isSubmitting || !selectedAnswers[currentQuestion?.id || 0]}
-                                    className="px-6 py-2.5 text-xs font-bold rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm shadow-emerald-500/20"
+                                    className="px-6 py-2.5 text-xs font-bold rounded-xl bg-primary-600 hover:bg-primary-500 text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-sm"
                                 >
                                     {isSubmitting ? t('common.loading') : t('common.submit')}
                                 </button>
@@ -193,31 +193,31 @@ export default function Show({ quiz }: Props) {
                     </div>
                 ) : (
                     /* Completion / Results Screen */
-                    <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-10 shadow-xl space-y-8 animate-in fade-in-50 zoom-in-95">
+                    <div className="rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 sm:p-10 shadow-xl space-y-8 animate-in fade-in-50 zoom-in-95">
                         <div className="text-center space-y-3">
                             <div
                                 className={cn(
                                     'w-16 h-16 rounded-3xl mx-auto flex items-center justify-center text-white shadow-lg',
                                     result?.passed
-                                        ? 'bg-emerald-500 shadow-emerald-500/30'
-                                        : 'bg-amber-500 shadow-amber-500/30'
+                                        ? 'bg-green-500'
+                                        : 'bg-amber-500'
                                 )}
                             >
                                 {result?.passed ? <Award className="w-8 h-8" /> : <HelpCircle className="w-8 h-8" />}
                             </div>
 
-                            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white">
+                            <h2 className="text-3xl font-extrabold text-neutral-900 dark:text-white">
                                 {t('quizzes.quiz_complete')}
                             </h2>
 
                             <div className="flex items-center justify-center gap-2 text-2xl font-black font-mono">
-                                <span className={result?.passed ? 'text-emerald-600' : 'text-amber-600'}>
+                                <span className={result?.passed ? 'text-green-600' : 'text-amber-600'}>
                                     {result?.score} / {result?.total_questions}
                                 </span>
-                                <span className="text-slate-400">({result?.percentage}%)</span>
+                                <span className="text-neutral-400">({result?.percentage}%)</span>
                             </div>
 
-                            <p className="text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto">
+                            <p className="text-sm text-neutral-600 dark:text-neutral-300 max-w-md mx-auto">
                                 {result?.passed
                                     ? t('quizzes.passed_message')
                                     : t('quizzes.failed_message')}
@@ -226,8 +226,8 @@ export default function Show({ quiz }: Props) {
 
                         {/* Answers Review */}
                         {result && result.review && (
-                            <div className="space-y-4 pt-6 border-t border-slate-100 dark:border-slate-800">
-                                <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400">
+                            <div className="space-y-4 pt-6 border-t border-neutral-100 dark:border-neutral-800">
+                                <h3 className="text-sm font-bold uppercase tracking-wider text-neutral-400">
                                     {t('quizzes.review_answers')}
                                 </h3>
 
@@ -238,24 +238,24 @@ export default function Show({ quiz }: Props) {
                                             className={cn(
                                                 'p-4 rounded-xl border text-xs space-y-2',
                                                 item.is_correct
-                                                    ? 'bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800'
+                                                    ? 'bg-green-50/40 dark:bg-green-950/20 border-green-200 dark:border-green-800'
                                                     : 'bg-red-50/40 dark:bg-red-950/20 border-red-200 dark:border-red-800'
                                             )}
                                         >
                                             <div className="flex items-start justify-between gap-2">
-                                                <span className="font-semibold text-slate-800 dark:text-slate-200">
+                                                <span className="font-semibold text-neutral-800 dark:text-neutral-200">
                                                     {i + 1}. {item.question_text}
                                                 </span>
                                                 {item.is_correct ? (
-                                                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                                                    <CheckCircle2 className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                                                 ) : (
                                                     <XCircle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
                                                 )}
                                             </div>
 
                                             {item.explanation && (
-                                                <div className="pt-2 border-t border-slate-200/60 dark:border-slate-700/60 text-slate-600 dark:text-slate-300">
-                                                    <span className="font-bold text-slate-500">{t('quizzes.explanation')}: </span>
+                                                <div className="pt-2 border-t border-neutral-200/60 dark:border-neutral-700/60 text-neutral-600 dark:text-neutral-300">
+                                                    <span className="font-bold text-neutral-500">{t('quizzes.explanation')}: </span>
                                                     {item.explanation}
                                                 </div>
                                             )}
@@ -266,11 +266,11 @@ export default function Show({ quiz }: Props) {
                         )}
 
                         {/* Next Actions */}
-                        <div className="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                        <div className="flex flex-wrap items-center justify-center gap-4 pt-4 border-t border-neutral-100 dark:border-neutral-800">
                             <button
                                 type="button"
                                 onClick={handleRestart}
-                                className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 transition-colors"
+                                className="flex items-center gap-1.5 px-5 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 text-xs font-semibold text-neutral-700 dark:text-neutral-200 transition-colors"
                             >
                                 <RotateCcw className="w-3.5 h-3.5" />
                                 <span>{t('quizzes.try_again')}</span>
@@ -279,7 +279,7 @@ export default function Show({ quiz }: Props) {
                             {quiz.course && (
                                 <Link
                                     href={`/${quiz.course.slug}`}
-                                    className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-sm shadow-emerald-500/20"
+                                    className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-500 text-white text-xs font-bold transition-all shadow-sm"
                                 >
                                     <BookOpen className="w-3.5 h-3.5" />
                                     <span>{t('common.continue_learning')}</span>

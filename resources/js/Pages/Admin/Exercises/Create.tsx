@@ -78,7 +78,7 @@ export default function Create({ courses = [] }: Props) {
             <div className="max-w-4xl mx-auto space-y-6">
                 <Link
                     href="/admin/exercises"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-900"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-neutral-900"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Back to Exercises</span>
@@ -86,8 +86,8 @@ export default function Create({ courses = [] }: Props) {
 
                 <form onSubmit={handleSubmit} className="space-y-8">
                     {/* Settings */}
-                    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs space-y-4">
-                        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+                    <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-xs space-y-4">
+                        <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                             Exercise Configuration
                         </h2>
 
@@ -97,7 +97,7 @@ export default function Create({ courses = [] }: Props) {
                                 <select
                                     value={data.course_id}
                                     onChange={(e) => setData('course_id', e.target.value)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 text-xs bg-neutral-50 dark:bg-neutral-950"
                                     required
                                 >
                                     {courses.map((c) => (
@@ -115,7 +115,7 @@ export default function Create({ courses = [] }: Props) {
                                     value={data.slug}
                                     onChange={(e) => setData('slug', e.target.value)}
                                     placeholder="e.g. html-heading-intro"
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 dark:bg-slate-950 font-mono"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 text-xs bg-neutral-50 dark:bg-neutral-950 font-mono"
                                     required
                                 />
                             </div>
@@ -125,7 +125,7 @@ export default function Create({ courses = [] }: Props) {
                                 <select
                                     value={data.language}
                                     onChange={(e) => setData('language', e.target.value)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 dark:bg-slate-950 uppercase font-mono"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 text-xs bg-neutral-50 dark:bg-neutral-950 uppercase font-mono"
                                 >
                                     <option value="html">HTML</option>
                                     <option value="css">CSS</option>
@@ -140,7 +140,7 @@ export default function Create({ courses = [] }: Props) {
                                     type="number"
                                     value={data.points}
                                     onChange={(e) => setData('points', parseInt(e.target.value) || 10)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
                         </div>
@@ -149,7 +149,7 @@ export default function Create({ courses = [] }: Props) {
                     {/* Dual Translations Instructions */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* English */}
-                        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs space-y-4">
+                        <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-xs space-y-4">
                             <div className="flex items-center gap-2">
                                 <span>🇬🇧</span>
                                 <h3 className="font-bold text-sm">English Instructions</h3>
@@ -162,7 +162,7 @@ export default function Create({ courses = [] }: Props) {
                                     value={data.en_title}
                                     onChange={(e) => setData('en_title', e.target.value)}
                                     placeholder="HTML Heading Exercise"
-                                    className="w-full px-3 py-2 rounded-xl border text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border text-xs bg-neutral-50 dark:bg-neutral-950"
                                     required
                                 />
                             </div>
@@ -174,7 +174,7 @@ export default function Create({ courses = [] }: Props) {
                                     onChange={(e) => setData('en_instructions', e.target.value)}
                                     rows={3}
                                     placeholder="Create an h1 heading with the text: Hello World"
-                                    className="w-full px-3 py-2 rounded-xl border text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border text-xs bg-neutral-50 dark:bg-neutral-950"
                                     required
                                 />
                             </div>
@@ -186,13 +186,13 @@ export default function Create({ courses = [] }: Props) {
                                     value={data.en_hint}
                                     onChange={(e) => setData('en_hint', e.target.value)}
                                     placeholder="Use the <h1> and </h1> tags"
-                                    className="w-full px-3 py-2 rounded-xl border text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
                         </div>
 
                         {/* Khmer */}
-                        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs space-y-4">
+                        <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-xs space-y-4">
                             <div className="flex items-center gap-2">
                                 <span>🇰🇭</span>
                                 <h3 className="font-bold text-sm">Khmer Instructions (ភាសាខ្មែរ)</h3>
@@ -205,7 +205,7 @@ export default function Create({ courses = [] }: Props) {
                                     value={data.km_title}
                                     onChange={(e) => setData('km_title', e.target.value)}
                                     placeholder="លំហាត់ចំណងជើង HTML"
-                                    className="w-full px-3 py-2 rounded-xl border text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
 
@@ -216,7 +216,7 @@ export default function Create({ courses = [] }: Props) {
                                     onChange={(e) => setData('km_instructions', e.target.value)}
                                     rows={3}
                                     placeholder="បង្កើត heading h1 ដែលមានអក្សរ៖ Hello World"
-                                    className="w-full px-3 py-2 rounded-xl border text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
 
@@ -227,15 +227,15 @@ export default function Create({ courses = [] }: Props) {
                                     value={data.km_hint}
                                     onChange={(e) => setData('km_hint', e.target.value)}
                                     placeholder="ប្រើប្រាស់ tag <h1> និង </h1>"
-                                    className="w-full px-3 py-2 rounded-xl border text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
                         </div>
                     </div>
 
                     {/* Initial and Solution Code */}
-                    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs space-y-4">
-                        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+                    <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-xs space-y-4">
+                        <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                             Code Setup
                         </h2>
 
@@ -246,7 +246,7 @@ export default function Create({ courses = [] }: Props) {
                                     value={data.initial_code}
                                     onChange={(e) => setData('initial_code', e.target.value)}
                                     rows={5}
-                                    className="w-full px-3 py-2 rounded-xl border text-xs font-mono bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border text-xs font-mono bg-neutral-50 dark:bg-neutral-950"
                                     required
                                 />
                             </div>
@@ -257,7 +257,7 @@ export default function Create({ courses = [] }: Props) {
                                     value={data.solution_code}
                                     onChange={(e) => setData('solution_code', e.target.value)}
                                     rows={5}
-                                    className="w-full px-3 py-2 rounded-xl border text-xs font-mono bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border text-xs font-mono bg-neutral-50 dark:bg-neutral-950"
                                     required
                                 />
                             </div>
@@ -265,9 +265,9 @@ export default function Create({ courses = [] }: Props) {
                     </div>
 
                     {/* Test Cases Builder */}
-                    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs space-y-4">
+                    <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-xs space-y-4">
                         <div className="flex items-center justify-between">
-                            <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+                            <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                                 Test Cases (Automated Evaluation)
                             </h2>
                             <button
@@ -282,8 +282,8 @@ export default function Create({ courses = [] }: Props) {
 
                         <div className="space-y-3">
                             {testCases.map((tc, idx) => (
-                                <div key={idx} className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 space-y-3">
-                                    <div className="flex items-center justify-between text-xs font-bold text-slate-500">
+                                <div key={idx} className="p-4 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 space-y-3">
+                                    <div className="flex items-center justify-between text-xs font-bold text-neutral-500">
                                         <span>Test Case {idx + 1}</span>
                                         <button
                                             type="button"
@@ -350,7 +350,7 @@ export default function Create({ courses = [] }: Props) {
                         <button
                             type="submit"
                             disabled={processing}
-                            className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
+                            className="flex items-center gap-2 px-6 py-2.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
                         >
                             <Save className="w-4 h-4" />
                             <span>Save Exercise</span>

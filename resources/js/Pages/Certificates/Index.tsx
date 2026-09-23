@@ -28,10 +28,10 @@ export default function Index({ certificates = [] }: Props) {
                         <Award className="w-3.5 h-3.5" />
                         <span>Credentials</span>
                     </div>
-                    <h1 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                    <h1 className="text-3xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
                         {t('certificates.title')}
                     </h1>
-                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                    <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
                         {t('certificates.subtitle')}
                     </p>
                 </div>
@@ -42,23 +42,23 @@ export default function Index({ certificates = [] }: Props) {
                             <Link
                                 key={cert.id}
                                 href={`/certificates/${cert.uuid}`}
-                                className="group p-8 rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-emerald-500/60 shadow-xs hover:shadow-xl transition-all flex flex-col justify-between space-y-6"
+                                className="group p-8 rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-primary-500/60 shadow-xs hover:shadow-xl transition-all flex flex-col justify-between space-y-6"
                             >
                                 <div className="space-y-3">
-                                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800 text-emerald-600 flex items-center justify-center">
+                                    <div className="w-12 h-12 rounded-2xl bg-primary-50 dark:bg-primary-950/60 border border-primary-200 dark:border-primary-800 text-primary-600 flex items-center justify-center">
                                         <Award className="w-6 h-6" />
                                     </div>
-                                    <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 transition-colors">
+                                    <h3 className="text-xl font-bold text-neutral-900 dark:text-white group-hover:text-primary-600 transition-colors">
                                         {cert.course_title}
                                     </h3>
-                                    <div className="text-xs font-mono text-slate-400">
-                                        Code: <span className="text-emerald-600 font-semibold">{cert.certificate_code}</span>
+                                    <div className="text-xs font-mono text-neutral-400">
+                                        Code: <span className="text-primary-600 font-semibold">{cert.certificate_code}</span>
                                     </div>
                                 </div>
 
-                                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
+                                <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center justify-between text-xs text-neutral-500">
                                     <span>Issued {cert.issued_at}</span>
-                                    <span className="font-semibold text-emerald-600 group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                                    <span className="font-semibold text-primary-600 group-hover:translate-x-1 transition-transform flex items-center gap-1">
                                         View Certificate <ArrowRight className="w-3.5 h-3.5" />
                                     </span>
                                 </div>
@@ -66,14 +66,14 @@ export default function Index({ certificates = [] }: Props) {
                         ))}
                     </div>
                 ) : (
-                    <div className="p-12 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-center space-y-4">
-                        <Award className="w-12 h-12 text-slate-300 mx-auto" />
-                        <p className="text-sm text-slate-500 max-w-md mx-auto leading-relaxed">
+                    <div className="p-12 rounded-3xl border border-dashed border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-center space-y-4">
+                        <Award className="w-12 h-12 text-neutral-300 mx-auto" />
+                        <p className="text-sm text-neutral-500 max-w-md mx-auto leading-relaxed">
                             {t('certificates.no_certificates')}
                         </p>
                         <Link
                             href="/courses"
-                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-500"
+                            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary-600 text-white text-xs font-bold hover:bg-primary-500"
                         >
                             <BookOpen className="w-3.5 h-3.5" />
                             <span>{t('common.explore_courses')}</span>

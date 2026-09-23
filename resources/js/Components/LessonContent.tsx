@@ -15,7 +15,7 @@ export default function LessonContent({ blocks = [], className }: Props) {
     }
 
     return (
-        <div className={cn('space-y-6 text-slate-800 dark:text-slate-200 leading-relaxed font-sans', className)}>
+        <div className={cn('space-y-6 text-neutral-800 dark:text-neutral-200 leading-relaxed font-sans', className)}>
             {blocks.map((block, index) => {
                 switch (block.type) {
                     case 'heading': {
@@ -29,7 +29,7 @@ export default function LessonContent({ blocks = [], className }: Props) {
                                 <h2
                                     key={index}
                                     id={id}
-                                    className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white pt-6 pb-2 border-b border-slate-100 dark:border-slate-800 scroll-mt-24"
+                                    className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white pt-6 pb-2 border-b border-neutral-100 dark:border-neutral-800 scroll-mt-24"
                                 >
                                     {block.content}
                                 </h2>
@@ -40,7 +40,7 @@ export default function LessonContent({ blocks = [], className }: Props) {
                                 <h3
                                     key={index}
                                     id={id}
-                                    className="text-lg font-semibold text-slate-900 dark:text-white pt-4 scroll-mt-24"
+                                    className="text-lg font-semibold text-neutral-900 dark:text-white pt-4 scroll-mt-24"
                                 >
                                     {block.content}
                                 </h3>
@@ -50,7 +50,7 @@ export default function LessonContent({ blocks = [], className }: Props) {
                             <h4
                                 key={index}
                                 id={id}
-                                className="text-base font-semibold text-slate-800 dark:text-slate-200 pt-2 scroll-mt-24"
+                                className="text-base font-semibold text-neutral-800 dark:text-neutral-200 pt-2 scroll-mt-24"
                             >
                                 {block.content}
                             </h4>
@@ -61,7 +61,7 @@ export default function LessonContent({ blocks = [], className }: Props) {
                         return (
                             <p
                                 key={index}
-                                className="text-sm sm:text-base text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed"
+                                className="text-sm sm:text-base text-neutral-700 dark:text-neutral-300 whitespace-pre-line leading-relaxed"
                             >
                                 {block.content}
                             </p>
@@ -113,9 +113,9 @@ export default function LessonContent({ blocks = [], className }: Props) {
                         return (
                             <div
                                 key={index}
-                                className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 flex gap-3 text-sm my-4"
+                                className="p-4 rounded-xl bg-primary-50 dark:bg-primary-950/40 border border-primary-200 dark:border-primary-800 text-primary-900 dark:text-primary-200 flex gap-3 text-sm my-4"
                             >
-                                <Lightbulb className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
+                                <Lightbulb className="w-5 h-5 text-primary-600 dark:text-primary-400 shrink-0 mt-0.5" />
                                 <div className="space-y-1">
                                     {block.title && <div className="font-semibold text-xs uppercase tracking-wider">{block.title}</div>}
                                     <div>{block.content}</div>

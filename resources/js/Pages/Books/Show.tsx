@@ -210,10 +210,10 @@ export default function Show({
                 <Head title={book.title} />
 
                 {/* Book Header Hero */}
-                <div className="bg-slate-900 text-white py-12 border-b border-slate-800">
+                <div className="bg-neutral-900 text-white py-12 border-b border-neutral-800">
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                            <div className="w-40 h-56 rounded-2xl bg-gradient-to-tr from-teal-600 to-emerald-500 shadow-2xl flex flex-col items-center justify-center p-4 text-center text-white shrink-0">
+                            <div className="bg-primary-600 w-40 h-56 rounded-2xl shadow-2xl flex flex-col items-center justify-center p-4 text-center text-white shrink-0">
                                 <BookOpen className="w-12 h-12 mb-3 opacity-90" />
                                 <span className="text-xs font-bold uppercase tracking-wider line-clamp-2">
                                     {book.title}
@@ -221,7 +221,7 @@ export default function Show({
                             </div>
 
                             <div className="flex-1 text-center md:text-left">
-                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 text-xs font-semibold mb-3">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-500/20 text-primary-300 text-xs font-semibold mb-3">
                                     <Sparkles className="w-3.5 h-3.5" />
                                     <span>Verified Technical Book</span>
                                 </div>
@@ -229,12 +229,12 @@ export default function Show({
                                     {book.title}
                                 </h1>
                                 {book.author && (
-                                    <p className="text-sm text-slate-400 mt-2">
-                                        By <span className="text-slate-200 font-medium">{book.author}</span>
+                                    <p className="text-sm text-neutral-400 mt-2">
+                                        By <span className="text-neutral-200 font-medium">{book.author}</span>
                                     </p>
                                 )}
                                 {book.description && (
-                                    <p className="text-sm sm:text-base text-slate-300 mt-4 leading-relaxed max-w-3xl">
+                                    <p className="text-sm sm:text-base text-neutral-300 mt-4 leading-relaxed max-w-3xl">
                                         {book.description}
                                     </p>
                                 )}
@@ -243,21 +243,21 @@ export default function Show({
                                     {book.first_read_url ? (
                                         <Link
                                             href={book.first_read_url}
-                                            className="px-6 py-3 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-sm shadow-lg shadow-teal-500/25 flex items-center gap-2 transition-all hover:scale-105"
+                                            className="px-6 py-3 rounded-xl bg-primary-500 hover:bg-primary-400 text-neutral-950 font-bold text-sm shadow-lg flex items-center gap-2 transition-all hover:scale-105"
                                         >
                                             <BookOpen className="w-4 h-4" />
                                             <span>{t('books.start_reading')}</span>
                                         </Link>
                                     ) : (
-                                        <span className="text-xs text-slate-400">Chapters being compiled...</span>
+                                        <span className="text-xs text-neutral-400">Chapters being compiled...</span>
                                     )}
 
                                     <button
                                         type="button"
                                         onClick={() => setAskModalOpen(true)}
-                                        className="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm border border-slate-700 flex items-center gap-2 transition-colors"
+                                        className="px-5 py-3 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-white font-semibold text-sm border border-neutral-700 flex items-center gap-2 transition-colors"
                                     >
-                                        <MessageSquare className="w-4 h-4 text-teal-400" />
+                                        <MessageSquare className="w-4 h-4 text-primary-400" />
                                         <span>{t('books.ask_book')}</span>
                                     </button>
                                 </div>
@@ -268,8 +268,8 @@ export default function Show({
 
                 {/* Table of Contents Syllabus */}
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
-                        <ListOrdered className="w-6 h-6 text-teal-500" />
+                    <h2 className="text-2xl font-bold text-neutral-900 dark:text-white mb-6 flex items-center gap-2">
+                        <ListOrdered className="w-6 h-6 text-primary-500" />
                         <span>{t('books.table_of_contents')}</span>
                     </h2>
 
@@ -277,19 +277,19 @@ export default function Show({
                         {tableOfContents.map((chap) => (
                             <div
                                 key={chap.id}
-                                className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm"
+                                className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 shadow-sm"
                             >
-                                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-700/60 pb-3 mb-4">
+                                <div className="flex items-center justify-between border-b border-neutral-100 dark:border-neutral-700/60 pb-3 mb-4">
                                     <div className="flex items-center gap-2">
-                                        <span className="w-7 h-7 rounded-lg bg-teal-50 dark:bg-teal-950 text-teal-600 dark:text-teal-400 font-bold text-xs flex items-center justify-center">
+                                        <span className="w-7 h-7 rounded-lg bg-primary-50 dark:bg-primary-950 text-primary-600 dark:text-primary-400 font-bold text-xs flex items-center justify-center">
                                             {chap.chapter_number}
                                         </span>
-                                        <h3 className="font-bold text-base text-slate-900 dark:text-white">
+                                        <h3 className="font-bold text-base text-neutral-900 dark:text-white">
                                             {chap.title}
                                         </h3>
                                     </div>
                                     {chap.start_page && (
-                                        <span className="text-xs font-mono text-slate-400">
+                                        <span className="text-xs font-mono text-neutral-400">
                                             Page {chap.start_page}
                                         </span>
                                     )}
@@ -300,20 +300,20 @@ export default function Show({
                                         <Link
                                             key={sec.id}
                                             href={`/books/${book.slug}/${chap.slug}/${sec.slug}`}
-                                            className="flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700/40 text-slate-700 dark:text-slate-200 text-sm font-medium transition-colors group"
+                                            className="flex items-center justify-between p-2.5 rounded-xl hover:bg-neutral-50 dark:hover:bg-neutral-700/40 text-neutral-700 dark:text-neutral-200 text-sm font-medium transition-colors group"
                                         >
                                             <div className="flex items-center gap-2">
                                                 {sec.section_number && (
-                                                    <span className="text-xs font-mono text-teal-600 dark:text-teal-400 font-semibold">
+                                                    <span className="text-xs font-mono text-primary-600 dark:text-primary-400 font-semibold">
                                                         {sec.section_number}
                                                     </span>
                                                 )}
-                                                <span className="group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+                                                <span className="group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                                                     {sec.title}
                                                 </span>
                                             </div>
                                             {sec.page_number && (
-                                                <span className="text-[11px] font-mono text-slate-400">
+                                                <span className="text-[11px] font-mono text-neutral-400">
                                                     p.{sec.page_number}
                                                 </span>
                                             )}
@@ -337,9 +337,9 @@ export default function Show({
             <Head title={`${section.title} - ${book.title}`} />
 
             {/* Reading Progress Bar */}
-            <div className="w-full bg-slate-200 dark:bg-slate-800 h-1 fixed top-16 left-0 z-30">
+            <div className="w-full bg-neutral-200 dark:bg-neutral-800 h-1 fixed top-16 left-0 z-30">
                 <div
-                    className="bg-teal-500 h-1 transition-all duration-300"
+                    className="bg-primary-500 h-1 transition-all duration-300"
                     style={{ width: `${readingProgress}%` }}
                 />
             </div>
@@ -347,11 +347,11 @@ export default function Show({
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col lg:flex-row gap-8">
                 {/* Left Sidebar: Table of Contents & In-Book Search */}
                 <aside className="w-full lg:w-80 shrink-0">
-                    <div className="sticky top-24 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 shadow-sm max-h-[calc(100vh-7rem)] flex flex-col">
+                    <div className="sticky top-24 bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 p-4 shadow-sm max-h-[calc(100vh-7rem)] flex flex-col">
                         {/* Book Header Link */}
                         <Link
                             href={`/books/${book.slug}`}
-                            className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wider hover:text-teal-600 mb-3"
+                            className="flex items-center gap-2 text-xs font-bold text-neutral-500 uppercase tracking-wider hover:text-primary-600 mb-3"
                         >
                             <ChevronLeft className="w-4 h-4" />
                             <span className="truncate">{book.title}</span>
@@ -359,40 +359,40 @@ export default function Show({
 
                         {/* Search Input */}
                         <div className="relative mb-4">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-neutral-400" />
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => handleInBookSearch(e.target.value)}
                                 placeholder={t('books.search_in_book')}
-                                className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-teal-500"
+                                className="w-full pl-9 pr-3 py-1.5 rounded-lg border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-xs text-neutral-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary-500"
                             />
                         </div>
 
                         {/* Search Results if typing */}
                         {searchQuery.trim().length >= 2 ? (
                             <div className="overflow-y-auto flex-1 space-y-2 text-xs">
-                                <div className="text-[11px] font-semibold text-slate-400 uppercase">
+                                <div className="text-[11px] font-semibold text-neutral-400 uppercase">
                                     Search Matches ({searchResults.length})
                                 </div>
                                 {isSearching ? (
-                                    <div className="text-center py-4 text-slate-400">Searching book...</div>
+                                    <div className="text-center py-4 text-neutral-400">Searching book...</div>
                                 ) : searchResults.length === 0 ? (
-                                    <div className="text-center py-4 text-slate-400">No matches found.</div>
+                                    <div className="text-center py-4 text-neutral-400">No matches found.</div>
                                 ) : (
                                     searchResults.map((res, i) => (
                                         <Link
                                             key={i}
                                             href={res.url}
-                                            className="block p-2 rounded-lg bg-slate-50 dark:bg-slate-800/60 hover:bg-teal-50 dark:hover:bg-teal-950/40 border border-slate-200 dark:border-slate-700/60 transition-colors"
+                                            className="block p-2 rounded-lg bg-neutral-50 dark:bg-neutral-800/60 hover:bg-primary-50 dark:hover:bg-primary-950/40 border border-neutral-200 dark:border-neutral-700/60 transition-colors"
                                         >
-                                            <div className="font-semibold text-teal-600 dark:text-teal-400">
+                                            <div className="font-semibold text-primary-600 dark:text-primary-400">
                                                 {res.section_title}
                                             </div>
-                                            <div className="text-slate-500 dark:text-slate-400 text-[11px] line-clamp-2 mt-0.5">
+                                            <div className="text-neutral-500 dark:text-neutral-400 text-[11px] line-clamp-2 mt-0.5">
                                                 {res.content_snippet}
                                             </div>
-                                            <div className="text-[10px] font-mono text-slate-400 mt-1">
+                                            <div className="text-[10px] font-mono text-neutral-400 mt-1">
                                                 Page {res.page_number} &bull; {res.type}
                                             </div>
                                         </Link>
@@ -404,12 +404,12 @@ export default function Show({
                             <div ref={tocContainerRef} className="overflow-y-auto flex-1 space-y-4 pr-1">
                                 {tableOfContents.map((chap) => (
                                     <div key={chap.id} className="space-y-1">
-                                        <div className="text-xs font-bold text-slate-900 dark:text-white flex items-center justify-between py-1">
+                                        <div className="text-xs font-bold text-neutral-900 dark:text-white flex items-center justify-between py-1">
                                             <span className="truncate">
                                                 {chap.chapter_number}. {chap.title}
                                             </span>
                                         </div>
-                                        <div className="space-y-0.5 pl-2 border-l border-slate-100 dark:border-slate-800">
+                                        <div className="space-y-0.5 pl-2 border-l border-neutral-100 dark:border-neutral-800">
                                             {chap.sections.map((sec) => {
                                                 const isActive = sec.id === section.id;
                                                 return (
@@ -420,8 +420,8 @@ export default function Show({
                                                         className={cn(
                                                             'block px-2.5 py-1.5 rounded-lg text-xs transition-colors',
                                                             isActive
-                                                                ? 'bg-teal-50 dark:bg-teal-950/70 text-teal-600 dark:text-teal-400 font-semibold border-l-2 border-teal-500'
-                                                                : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                                                                ? 'bg-primary-50 dark:bg-primary-950/70 text-primary-600 dark:text-primary-400 font-semibold border-l-2 border-primary-500'
+                                                                : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                                                         )}
                                                     >
                                                         <div className="flex items-center justify-between">
@@ -444,11 +444,11 @@ export default function Show({
                         )}
 
                         {/* Ask the Book Quick Button */}
-                        <div className="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+                        <div className="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800">
                             <button
                                 type="button"
                                 onClick={() => setAskModalOpen(true)}
-                                className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-semibold shadow-sm transition-colors"
+                                className="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-xs font-semibold shadow-sm transition-colors"
                             >
                                 <Sparkles className="w-3.5 h-3.5" />
                                 <span>{t('books.ask_book')}</span>
@@ -460,14 +460,14 @@ export default function Show({
                 {/* Main Reading Column */}
                 <main className="flex-1 max-w-3xl min-w-0">
                     {/* Header & Breadcrumb */}
-                    <div className="border-b border-slate-200 dark:border-slate-800 pb-4 mb-6">
-                        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 mb-2">
+                    <div className="border-b border-neutral-200 dark:border-neutral-800 pb-4 mb-6">
+                        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-neutral-500 mb-2">
                             <div className="flex items-center gap-1.5 font-medium">
-                                <Link href="/books" className="hover:text-teal-600">
+                                <Link href="/books" className="hover:text-primary-600">
                                     {t('books.title')}
                                 </Link>
                                 <span>&rsaquo;</span>
-                                <Link href={`/books/${book.slug}`} className="hover:text-teal-600 truncate max-w-[150px]">
+                                <Link href={`/books/${book.slug}`} className="hover:text-primary-600 truncate max-w-[150px]">
                                     {book.title}
                                 </Link>
                                 <span>&rsaquo;</span>
@@ -475,16 +475,16 @@ export default function Show({
                             </div>
 
                             {section.page_number && (
-                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-mono text-xs font-semibold">
-                                    <FileText className="w-3 h-3 text-teal-500" />
+                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 font-mono text-xs font-semibold">
+                                    <FileText className="w-3 h-3 text-primary-500" />
                                     <span>{t('books.page_ref')}: {section.page_number}</span>
                                 </span>
                             )}
                         </div>
 
-                        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                        <h1 className="text-2xl sm:text-3xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
                             {section.section_number && (
-                                <span className="text-teal-600 dark:text-teal-400 mr-2">
+                                <span className="text-primary-600 dark:text-primary-400 mr-2">
                                     {section.section_number}
                                 </span>
                             )}
@@ -494,15 +494,15 @@ export default function Show({
 
                     {/* View Mode Toggle */}
                     <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-                        <div className="inline-flex rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 p-1 text-xs font-semibold">
+                        <div className="inline-flex rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-100 dark:bg-neutral-800 p-1 text-xs font-semibold">
                             <button
                                 type="button"
                                 onClick={() => setViewMode('text')}
                                 className={cn(
                                     'flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors',
                                     viewMode === 'text'
-                                        ? 'bg-white dark:bg-slate-900 text-teal-600 dark:text-teal-400 shadow-sm'
-                                        : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                                        ? 'bg-white dark:bg-neutral-900 text-primary-600 dark:text-primary-400 shadow-sm'
+                                        : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200'
                                 )}
                             >
                                 <FileText className="w-3.5 h-3.5" />
@@ -515,8 +515,8 @@ export default function Show({
                                 className={cn(
                                     'flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed',
                                     viewMode === 'pdf'
-                                        ? 'bg-white dark:bg-slate-900 text-teal-600 dark:text-teal-400 shadow-sm'
-                                        : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                                        ? 'bg-white dark:bg-neutral-900 text-primary-600 dark:text-primary-400 shadow-sm'
+                                        : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200'
                                 )}
                             >
                                 <ImageIcon className="w-3.5 h-3.5" />
@@ -529,7 +529,7 @@ export default function Show({
                                 href={`${book.pdf_url}${section.page_number ? `#page=${section.page_number}` : ''}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-teal-600"
+                                className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-primary-600"
                             >
                                 <ExternalLink className="w-3.5 h-3.5" />
                                 <span>Open original PDF</span>
@@ -542,7 +542,7 @@ export default function Show({
                             {section.pdf_pages.map((page) => (
                                 <figure
                                     key={page.page_number}
-                                    className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white shadow-sm overflow-hidden"
+                                    className="rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-white shadow-sm overflow-hidden"
                                 >
                                     <img
                                         src={page.image_url}
@@ -550,7 +550,7 @@ export default function Show({
                                         loading="lazy"
                                         className="w-full h-auto"
                                     />
-                                    <figcaption className="px-4 py-2 text-xs font-mono text-slate-500 bg-slate-50 dark:bg-slate-800 dark:text-slate-400 border-t border-slate-200 dark:border-slate-700">
+                                    <figcaption className="px-4 py-2 text-xs font-mono text-neutral-500 bg-neutral-50 dark:bg-neutral-800 dark:text-neutral-400 border-t border-neutral-200 dark:border-neutral-700">
                                         Page {page.page_number}
                                     </figcaption>
                                 </figure>
@@ -566,10 +566,10 @@ export default function Show({
                                 return (
                                     <React.Fragment key={block.id}>
                                         {startsNewPage && (
-                                            <div className="flex items-center gap-3 text-[11px] font-mono text-slate-400">
-                                                <span className="flex-1 border-t border-dashed border-slate-200 dark:border-slate-700" />
+                                            <div className="flex items-center gap-3 text-[11px] font-mono text-neutral-400">
+                                                <span className="flex-1 border-t border-dashed border-neutral-200 dark:border-neutral-700" />
                                                 <span>p.{block.page_number}</span>
-                                                <span className="flex-1 border-t border-dashed border-slate-200 dark:border-slate-700" />
+                                                <span className="flex-1 border-t border-dashed border-neutral-200 dark:border-neutral-700" />
                                             </div>
                                         )}
                                         {renderContentBlock(block)}
@@ -580,11 +580,11 @@ export default function Show({
                     )}
 
                     {/* Pagination Footer */}
-                    <div className="mt-12 pt-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4">
+                    <div className="mt-12 pt-6 border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between gap-4">
                         {prevSection ? (
                             <Link
                                 href={prevSection.url}
-                                className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm transition-colors"
+                                className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 text-sm font-semibold text-neutral-700 dark:text-neutral-200 shadow-sm transition-colors"
                             >
                                 <ChevronLeft className="w-4 h-4" />
                                 <span className="truncate max-w-[150px] sm:max-w-xs">{prevSection.title}</span>
@@ -594,7 +594,7 @@ export default function Show({
                         {nextSection && (
                             <Link
                                 href={nextSection.url}
-                                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold shadow-sm transition-colors ml-auto"
+                                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold shadow-sm transition-colors ml-auto"
                             >
                                 <span className="truncate max-w-[150px] sm:max-w-xs">{nextSection.title}</span>
                                 <ChevronRight className="w-4 h-4" />
@@ -617,14 +617,14 @@ export default function Show({
         switch (block.type) {
             case 'heading':
                 return (
-                    <h2 key={block.id} className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white pt-4">
+                    <h2 key={block.id} className="text-xl sm:text-2xl font-bold text-neutral-900 dark:text-white pt-4">
                         {block.content}
                     </h2>
                 );
 
             case 'subheading':
                 return (
-                    <h3 key={block.id} className="text-lg font-bold text-slate-800 dark:text-slate-100 pt-2">
+                    <h3 key={block.id} className="text-lg font-bold text-neutral-800 dark:text-neutral-100 pt-2">
                         {block.content}
                     </h3>
                 );
@@ -633,9 +633,9 @@ export default function Show({
                 return (
                     <div
                         key={block.id}
-                        className="p-4 rounded-xl bg-teal-50/80 dark:bg-teal-950/40 border-l-4 border-teal-500 text-slate-800 dark:text-slate-200 shadow-sm"
+                        className="p-4 rounded-xl bg-primary-50/80 dark:bg-primary-950/40 border-l-4 border-primary-500 text-neutral-800 dark:text-neutral-200 shadow-sm"
                     >
-                        <div className="flex items-center gap-1.5 text-xs font-bold text-teal-700 dark:text-teal-300 uppercase tracking-wider mb-1">
+                        <div className="flex items-center gap-1.5 text-xs font-bold text-primary-700 dark:text-primary-300 uppercase tracking-wider mb-1">
                             <Info className="w-4 h-4" />
                             <span>Definition</span>
                         </div>
@@ -647,7 +647,7 @@ export default function Show({
                 return (
                     <div
                         key={block.id}
-                        className="p-4 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border-l-4 border-blue-500 text-slate-800 dark:text-slate-200 shadow-sm"
+                        className="p-4 rounded-xl bg-blue-50/80 dark:bg-blue-950/40 border-l-4 border-blue-500 text-neutral-800 dark:text-neutral-200 shadow-sm"
                     >
                         <div className="flex items-center gap-1.5 text-xs font-bold text-blue-700 dark:text-blue-300 uppercase tracking-wider mb-1">
                             <Info className="w-4 h-4" />
@@ -661,7 +661,7 @@ export default function Show({
                 return (
                     <div
                         key={block.id}
-                        className="p-4 rounded-xl bg-amber-50/80 dark:bg-amber-950/40 border-l-4 border-amber-500 text-slate-800 dark:text-slate-200 shadow-sm"
+                        className="p-4 rounded-xl bg-amber-50/80 dark:bg-amber-950/40 border-l-4 border-amber-500 text-neutral-800 dark:text-neutral-200 shadow-sm"
                     >
                         <div className="flex items-center gap-1.5 text-xs font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wider mb-1">
                             <AlertCircle className="w-4 h-4" />
@@ -677,22 +677,22 @@ export default function Show({
                 return (
                     <div
                         key={block.id}
-                        className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-900 overflow-hidden shadow-md my-4"
+                        className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-neutral-900 overflow-hidden shadow-md my-4"
                     >
-                        <div className="flex items-center justify-between px-4 py-2 bg-slate-800/90 border-b border-slate-700/60 text-slate-300 text-xs">
+                        <div className="flex items-center justify-between px-4 py-2 bg-neutral-800/90 border-b border-neutral-700/60 text-neutral-300 text-xs">
                             <div className="flex items-center gap-2 font-mono">
                                 <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
                                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                                <span className="uppercase font-semibold ml-2 text-teal-400">{lang}</span>
+                                <span className="w-2.5 h-2.5 rounded-full bg-primary-500" />
+                                <span className="uppercase font-semibold ml-2 text-primary-400">{lang}</span>
                             </div>
 
                             <button
                                 type="button"
                                 onClick={() => handleCopyCode(block.id, currentCode)}
-                                className="flex items-center gap-1 hover:text-white px-2 py-1 rounded bg-slate-700/50 hover:bg-slate-700 transition-colors"
+                                className="flex items-center gap-1 hover:text-white px-2 py-1 rounded bg-neutral-700/50 hover:bg-neutral-700 transition-colors"
                             >
-                                {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                                {isCopied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
                                 <span>{isCopied ? t('common.copied') : t('common.copy')}</span>
                             </button>
                         </div>
@@ -701,7 +701,10 @@ export default function Show({
                             value={currentCode}
                             language={lang}
                             onChange={(val) => setEditorCodes((prev) => ({ ...prev, [block.id]: val }))}
-                            height={`${Math.min(Math.max(block.content.split('\n').length * 19 + 24, 80), 560)}px`}
+                            height={`${Math.min(block.content.split('\n').length * 20 + 2 * 14, 560)}px`}
+                            lineHeight={20}
+                            verticalPadding={14}
+                            autoHeightMax={560}
                             readOnly={false}
                         />
                     </div>
@@ -713,7 +716,7 @@ export default function Show({
                     <ListTag
                         key={block.id}
                         className={cn(
-                            'pl-6 space-y-1.5 text-base text-slate-700 dark:text-slate-300 leading-relaxed marker:text-teal-500',
+                            'pl-6 space-y-1.5 text-base text-neutral-700 dark:text-neutral-300 leading-relaxed marker:text-primary-500',
                             block.metadata?.ordered ? 'list-decimal' : 'list-disc'
                         )}
                     >
@@ -727,9 +730,9 @@ export default function Show({
                 return (
                     <div
                         key={block.id}
-                        className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60 overflow-x-auto"
+                        className="rounded-xl border border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800/60 overflow-x-auto"
                     >
-                        <pre className="p-4 text-xs sm:text-sm font-mono text-slate-700 dark:text-slate-200 whitespace-pre">
+                        <pre className="p-4 text-xs sm:text-sm font-mono text-neutral-700 dark:text-neutral-200 whitespace-pre">
                             {block.content}
                         </pre>
                     </div>
@@ -739,9 +742,9 @@ export default function Show({
                 return (
                     <blockquote
                         key={block.id}
-                        className="pl-4 border-l-4 border-slate-300 dark:border-slate-600 text-slate-600 dark:text-slate-400 italic leading-relaxed"
+                        className="pl-4 border-l-4 border-neutral-300 dark:border-neutral-600 text-neutral-600 dark:text-neutral-400 italic leading-relaxed"
                     >
-                        <Quote className="w-4 h-4 mb-1 text-slate-400" />
+                        <Quote className="w-4 h-4 mb-1 text-neutral-400" />
                         {block.content}
                     </blockquote>
                 );
@@ -750,13 +753,13 @@ export default function Show({
                 return (
                     <div
                         key={block.id}
-                        className="p-5 rounded-2xl bg-gradient-to-tr from-emerald-500/10 to-teal-500/10 border border-emerald-500/30 dark:bg-slate-800/80 my-4"
+                        className="bg-primary-50/60 p-5 rounded-2xl border border-primary-500/30 dark:bg-neutral-800/80 my-4"
                     >
-                        <div className="flex items-center gap-2 font-bold text-sm text-emerald-600 dark:text-emerald-400 mb-2">
+                        <div className="flex items-center gap-2 font-bold text-sm text-primary-600 dark:text-primary-400 mb-2">
                             <HelpCircle className="w-4 h-4" />
                             <span>Exercise / Practice</span>
                         </div>
-                        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed whitespace-pre-line">
+                        <p className="text-sm text-neutral-700 dark:text-neutral-300 leading-relaxed whitespace-pre-line">
                             {block.content}
                         </p>
                     </div>
@@ -766,13 +769,13 @@ export default function Show({
                 return (
                     <div
                         key={block.id}
-                        className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 my-4"
+                        className="p-5 rounded-2xl bg-neutral-50 dark:bg-neutral-800/80 border border-neutral-200 dark:border-neutral-700 my-4"
                     >
-                        <div className="flex items-center gap-2 font-bold text-sm text-slate-900 dark:text-white mb-2">
-                            <CheckCircle2 className="w-4 h-4 text-teal-500" />
+                        <div className="flex items-center gap-2 font-bold text-sm text-neutral-900 dark:text-white mb-2">
+                            <CheckCircle2 className="w-4 h-4 text-primary-500" />
                             <span>Chapter / Section Summary</span>
                         </div>
-                        <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                        <p className="text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed">
                             {block.content}
                         </p>
                     </div>
@@ -783,7 +786,7 @@ export default function Show({
                 return (
                     <p
                         key={block.id}
-                        className="text-base text-slate-700 dark:text-slate-300 leading-relaxed"
+                        className="text-base text-neutral-700 dark:text-neutral-300 leading-relaxed"
                     >
                         {block.content}
                     </p>
@@ -796,19 +799,19 @@ export default function Show({
         if (!askModalOpen) return null;
 
         return (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-in fade-in-50">
-                <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-2xl w-full shadow-2xl flex flex-col max-h-[85vh] overflow-hidden">
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-950/60 backdrop-blur-sm animate-in fade-in-50">
+                <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl max-w-2xl w-full shadow-2xl flex flex-col max-h-[85vh] overflow-hidden">
                     {/* Modal Header */}
-                    <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                    <div className="p-4 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
                         <div className="flex items-center gap-2.5">
-                            <div className="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+                            <div className="w-8 h-8 rounded-lg bg-primary-500/20 text-primary-600 dark:text-primary-400 flex items-center justify-center">
                                 <Sparkles className="w-4 h-4" />
                             </div>
                             <div>
-                                <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+                                <h3 className="font-bold text-sm text-neutral-900 dark:text-white">
                                     {t('books.ask_book')}
                                 </h3>
-                                <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                                <p className="text-[11px] text-neutral-500 dark:text-neutral-400">
                                     {t('books.grounded_notice')}
                                 </p>
                             </div>
@@ -816,26 +819,26 @@ export default function Show({
                         <button
                             type="button"
                             onClick={() => setAskModalOpen(false)}
-                            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white"
+                            className="p-1 rounded-lg text-neutral-400 hover:text-neutral-600 dark:hover:text-white"
                         >
                             <X className="w-5 h-5" />
                         </button>
                     </div>
 
                     {/* Question Input Form */}
-                    <form onSubmit={handleAskQuestion} className="p-4 border-b border-slate-100 dark:border-slate-800">
+                    <form onSubmit={handleAskQuestion} className="p-4 border-b border-neutral-100 dark:border-neutral-800">
                         <div className="flex gap-2">
                             <input
                                 type="text"
                                 value={questionInput}
                                 onChange={(e) => setQuestionInput(e.target.value)}
                                 placeholder={t('books.ask_placeholder')}
-                                className="flex-1 px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+                                className="flex-1 px-4 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800 text-sm text-neutral-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
                             />
                             <button
                                 type="submit"
                                 disabled={isAsking || !questionInput.trim()}
-                                className="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 disabled:opacity-50 text-white text-sm font-semibold flex items-center gap-1.5 shadow-sm transition-colors shrink-0"
+                                className="px-4 py-2 rounded-xl bg-primary-600 hover:bg-primary-700 disabled:opacity-50 text-white text-sm font-semibold flex items-center gap-1.5 shadow-sm transition-colors shrink-0"
                             >
                                 <Send className="w-3.5 h-3.5" />
                                 <span>{isAsking ? 'Thinking...' : t('books.ask_btn')}</span>
@@ -846,36 +849,36 @@ export default function Show({
                     {/* Modal Body: Answer and Citations */}
                     <div className="p-6 overflow-y-auto space-y-6 flex-1 text-sm">
                         {isAsking ? (
-                            <div className="flex flex-col items-center justify-center py-12 text-slate-400 space-y-3">
-                                <Sparkles className="w-8 h-8 text-teal-500 animate-spin" />
+                            <div className="flex flex-col items-center justify-center py-12 text-neutral-400 space-y-3">
+                                <Sparkles className="w-8 h-8 text-primary-500 animate-spin" />
                                 <span>Reading book pages and grounding answer...</span>
                             </div>
                         ) : aiResponse ? (
                             <div>
-                                <div className="text-xs font-semibold uppercase text-slate-400 tracking-wider mb-2">
+                                <div className="text-xs font-semibold uppercase text-neutral-400 tracking-wider mb-2">
                                     Grounded Answer
                                 </div>
-                                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 whitespace-pre-line leading-relaxed">
+                                <div className="p-4 rounded-xl bg-neutral-50 dark:bg-neutral-800/60 border border-neutral-200 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 whitespace-pre-line leading-relaxed">
                                     {aiResponse.answer}
                                 </div>
 
                                 {aiResponse.citations && aiResponse.citations.length > 0 && (
                                     <div className="mt-6">
-                                        <div className="text-xs font-semibold uppercase text-slate-400 tracking-wider mb-3 flex items-center gap-1.5">
-                                            <FileText className="w-3.5 h-3.5 text-teal-500" />
+                                        <div className="text-xs font-semibold uppercase text-neutral-400 tracking-wider mb-3 flex items-center gap-1.5">
+                                            <FileText className="w-3.5 h-3.5 text-primary-500" />
                                             <span>{t('books.citations')}</span>
                                         </div>
                                         <div className="space-y-2">
                                             {aiResponse.citations.map((cite, i) => (
                                                 <div
                                                     key={i}
-                                                    className="p-3 rounded-lg bg-teal-50/50 dark:bg-teal-950/20 border border-teal-200/60 dark:border-teal-800/40 text-xs"
+                                                    className="p-3 rounded-lg bg-primary-50/50 dark:bg-primary-950/20 border border-primary-200/60 dark:border-primary-800/40 text-xs"
                                                 >
-                                                    <div className="flex items-center justify-between font-bold text-teal-700 dark:text-teal-400 mb-1">
+                                                    <div className="flex items-center justify-between font-bold text-primary-700 dark:text-primary-400 mb-1">
                                                         <span>{cite.section}</span>
                                                         <span className="font-mono">Page {cite.page}</span>
                                                     </div>
-                                                    <p className="text-slate-600 dark:text-slate-400 italic">
+                                                    <p className="text-neutral-600 dark:text-neutral-400 italic">
                                                         "{cite.text}"
                                                     </p>
                                                 </div>
@@ -885,7 +888,7 @@ export default function Show({
                                 )}
                             </div>
                         ) : (
-                            <div className="text-center py-12 text-slate-400 text-xs">
+                            <div className="text-center py-12 text-neutral-400 text-xs">
                                 Enter a question to find answers directly from this book with exact page citations.
                             </div>
                         )}

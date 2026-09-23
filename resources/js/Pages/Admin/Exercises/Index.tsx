@@ -30,21 +30,21 @@ export default function Index({ exercises = [] }: Props) {
         <AdminLayout title={t('admin.manage_exercises')}>
             <div className="space-y-6">
                 <div className="flex items-center justify-between">
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-neutral-500">
                         Create coding exercises, define test cases, and write hints.
                     </p>
                     <Link
                         href="/admin/exercises/create"
-                        className="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
+                        className="flex items-center gap-1.5 px-4 py-2 bg-primary-600 hover:bg-primary-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
                     >
                         <Plus className="w-4 h-4" />
                         <span>Add Exercise</span>
                     </Link>
                 </div>
 
-                <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-xs">
+                <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden shadow-xs">
                     <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-50 dark:bg-slate-800/60 border-b border-slate-200 dark:border-slate-800 text-slate-500 uppercase font-semibold">
+                        <thead className="bg-neutral-50 dark:bg-neutral-800/60 border-b border-neutral-200 dark:border-neutral-800 text-neutral-500 uppercase font-semibold">
                             <tr>
                                 <th className="p-4">Exercise</th>
                                 <th className="p-4">Course</th>
@@ -55,13 +55,13 @@ export default function Index({ exercises = [] }: Props) {
                                 <th className="p-4 text-right">Actions</th>
                             </tr>
                         </thead>
-                        <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                        <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
                             {exercises.map((e) => (
-                                <tr key={e.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40">
-                                    <td className="p-4 font-bold text-slate-900 dark:text-white">
+                                <tr key={e.id} className="hover:bg-neutral-50 dark:hover:bg-neutral-800/40">
+                                    <td className="p-4 font-bold text-neutral-900 dark:text-white">
                                         {e.en_title}
                                     </td>
-                                    <td className="p-4 text-slate-600">{e.course_title}</td>
+                                    <td className="p-4 text-neutral-600">{e.course_title}</td>
                                     <td className="p-4 font-mono uppercase font-bold text-blue-600">{e.language}</td>
                                     <td className="p-4 capitalize">{e.difficulty}</td>
                                     <td className="p-4 font-mono font-bold text-amber-600">{e.points}</td>
@@ -70,7 +70,7 @@ export default function Index({ exercises = [] }: Props) {
                                         <div className="flex items-center justify-end gap-2">
                                             <Link
                                                 href={`/exercises/${e.slug}`}
-                                                className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 text-slate-600"
+                                                className="p-1.5 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-100 text-neutral-600"
                                                 target="_blank"
                                                 title="View"
                                             >

@@ -99,7 +99,7 @@ export default function Edit({ courses = [], lesson }: Props) {
             <div className="max-w-5xl mx-auto space-y-6">
                 <Link
                     href="/admin/lessons"
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-900"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-neutral-900"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     <span>Back to Lessons</span>
@@ -107,8 +107,8 @@ export default function Edit({ courses = [], lesson }: Props) {
 
                 <form onSubmit={handleSubmit} className="space-y-8">
                     {/* Core Settings */}
-                    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs space-y-4">
-                        <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+                    <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-xs space-y-4">
+                        <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-900 dark:text-white">
                             Lesson Parameters
                         </h2>
 
@@ -118,7 +118,7 @@ export default function Edit({ courses = [], lesson }: Props) {
                                 <select
                                     value={data.course_id}
                                     onChange={(e) => setData('course_id', Number(e.target.value))}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950"
                                     required
                                 >
                                     {courses.map((c) => (
@@ -135,7 +135,7 @@ export default function Edit({ courses = [], lesson }: Props) {
                                     type="text"
                                     value={data.slug}
                                     onChange={(e) => setData('slug', e.target.value)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950 font-mono"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950 font-mono"
                                     required
                                 />
                             </div>
@@ -146,7 +146,7 @@ export default function Edit({ courses = [], lesson }: Props) {
                                     type="number"
                                     value={data.order}
                                     onChange={(e) => setData('order', parseInt(e.target.value) || 0)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
 
@@ -156,7 +156,7 @@ export default function Edit({ courses = [], lesson }: Props) {
                                     type="number"
                                     value={data.duration_minutes}
                                     onChange={(e) => setData('duration_minutes', parseInt(e.target.value) || 5)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
                         </div>
@@ -167,7 +167,7 @@ export default function Edit({ courses = [], lesson }: Props) {
                                     type="checkbox"
                                     checked={data.is_published}
                                     onChange={(e) => setData('is_published', e.target.checked)}
-                                    className="rounded border-slate-300 text-emerald-600"
+                                    className="rounded border-neutral-300 text-primary-600"
                                 />
                                 <span>Published</span>
                             </label>
@@ -177,7 +177,7 @@ export default function Edit({ courses = [], lesson }: Props) {
                     {/* Dual Content Builders */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         {/* English Builder */}
-                        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs space-y-4">
+                        <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-xs space-y-4">
                             <div className="flex items-center justify-between border-b pb-3">
                                 <div className="flex items-center gap-2">
                                     <span className="text-base">🇬🇧</span>
@@ -191,7 +191,7 @@ export default function Edit({ courses = [], lesson }: Props) {
                                     type="text"
                                     value={data.en_title}
                                     onChange={(e) => setData('en_title', e.target.value)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950"
                                     required
                                 />
                             </div>
@@ -202,32 +202,32 @@ export default function Edit({ courses = [], lesson }: Props) {
                                     value={data.en_description}
                                     onChange={(e) => setData('en_description', e.target.value)}
                                     rows={2}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
 
                             <div className="space-y-3 pt-2">
                                 <div className="flex items-center justify-between">
-                                    <span className="text-xs font-bold text-slate-500 uppercase">Content Blocks</span>
+                                    <span className="text-xs font-bold text-neutral-500 uppercase">Content Blocks</span>
                                     <div className="flex items-center gap-1">
                                         <button
                                             type="button"
                                             onClick={() => addBlock('en', 'paragraph')}
-                                            className="px-2 py-1 text-[10px] font-bold bg-slate-100 hover:bg-slate-200 rounded"
+                                            className="px-2 py-1 text-[10px] font-bold bg-neutral-100 hover:bg-neutral-200 rounded"
                                         >
                                             + Text
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => addBlock('en', 'heading')}
-                                            className="px-2 py-1 text-[10px] font-bold bg-slate-100 hover:bg-slate-200 rounded"
+                                            className="px-2 py-1 text-[10px] font-bold bg-neutral-100 hover:bg-neutral-200 rounded"
                                         >
                                             + Heading
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => addBlock('en', 'code_example')}
-                                            className="px-2 py-1 text-[10px] font-bold bg-slate-100 hover:bg-slate-200 rounded text-emerald-600"
+                                            className="px-2 py-1 text-[10px] font-bold bg-neutral-100 hover:bg-neutral-200 rounded text-primary-600"
                                         >
                                             + Code
                                         </button>
@@ -235,8 +235,8 @@ export default function Edit({ courses = [], lesson }: Props) {
                                 </div>
 
                                 {enBlocks.map((b, i) => (
-                                    <div key={i} className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2 bg-slate-50/50">
-                                        <div className="flex items-center justify-between text-[11px] font-bold uppercase text-slate-400">
+                                    <div key={i} className="p-3 rounded-xl border border-neutral-200 dark:border-neutral-800 space-y-2 bg-neutral-50/50">
+                                        <div className="flex items-center justify-between text-[11px] font-bold uppercase text-neutral-400">
                                             <span>Block {i + 1}: {b.type}</span>
                                             <button
                                                 type="button"
@@ -277,7 +277,7 @@ export default function Edit({ courses = [], lesson }: Props) {
                         </div>
 
                         {/* Khmer Builder */}
-                        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs space-y-4">
+                        <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-xs space-y-4">
                             <div className="flex items-center justify-between border-b pb-3">
                                 <div className="flex items-center gap-2">
                                     <span className="text-base">🇰🇭</span>
@@ -291,7 +291,7 @@ export default function Edit({ courses = [], lesson }: Props) {
                                     type="text"
                                     value={data.km_title}
                                     onChange={(e) => setData('km_title', e.target.value)}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
 
@@ -301,32 +301,32 @@ export default function Edit({ courses = [], lesson }: Props) {
                                     value={data.km_description}
                                     onChange={(e) => setData('km_description', e.target.value)}
                                     rows={2}
-                                    className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs bg-slate-50 dark:bg-slate-950"
+                                    className="w-full px-3 py-2 rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs bg-neutral-50 dark:bg-neutral-950"
                                 />
                             </div>
 
                             <div className="space-y-3 pt-2">
                                 <div className="flex items-center justify-between">
-                                    <span className="text-xs font-bold text-slate-500 uppercase">ផ្នែកមាតិកា (Blocks)</span>
+                                    <span className="text-xs font-bold text-neutral-500 uppercase">ផ្នែកមាតិកា (Blocks)</span>
                                     <div className="flex items-center gap-1">
                                         <button
                                             type="button"
                                             onClick={() => addBlock('km', 'paragraph')}
-                                            className="px-2 py-1 text-[10px] font-bold bg-slate-100 hover:bg-slate-200 rounded"
+                                            className="px-2 py-1 text-[10px] font-bold bg-neutral-100 hover:bg-neutral-200 rounded"
                                         >
                                             + អត្ថបទ
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => addBlock('km', 'heading')}
-                                            className="px-2 py-1 text-[10px] font-bold bg-slate-100 hover:bg-slate-200 rounded"
+                                            className="px-2 py-1 text-[10px] font-bold bg-neutral-100 hover:bg-neutral-200 rounded"
                                         >
                                             + ចំណងជើង
                                         </button>
                                         <button
                                             type="button"
                                             onClick={() => addBlock('km', 'code_example')}
-                                            className="px-2 py-1 text-[10px] font-bold bg-slate-100 hover:bg-slate-200 rounded text-emerald-600"
+                                            className="px-2 py-1 text-[10px] font-bold bg-neutral-100 hover:bg-neutral-200 rounded text-primary-600"
                                         >
                                             + កូដ
                                         </button>
@@ -334,8 +334,8 @@ export default function Edit({ courses = [], lesson }: Props) {
                                 </div>
 
                                 {kmBlocks.map((b, i) => (
-                                    <div key={i} className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2 bg-slate-50/50">
-                                        <div className="flex items-center justify-between text-[11px] font-bold uppercase text-slate-400">
+                                    <div key={i} className="p-3 rounded-xl border border-neutral-200 dark:border-neutral-800 space-y-2 bg-neutral-50/50">
+                                        <div className="flex items-center justify-between text-[11px] font-bold uppercase text-neutral-400">
                                             <span>Block {i + 1}: {b.type}</span>
                                             <button
                                                 type="button"
@@ -379,7 +379,7 @@ export default function Edit({ courses = [], lesson }: Props) {
                         <button
                             type="submit"
                             disabled={processing}
-                            className="flex items-center gap-2 px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
+                            className="flex items-center gap-2 px-6 py-2.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
                         >
                             <Save className="w-4 h-4" />
                             <span>Save Changes</span>

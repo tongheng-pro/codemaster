@@ -32,8 +32,8 @@ export default function Show({
         >
             <div className="space-y-6">
                 {/* Lesson Header */}
-                <div className="pb-6 border-b border-slate-200 dark:border-slate-800">
-                    <div className="flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400 font-semibold uppercase tracking-wider mb-2">
+                <div className="pb-6 border-b border-neutral-200 dark:border-neutral-800">
+                    <div className="flex items-center gap-2 text-xs font-mono text-primary-600 dark:text-primary-400 font-semibold uppercase tracking-wider mb-2">
                         <span>{course.title}</span>
                         <span>&bull;</span>
                         <span className="flex items-center gap-1">
@@ -42,12 +42,12 @@ export default function Show({
                         </span>
                     </div>
 
-                    <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+                    <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-white">
                         {lesson.title}
                     </h1>
 
                     {lesson.description && (
-                        <p className="text-base text-slate-600 dark:text-slate-300 mt-2 leading-relaxed">
+                        <p className="text-base text-neutral-600 dark:text-neutral-300 mt-2 leading-relaxed">
                             {lesson.description}
                         </p>
                     )}

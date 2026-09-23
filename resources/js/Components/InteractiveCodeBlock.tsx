@@ -19,7 +19,10 @@ export default function InteractiveCodeBlock({
 }: Props) {
     const { t } = useTranslation();
     const [code, setCode] = useState(initialCode);
-    const [previewContent, setPreviewContent] = useState('');
+    // The preview is ready on the first render: an iframe that starts empty and gets srcdoc later can stay blank in some browsers
+    const [previewContent, setPreviewContent] = useState(() => generatePreview(initialCode));
+    // Changing the key remounts the iframe, so every Run loads a fresh document
+    const [previewVersion, setPreviewVersion] = useState(0);
     const [copied, setCopied] = useState(false);
 
     // Build sandboxed HTML payload
@@ -103,16 +106,22 @@ export default function InteractiveCodeBlock({
     }
 
     useEffect(() => {
-        setPreviewContent(generatePreview(initialCode));
+        setCode(initialCode);
+        showPreview(initialCode);
     }, [initialCode]);
 
+    function showPreview(rawCode: string) {
+        setPreviewContent(generatePreview(rawCode));
+        setPreviewVersion((version) => version + 1);
+    }
+
     function handleRun() {
-        setPreviewContent(generatePreview(code));
+        showPreview(code);
     }
 
     function handleReset() {
         setCode(initialCode);
-        setPreviewContent(generatePreview(initialCode));
+        showPreview(initialCode);
     }
 
     function handleCopy() {
@@ -122,21 +131,21 @@ export default function InteractiveCodeBlock({
     }
 
     return (
-        <div className={cn('rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs overflow-hidden my-6', className)}>
+        <div className={cn('rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-xs overflow-hidden my-6', className)}>
             {/* Header / Language Badge */}
-            <div className="flex items-center justify-between px-4 py-2.5 bg-slate-100/80 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-800 text-xs">
+            <div className="flex items-center justify-between px-4 py-2.5 bg-neutral-100/80 dark:bg-neutral-800/80 border-b border-neutral-200 dark:border-neutral-800 text-xs">
                 <div className="flex items-center gap-2">
-                    <span className="font-mono uppercase font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
+                    <span className="font-mono uppercase font-bold text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/60 px-2 py-0.5 rounded border border-primary-200 dark:border-primary-800">
                         {language}
                     </span>
-                    {title && <span className="font-medium text-slate-700 dark:text-slate-200">{title}</span>}
+                    {title && <span className="font-medium text-neutral-700 dark:text-neutral-200">{title}</span>}
                 </div>
 
                 <div className="flex items-center gap-1.5">
                     <button
                         type="button"
                         onClick={handleRun}
-                        className="flex items-center gap-1 px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold text-xs transition-colors shadow-xs"
+                        className="flex items-center gap-1 px-3 py-1 bg-primary-600 hover:bg-primary-500 text-white rounded-lg font-semibold text-xs transition-colors shadow-xs"
                     >
                         <Play className="w-3.5 h-3.5 fill-white" />
                         <span>{t('common.run')}</span>
@@ -144,7 +153,7 @@ export default function InteractiveCodeBlock({
                     <button
                         type="button"
                         onClick={handleReset}
-                        className="flex items-center gap-1 px-2.5 py-1 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-xs transition-colors"
+                        className="flex items-center gap-1 px-2.5 py-1 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg text-xs transition-colors"
                         title={t('common.reset')}
                     >
                         <RotateCcw className="w-3.5 h-3.5" />
@@ -153,17 +162,17 @@ export default function InteractiveCodeBlock({
                     <button
                         type="button"
                         onClick={handleCopy}
-                        className="flex items-center gap-1 px-2.5 py-1 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-xs transition-colors"
+                        className="flex items-center gap-1 px-2.5 py-1 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg text-xs transition-colors"
                         title={t('common.copy')}
                     >
-                        {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                        {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
                         <span className="hidden sm:inline">{copied ? t('common.copied') : t('common.copy')}</span>
                     </button>
                 </div>
             </div>
 
             {/* Monaco Code Editor Container */}
-            <div className="border-b border-slate-200 dark:border-slate-800">
+            <div className="border-b border-neutral-200 dark:border-neutral-800">
                 <MonacoCodeEditor
                     value={code}
                     onChange={(newVal) => setCode(newVal)}
@@ -173,13 +182,14 @@ export default function InteractiveCodeBlock({
             </div>
 
             {/* Output / Preview Container */}
-            <div className="bg-slate-50 dark:bg-slate-950 p-3">
-                <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-2">
+            <div className="bg-neutral-50 dark:bg-neutral-950 p-3">
+                <div className="flex items-center gap-1.5 text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mb-2">
                     <Eye className="w-3.5 h-3.5" />
                     <span>{t('common.result')}</span>
                 </div>
-                <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white overflow-hidden shadow-inner">
+                <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white overflow-hidden shadow-inner">
                     <iframe
+                        key={previewVersion}
                         srcDoc={previewContent}
                         title="Code Preview"
                         sandbox="allow-scripts"

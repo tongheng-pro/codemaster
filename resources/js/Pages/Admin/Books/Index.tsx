@@ -42,7 +42,10 @@ interface Props {
 export default function Index({ books: initialBooks }: Props) {
     const { t } = useTranslation();
     const [books, setBooks] = useState<AdminBook[]>(initialBooks);
-    const [uploadModalOpen, setUploadModalOpen] = useState(false);
+    // Open the upload form straight away when arriving from the dashboard's "Upload book" button
+    const [uploadModalOpen, setUploadModalOpen] = useState(
+        () => new URLSearchParams(window.location.search).get('upload') === '1'
+    );
 
     // Sync state with props
     useEffect(() => {
@@ -106,11 +109,11 @@ export default function Index({ books: initialBooks }: Props) {
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                     <div>
-                        <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2.5">
-                            <Library className="w-7 h-7 text-teal-600 dark:text-teal-400" />
+                        <h1 className="text-2xl font-extrabold text-neutral-900 dark:text-white flex items-center gap-2.5">
+                            <Library className="w-7 h-7 text-primary-600 dark:text-primary-400" />
                             <span>{t('admin.manage_books')}</span>
                         </h1>
-                        <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+                        <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
                             Upload PDF books, inspect OCR/text extraction, review AI chapters, and publish online.
                         </p>
                     </div>
@@ -118,7 +121,7 @@ export default function Index({ books: initialBooks }: Props) {
                     <button
                         type="button"
                         onClick={() => setUploadModalOpen(true)}
-                        className="px-4 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold shadow-sm flex items-center gap-2 transition-colors self-start sm:self-auto"
+                        className="px-4 py-2.5 rounded-xl bg-primary-600 hover:bg-primary-700 text-white text-sm font-semibold shadow-sm flex items-center gap-2 transition-colors self-start sm:self-auto"
                     >
                         <Upload className="w-4 h-4" />
                         <span>{t('books.upload_pdf')}</span>
@@ -126,21 +129,21 @@ export default function Index({ books: initialBooks }: Props) {
                 </div>
 
                 {/* Books List Table */}
-                <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+                <div className="bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-sm overflow-hidden">
                     {books.length === 0 ? (
                         <div className="text-center py-16">
-                            <Library className="w-12 h-12 text-slate-300 dark:text-slate-700 mx-auto mb-3" />
-                            <h3 className="font-bold text-slate-900 dark:text-white text-base">
+                            <Library className="w-12 h-12 text-neutral-300 dark:text-neutral-700 mx-auto mb-3" />
+                            <h3 className="font-bold text-neutral-900 dark:text-white text-base">
                                 No books uploaded yet
                             </h3>
-                            <p className="text-sm text-slate-500 mt-1">
+                            <p className="text-sm text-neutral-500 mt-1">
                                 Click "Upload PDF Book" to import and structure your first book with AI.
                             </p>
                         </div>
                     ) : (
                         <div className="overflow-x-auto">
-                            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-300">
-                                <thead className="bg-slate-50 dark:bg-slate-800/60 text-xs font-semibold uppercase text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-slate-800">
+                            <table className="w-full text-left text-sm text-neutral-600 dark:text-neutral-300">
+                                <thead className="bg-neutral-50 dark:bg-neutral-800/60 text-xs font-semibold uppercase text-neutral-500 dark:text-neutral-400 border-b border-neutral-200 dark:border-neutral-800">
                                     <tr>
                                         <th className="px-6 py-4">Book Title / Author</th>
                                         <th className="px-6 py-4">Pages / Chapters</th>
@@ -149,16 +152,16 @@ export default function Index({ books: initialBooks }: Props) {
                                         <th className="px-6 py-4 text-right">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                                <tbody className="divide-y divide-neutral-100 dark:divide-neutral-800">
                                     {books.map((b) => {
                                         const isProcessing = !['completed', 'failed'].includes(b.status);
                                         return (
-                                            <tr key={b.id} className="hover:bg-slate-50/70 dark:hover:bg-slate-800/40 transition-colors">
+                                            <tr key={b.id} className="hover:bg-neutral-50/70 dark:hover:bg-neutral-800/40 transition-colors">
                                                 <td className="px-6 py-4">
-                                                    <div className="font-bold text-slate-900 dark:text-white">
+                                                    <div className="font-bold text-neutral-900 dark:text-white">
                                                         {b.title}
                                                     </div>
-                                                    <div className="text-xs text-slate-400 mt-0.5">
+                                                    <div className="text-xs text-neutral-400 mt-0.5">
                                                         {b.author || 'Author unspecified'} &bull; {b.created_at}
                                                     </div>
                                                 </td>
@@ -172,28 +175,28 @@ export default function Index({ books: initialBooks }: Props) {
                                                 <td className="px-6 py-4 max-w-xs">
                                                     <div className="space-y-1.5">
                                                         <div className="flex items-center justify-between text-xs">
-                                                            <span className="font-semibold uppercase tracking-wider text-[10px] text-teal-600 dark:text-teal-400">
+                                                            <span className="font-semibold uppercase tracking-wider text-[10px] text-primary-600 dark:text-primary-400">
                                                                 {b.status.replace('_', ' ')}
                                                             </span>
-                                                            <span className="font-mono text-slate-400">
+                                                            <span className="font-mono text-neutral-400">
                                                                 {b.processing_progress}%
                                                             </span>
                                                         </div>
-                                                        <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden">
+                                                        <div className="w-full bg-neutral-100 dark:bg-neutral-800 rounded-full h-1.5 overflow-hidden">
                                                             <div
                                                                 className={cn(
                                                                     'h-1.5 rounded-full transition-all duration-300',
                                                                     b.status === 'failed'
                                                                         ? 'bg-rose-500'
                                                                         : b.status === 'completed'
-                                                                        ? 'bg-emerald-500'
-                                                                        : 'bg-teal-500 animate-pulse'
+                                                                        ? 'bg-primary-500'
+                                                                        : 'bg-primary-500 animate-pulse'
                                                                 )}
                                                                 style={{ width: `${b.processing_progress}%` }}
                                                             />
                                                         </div>
                                                         {b.current_step && (
-                                                            <div className="text-[11px] text-slate-500 truncate" title={b.current_step}>
+                                                            <div className="text-[11px] text-neutral-500 truncate" title={b.current_step}>
                                                                 {b.current_step}
                                                             </div>
                                                         )}
@@ -206,8 +209,8 @@ export default function Index({ books: initialBooks }: Props) {
                                                         className={cn(
                                                             'px-2.5 py-1 rounded-full text-xs font-semibold inline-flex items-center gap-1 transition-colors',
                                                             b.is_published
-                                                                ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800'
-                                                                : 'bg-slate-100 dark:bg-slate-800 text-slate-500 border border-slate-200 dark:border-slate-700'
+                                                                ? 'bg-primary-50 dark:bg-primary-950/60 text-primary-600 dark:text-primary-400 border border-primary-200 dark:border-primary-800'
+                                                                : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-500 border border-neutral-200 dark:border-neutral-700'
                                                         )}
                                                     >
                                                         {b.is_published ? (
@@ -227,7 +230,7 @@ export default function Index({ books: initialBooks }: Props) {
                                                     <div className="flex items-center justify-end gap-2">
                                                         <Link
                                                             href={`/admin/books/${b.id}/review`}
-                                                            className="p-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/50 hover:bg-teal-100 text-teal-600 dark:text-teal-400 text-xs font-semibold flex items-center gap-1 border border-teal-200/60 dark:border-teal-800/60 transition-colors"
+                                                            className="p-1.5 rounded-lg bg-primary-50 dark:bg-primary-950/50 hover:bg-primary-100 text-primary-600 dark:text-primary-400 text-xs font-semibold flex items-center gap-1 border border-primary-200/60 dark:border-primary-800/60 transition-colors"
                                                             title={t('books.review_workspace')}
                                                         >
                                                             <Eye className="w-4 h-4" />
@@ -237,7 +240,7 @@ export default function Index({ books: initialBooks }: Props) {
                                                         <button
                                                             type="button"
                                                             onClick={() => handleReprocess(b.id)}
-                                                            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors"
+                                                            className="p-1.5 rounded-lg text-neutral-400 hover:text-neutral-600 dark:hover:text-white transition-colors"
                                                             title={t('books.reprocess')}
                                                         >
                                                             <RotateCcw className="w-4 h-4" />
@@ -265,17 +268,17 @@ export default function Index({ books: initialBooks }: Props) {
 
             {/* Upload Modal */}
             {uploadModalOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-sm animate-in fade-in-50">
-                    <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-xl w-full shadow-2xl overflow-hidden">
-                        <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                            <h3 className="font-bold text-base text-slate-900 dark:text-white flex items-center gap-2">
-                                <Upload className="w-4 h-4 text-teal-600" />
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-neutral-950/60 backdrop-blur-sm animate-in fade-in-50">
+                    <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-2xl max-w-xl w-full shadow-2xl overflow-hidden">
+                        <div className="p-4 border-b border-neutral-100 dark:border-neutral-800 flex items-center justify-between">
+                            <h3 className="font-bold text-base text-neutral-900 dark:text-white flex items-center gap-2">
+                                <Upload className="w-4 h-4 text-primary-600" />
                                 <span>{t('books.upload_pdf')}</span>
                             </h3>
                             <button
                                 type="button"
                                 onClick={() => setUploadModalOpen(false)}
-                                className="p-1 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white"
+                                className="p-1 rounded-lg text-neutral-400 hover:text-neutral-600 dark:hover:text-white"
                             >
                                 <X className="w-5 h-5" />
                             </button>
@@ -283,7 +286,7 @@ export default function Index({ books: initialBooks }: Props) {
 
                         <form onSubmit={handleUploadSubmit} className="p-6 space-y-4 text-sm">
                             <div>
-                                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                                <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
                                     Book Title *
                                 </label>
                                 <input
@@ -292,14 +295,14 @@ export default function Index({ books: initialBooks }: Props) {
                                     value={data.title}
                                     onChange={(e) => setData('title', e.target.value)}
                                     placeholder="e.g. HTML5 Notes for Professionals"
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:outline-none"
                                 />
                                 {errors.title && <div className="text-xs text-rose-500 mt-1">{errors.title}</div>}
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
                                         Author
                                     </label>
                                     <input
@@ -307,17 +310,17 @@ export default function Index({ books: initialBooks }: Props) {
                                         value={data.author}
                                         onChange={(e) => setData('author', e.target.value)}
                                         placeholder="e.g. Stack Overflow Contributors"
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:outline-none"
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                                    <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
                                         Original Language
                                     </label>
                                     <select
                                         value={data.original_language}
                                         onChange={(e) => setData('original_language', e.target.value)}
-                                        className="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                                        className="w-full px-3.5 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:outline-none"
                                     >
                                         <option value="en">English (en)</option>
                                         <option value="km">Khmer (km)</option>
@@ -326,7 +329,7 @@ export default function Index({ books: initialBooks }: Props) {
                             </div>
 
                             <div>
-                                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                                <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
                                     Description / Summary
                                 </label>
                                 <textarea
@@ -334,12 +337,12 @@ export default function Index({ books: initialBooks }: Props) {
                                     value={data.description}
                                     onChange={(e) => setData('description', e.target.value)}
                                     placeholder="Brief book overview..."
-                                    className="w-full px-3.5 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white focus:ring-2 focus:ring-teal-500 focus:outline-none"
+                                    className="w-full px-3.5 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:outline-none"
                                 />
                             </div>
 
                             <div>
-                                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                                <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
                                     PDF File * (Max: 150MB)
                                 </label>
                                 <input
@@ -347,7 +350,7 @@ export default function Index({ books: initialBooks }: Props) {
                                     required
                                     accept="application/pdf"
                                     onChange={(e) => setData('pdf_file', e.target.files ? e.target.files[0] : null)}
-                                    className="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 dark:file:bg-teal-950 dark:file:text-teal-300"
+                                    className="w-full text-xs text-neutral-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 dark:file:bg-primary-950 dark:file:text-primary-300"
                                 />
                                 {errors.pdf_file && <div className="text-xs text-rose-500 mt-1">{errors.pdf_file}</div>}
                             </div>
@@ -358,31 +361,31 @@ export default function Index({ books: initialBooks }: Props) {
                                     id="auto_translate"
                                     checked={data.auto_translate}
                                     onChange={(e) => setData('auto_translate', e.target.checked)}
-                                    className="rounded text-teal-600 focus:ring-teal-500"
+                                    className="rounded text-primary-600 focus:ring-primary-500"
                                 />
-                                <label htmlFor="auto_translate" className="text-xs text-slate-700 dark:text-slate-300 font-medium">
+                                <label htmlFor="auto_translate" className="text-xs text-neutral-700 dark:text-neutral-300 font-medium">
                                     Auto-translate extracted chapters & sections to Khmer (KM)
                                 </label>
                             </div>
 
                             {progress && (
-                                <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                                    <div className="bg-teal-600 h-2" style={{ width: `${progress.percentage}%` }} />
+                                <div className="w-full bg-neutral-100 rounded-full h-2 overflow-hidden">
+                                    <div className="bg-primary-600 h-2" style={{ width: `${progress.percentage}%` }} />
                                 </div>
                             )}
 
-                            <div className="flex justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+                            <div className="flex justify-end gap-3 pt-4 border-t border-neutral-100 dark:border-neutral-800">
                                 <button
                                     type="button"
                                     onClick={() => setUploadModalOpen(false)}
-                                    className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                                    className="px-4 py-2 rounded-xl border border-neutral-200 dark:border-neutral-700 text-neutral-600 dark:text-neutral-300 text-xs font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
                                 >
                                     Cancel
                                 </button>
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="px-5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 disabled:opacity-50 text-white text-xs font-semibold shadow-sm transition-colors"
+                                    className="px-5 py-2 rounded-xl bg-primary-600 hover:bg-primary-700 disabled:opacity-50 text-white text-xs font-semibold shadow-sm transition-colors"
                                 >
                                     {processing ? 'Uploading...' : 'Start Import & AI Extraction'}
                                 </button>

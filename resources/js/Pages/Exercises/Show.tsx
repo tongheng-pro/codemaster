@@ -116,7 +116,7 @@ export default function Show({ exercise }: Props) {
                 <div className="mb-4">
                     <Link
                         href="/exercises"
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-neutral-900 dark:hover:text-white transition-colors"
                     >
                         <ArrowLeft className="w-4 h-4" />
                         <span>{t('exercises.title')}</span>
@@ -126,7 +126,7 @@ export default function Show({ exercise }: Props) {
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1">
                     {/* Left Pane: Instructions & Requirements */}
                     <div className="lg:col-span-5 space-y-6 flex flex-col">
-                        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xs flex-1">
+                        <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-xs flex-1">
                             <div className="flex items-center justify-between mb-4">
                                 <span className="font-mono text-xs uppercase font-bold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/60 px-2.5 py-1 rounded-lg border border-blue-200 dark:border-blue-800">
                                     {exercise.language}
@@ -137,24 +137,24 @@ export default function Show({ exercise }: Props) {
                                 </div>
                             </div>
 
-                            <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-3">
+                            <h1 className="text-2xl font-extrabold tracking-tight text-neutral-900 dark:text-white mb-3">
                                 {exercise.title}
                             </h1>
 
-                            <div className="text-sm text-slate-700 dark:text-slate-300 whitespace-pre-line leading-relaxed mb-6 font-sans">
+                            <div className="text-sm text-neutral-700 dark:text-neutral-300 whitespace-pre-line leading-relaxed mb-6 font-sans">
                                 {exercise.instructions}
                             </div>
 
                             {/* Test Cases Results Breakdown */}
                             {hasEvaluated && (
-                                <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-800 space-y-3">
-                                    <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                                <div className="mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-800 space-y-3">
+                                    <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
                                         {t('exercises.test_cases')}
                                     </h4>
 
                                     {isAllPassed ? (
-                                        <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 flex items-center gap-2 text-sm font-semibold">
-                                            <CheckCircle2 className="w-5 h-5 text-emerald-500 shrink-0" />
+                                        <div className="p-4 rounded-xl bg-green-50 dark:bg-green-950/40 border border-green-200 dark:border-green-800 text-green-800 dark:text-green-200 flex items-center gap-2 text-sm font-semibold">
+                                            <CheckCircle2 className="w-5 h-5 text-green-500 shrink-0" />
                                             <span>{t('common.correct')}</span>
                                         </div>
                                     ) : (
@@ -171,13 +171,13 @@ export default function Show({ exercise }: Props) {
                                                 className={cn(
                                                     'p-3 rounded-xl border flex items-center justify-between text-xs font-medium',
                                                     tr.passed
-                                                        ? 'bg-emerald-50/40 dark:bg-emerald-950/20 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200'
+                                                        ? 'bg-green-50/40 dark:bg-green-950/20 border-green-200 dark:border-green-800 text-green-900 dark:text-green-200'
                                                         : 'bg-red-50/40 dark:bg-red-950/20 border-red-200 dark:border-red-800 text-red-900 dark:text-red-200'
                                                 )}
                                             >
                                                 <span>{tr.description}</span>
                                                 {tr.passed ? (
-                                                    <Check className="w-4 h-4 text-emerald-600" />
+                                                    <Check className="w-4 h-4 text-green-600" />
                                                 ) : (
                                                     <XCircle className="w-4 h-4 text-red-600" />
                                                 )}
@@ -188,7 +188,7 @@ export default function Show({ exercise }: Props) {
                             )}
 
                             {/* Hint and Solution toggles */}
-                            <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center gap-3">
+                            <div className="mt-6 pt-4 border-t border-neutral-100 dark:border-neutral-800 flex items-center gap-3">
                                 {exercise.hint && (
                                     <button
                                         type="button"
@@ -202,7 +202,7 @@ export default function Show({ exercise }: Props) {
                                 <button
                                     type="button"
                                     onClick={() => setShowSolution(!showSolution)}
-                                    className="text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 flex items-center gap-1"
+                                    className="text-xs font-medium text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200 flex items-center gap-1"
                                 >
                                     <Eye className="w-3.5 h-3.5" />
                                     <span>{t('common.show_answer')}</span>
@@ -219,11 +219,11 @@ export default function Show({ exercise }: Props) {
 
                             {/* Solution Box */}
                             {showSolution && (
-                                <div className="mt-3 p-3.5 rounded-xl bg-slate-900 text-slate-100 border border-slate-800 text-xs font-mono">
+                                <div className="mt-3 p-3.5 rounded-xl bg-neutral-900 text-neutral-100 border border-neutral-800 text-xs font-mono">
                                     <div className="font-sans font-bold text-amber-400 mb-1">
                                         {t('exercises.solution_title')}:
                                     </div>
-                                    <pre className="overflow-x-auto p-2 bg-slate-950 rounded-lg">
+                                    <pre className="overflow-x-auto p-2 bg-neutral-950 rounded-lg">
                                         {exercise.solution_code}
                                     </pre>
                                 </div>
@@ -233,10 +233,10 @@ export default function Show({ exercise }: Props) {
 
                     {/* Right Pane: Code Editor & Action Buttons */}
                     <div className="lg:col-span-7 flex flex-col space-y-4">
-                        <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-xs flex-1 flex flex-col">
+                        <div className="rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden shadow-xs flex-1 flex flex-col">
                             {/* Toolbar */}
-                            <div className="flex items-center justify-between px-4 py-3 bg-slate-100/70 dark:bg-slate-800/40 border-b border-slate-200 dark:border-slate-800">
-                                <span className="text-xs font-bold font-mono text-slate-600 dark:text-slate-300 uppercase">
+                            <div className="flex items-center justify-between px-4 py-3 bg-neutral-100/70 dark:bg-neutral-800/40 border-b border-neutral-200 dark:border-neutral-800">
+                                <span className="text-xs font-bold font-mono text-neutral-600 dark:text-neutral-300 uppercase">
                                     {exercise.language} Editor
                                 </span>
 
@@ -244,7 +244,7 @@ export default function Show({ exercise }: Props) {
                                     <button
                                         type="button"
                                         onClick={handleReset}
-                                        className="flex items-center gap-1 px-3 py-1.5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl text-xs font-medium transition-colors"
+                                        className="flex items-center gap-1 px-3 py-1.5 border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl text-xs font-medium transition-colors"
                                     >
                                         <RotateCcw className="w-3.5 h-3.5" />
                                         <span>{t('common.reset')}</span>
@@ -253,7 +253,7 @@ export default function Show({ exercise }: Props) {
                                     <button
                                         type="button"
                                         onClick={runEvaluation}
-                                        className="flex items-center gap-1.5 px-5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm shadow-emerald-500/20"
+                                        className="flex items-center gap-1.5 px-5 py-1.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl text-xs font-bold transition-all shadow-sm"
                                     >
                                         <Play className="w-3.5 h-3.5 fill-white" />
                                         <span>{t('common.submit')}</span>
@@ -273,11 +273,11 @@ export default function Show({ exercise }: Props) {
 
                             {/* Output Sandbox Preview */}
                             {previewDoc && (
-                                <div className="border-t border-slate-200 dark:border-slate-800 p-4 bg-slate-50 dark:bg-slate-950">
-                                    <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">
+                                <div className="border-t border-neutral-200 dark:border-neutral-800 p-4 bg-neutral-50 dark:bg-neutral-950">
+                                    <div className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider mb-2">
                                         {t('common.preview')}
                                     </div>
-                                    <div className="rounded-xl border border-slate-200 dark:border-slate-800 bg-white overflow-hidden">
+                                    <div className="rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white overflow-hidden">
                                         <iframe
                                             srcDoc={previewDoc}
                                             title="Sandbox Preview"

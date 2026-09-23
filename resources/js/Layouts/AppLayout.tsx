@@ -22,7 +22,7 @@ export default function AppLayout({ title, children }: Props) {
     }, [flash]);
 
     return (
-        <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans">
+        <div className="min-h-screen flex flex-col bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 font-sans">
             {title && <Head title={title} />}
 
             <Navbar />
@@ -30,15 +30,15 @@ export default function AppLayout({ title, children }: Props) {
             {/* Flash Notifications */}
             {flashSuccess && (
                 <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 mt-4">
-                    <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 rounded-xl flex items-center justify-between text-xs text-emerald-800 dark:text-emerald-200">
+                    <div className="p-3 bg-green-50 dark:bg-green-950/40 border border-green-200 dark:border-green-800 rounded-xl flex items-center justify-between text-xs text-green-800 dark:text-green-200">
                         <div className="flex items-center gap-2">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                            <CheckCircle2 className="w-4 h-4 text-green-600 dark:text-green-400 shrink-0" />
                             <span>{flashSuccess}</span>
                         </div>
                         <button
                             type="button"
                             onClick={() => setFlashSuccess(null)}
-                            className="p-1 hover:bg-emerald-100 dark:hover:bg-emerald-900 rounded-lg text-emerald-600 dark:text-emerald-400"
+                            className="p-1 hover:bg-green-100 dark:hover:bg-green-900 rounded-lg text-green-600 dark:text-green-400"
                         >
                             <X className="w-3.5 h-3.5" />
                         </button>

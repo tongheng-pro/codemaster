@@ -30,7 +30,7 @@ export default function LanguageSwitcher({ className }: { className?: string }) 
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-1.5 px-3 py-1.5 whitespace-nowrap text-xs sm:text-sm font-medium rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-xs"
+                className="flex items-center gap-1.5 px-3 py-1.5 whitespace-nowrap text-xs sm:text-sm font-medium rounded-lg border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors shadow-xs"
                 aria-expanded={isOpen}
                 aria-haspopup="true"
                 aria-label="Switch language"
@@ -42,8 +42,8 @@ export default function LanguageSwitcher({ className }: { className?: string }) 
             </button>
 
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl py-1 z-50 animate-in fade-in-50 zoom-in-95">
-                    <div className="px-3 py-1.5 text-[11px] font-semibold tracking-wider text-slate-400 dark:text-slate-500 uppercase border-b border-slate-100 dark:border-slate-800">
+                <div className="absolute right-0 mt-2 w-48 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl py-1 z-50 animate-in fade-in-50 zoom-in-95">
+                    <div className="px-3 py-1.5 text-[11px] font-semibold tracking-wider text-neutral-400 dark:text-neutral-500 uppercase border-b border-neutral-100 dark:border-neutral-800">
                         Select Language
                     </div>
                     {languages.map((lang) => (
@@ -55,18 +55,18 @@ export default function LanguageSwitcher({ className }: { className?: string }) 
                                 switchLocale(lang.code as 'en' | 'km');
                             }}
                             className={cn(
-                                'w-full text-left px-3 py-2 text-xs sm:text-sm flex items-center justify-between hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-slate-700 dark:text-slate-200 transition-colors',
-                                locale === lang.code && 'font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-50/60 dark:bg-emerald-950/20'
+                                'w-full text-left px-3 py-2 text-xs sm:text-sm flex items-center justify-between hover:bg-primary-50 dark:hover:bg-primary-950/40 text-neutral-700 dark:text-neutral-200 transition-colors',
+                                locale === lang.code && 'font-semibold text-primary-600 dark:text-primary-400 bg-primary-50/60 dark:bg-primary-950/20'
                             )}
                         >
                             <div className="flex items-center gap-2">
                                 <span className="text-base">{lang.flag}</span>
                                 <div>
                                     <div className="leading-snug">{lang.native}</div>
-                                    <div className="text-[11px] text-slate-400 dark:text-slate-500">{lang.label}</div>
+                                    <div className="text-[11px] text-neutral-400 dark:text-neutral-500">{lang.label}</div>
                                 </div>
                             </div>
-                            {locale === lang.code && <Check className="w-4 h-4 text-emerald-500" />}
+                            {locale === lang.code && <Check className="w-4 h-4 text-green-500" />}
                         </button>
                     ))}
                 </div>

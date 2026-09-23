@@ -153,15 +153,15 @@ console.log('Playground initialized!');`;
 
     return (
         <AppLayout title={t('playground.title')}>
-            <div className={cn('p-4 sm:p-6 lg:p-8 flex flex-col flex-1', isFullscreen && 'fixed inset-0 z-50 bg-slate-900')}>
+            <div className={cn('p-4 sm:p-6 lg:p-8 flex flex-col flex-1', isFullscreen && 'fixed inset-0 z-50 bg-neutral-900')}>
                 {/* Header & Controls */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-4">
                     <div>
-                        <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white flex items-center gap-2">
-                            <Code2 className="w-6 h-6 text-emerald-500" />
+                        <h1 className="text-2xl font-extrabold tracking-tight text-neutral-900 dark:text-white flex items-center gap-2">
+                            <Code2 className="w-6 h-6 text-primary-500" />
                             <span>{t('playground.title')}</span>
                         </h1>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                        <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
                             {t('playground.subtitle')}
                         </p>
                     </div>
@@ -171,7 +171,7 @@ console.log('Playground initialized!');`;
                         {Object.keys(templates).length > 0 && (
                             <select
                                 onChange={(e) => e.target.value && loadTemplate(e.target.value)}
-                                className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs text-slate-700 dark:text-slate-200"
+                                className="px-3 py-1.5 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-xs text-neutral-700 dark:text-neutral-200"
                                 defaultValue=""
                             >
                                 <option value="" disabled>
@@ -188,7 +188,7 @@ console.log('Playground initialized!');`;
                         <button
                             type="button"
                             onClick={compileSandbox}
-                            className="flex items-center gap-1.5 px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl font-semibold text-xs transition-colors shadow-sm shadow-emerald-500/20"
+                            className="flex items-center gap-1.5 px-4 py-1.5 bg-primary-600 hover:bg-primary-500 text-white rounded-xl font-semibold text-xs transition-colors shadow-sm"
                         >
                             <Play className="w-3.5 h-3.5 fill-white" />
                             <span>{t('common.run')}</span>
@@ -197,7 +197,7 @@ console.log('Playground initialized!');`;
                         <button
                             type="button"
                             onClick={handleReset}
-                            className="flex items-center gap-1.5 px-3 py-1.5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl text-xs font-medium transition-colors"
+                            className="flex items-center gap-1.5 px-3 py-1.5 border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl text-xs font-medium transition-colors"
                         >
                             <RotateCcw className="w-3.5 h-3.5" />
                             <span>{t('common.reset')}</span>
@@ -206,16 +206,16 @@ console.log('Playground initialized!');`;
                         <button
                             type="button"
                             onClick={handleCopy}
-                            className="flex items-center gap-1.5 px-3 py-1.5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl text-xs font-medium transition-colors"
+                            className="flex items-center gap-1.5 px-3 py-1.5 border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl text-xs font-medium transition-colors"
                         >
-                            {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                            {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
                             <span>{copied ? t('common.copied') : t('common.copy')}</span>
                         </button>
 
                         <button
                             type="button"
                             onClick={() => setIsFullscreen(!isFullscreen)}
-                            className="p-1.5 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-xl text-xs transition-colors"
+                            className="p-1.5 border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-200 hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl text-xs transition-colors"
                             title={isFullscreen ? t('common.exit_fullscreen') : t('common.fullscreen')}
                         >
                             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
@@ -226,9 +226,9 @@ console.log('Playground initialized!');`;
                 {/* Editor & Preview Split Grid */}
                 <div className="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-4 min-h-[500px]">
                     {/* Left Pane: Code Tabs & Editor */}
-                    <div className="flex flex-col rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-xs">
+                    <div className="flex flex-col rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden shadow-xs">
                         {/* Tab Headers */}
-                        <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-slate-100/70 dark:bg-slate-800/40 px-2 pt-2">
+                        <div className="flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800 bg-neutral-100/70 dark:bg-neutral-800/40 px-2 pt-2">
                             <div className="flex items-center gap-1">
                                 <button
                                     type="button"
@@ -236,8 +236,8 @@ console.log('Playground initialized!');`;
                                     className={cn(
                                         'px-4 py-2 rounded-t-xl text-xs font-semibold font-mono transition-colors',
                                         activeTab === 'html'
-                                            ? 'bg-white dark:bg-slate-900 text-emerald-600 dark:text-emerald-400 border-t-2 border-emerald-500'
-                                            : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                                            ? 'bg-white dark:bg-neutral-900 text-primary-600 dark:text-primary-400 border-t-2 border-primary-500'
+                                            : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200'
                                     )}
                                 >
                                     HTML
@@ -248,8 +248,8 @@ console.log('Playground initialized!');`;
                                     className={cn(
                                         'px-4 py-2 rounded-t-xl text-xs font-semibold font-mono transition-colors',
                                         activeTab === 'css'
-                                            ? 'bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 border-t-2 border-blue-500'
-                                            : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                                            ? 'bg-white dark:bg-neutral-900 text-blue-600 dark:text-blue-400 border-t-2 border-blue-500'
+                                            : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200'
                                     )}
                                 >
                                     CSS
@@ -260,8 +260,8 @@ console.log('Playground initialized!');`;
                                     className={cn(
                                         'px-4 py-2 rounded-t-xl text-xs font-semibold font-mono transition-colors',
                                         activeTab === 'js'
-                                            ? 'bg-white dark:bg-slate-900 text-amber-600 dark:text-amber-400 border-t-2 border-amber-500'
-                                            : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                                            ? 'bg-white dark:bg-neutral-900 text-amber-600 dark:text-amber-400 border-t-2 border-amber-500'
+                                            : 'text-neutral-500 hover:text-neutral-800 dark:hover:text-neutral-200'
                                     )}
                                 >
                                     JavaScript
@@ -299,10 +299,10 @@ console.log('Playground initialized!');`;
                     </div>
 
                     {/* Right Pane: Live Sandboxed Output */}
-                    <div className="flex flex-col rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 overflow-hidden shadow-xs">
-                        <div className="px-4 py-2.5 bg-slate-100/70 dark:bg-slate-800/40 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-bold text-slate-500 uppercase tracking-wider">
+                    <div className="flex flex-col rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden shadow-xs">
+                        <div className="px-4 py-2.5 bg-neutral-100/70 dark:bg-neutral-800/40 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between text-xs font-bold text-neutral-500 uppercase tracking-wider">
                             <span>{t('playground.preview')}</span>
-                            <span className="text-[10px] text-emerald-600 font-mono">Isolated Sandbox</span>
+                            <span className="text-[10px] text-primary-600 font-mono">Isolated Sandbox</span>
                         </div>
                         <div className="flex-1 bg-white min-h-[450px]">
                             <iframe

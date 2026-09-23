@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Book;
 use App\Models\Certificate;
 use App\Models\Course;
 use App\Models\Exercise;
@@ -31,15 +32,26 @@ class AdminDashboardController extends Controller
             'total_exercise_attempts' => ExerciseAttempt::count(),
             'total_quiz_attempts' => QuizAttempt::count(),
             'total_certificates' => Certificate::count(),
+            'total_books' => Book::count(),
         ];
 
         $recentUsers = User::latest()->take(5)->get();
         $recentCourses = Course::with('translations')->latest()->take(5)->get();
 
+        $recentBooks = Book::with('translations')->latest()->take(6)->get()->map(fn (Book $book) => [
+            'id' => $book->id,
+            'title' => $book->getTranslated('title', 'en'),
+            'status' => $book->status,
+            'processing_progress' => $book->processing_progress,
+            'total_pages' => $book->total_pages,
+            'is_published' => $book->is_published,
+        ]);
+
         return Inertia::render('Admin/Dashboard', [
             'stats' => $stats,
             'recentUsers' => $recentUsers,
             'recentCourses' => $recentCourses,
+            'recentBooks' => $recentBooks,
         ]);
     }
 }

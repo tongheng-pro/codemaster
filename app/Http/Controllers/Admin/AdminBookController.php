@@ -349,6 +349,6 @@ class AdminBookController extends Controller
 
         $book->delete();
 
-        return redirect()->route('admin.books.index')->with('success', 'Book and associated data deleted.');
+        return back()->with('success', 'Book and associated data deleted.');
     }
 }
