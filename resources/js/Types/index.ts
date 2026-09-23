@@ -176,6 +176,14 @@ export interface NavCourseItem {
     title: string;
 }
 
+export interface NavigationSettings {
+    courses: boolean;
+    books: boolean;
+    exercises: boolean;
+    quizzes: boolean;
+    playground: boolean;
+}
+
 export interface PageProps {
     auth: {
         user: User | null;
@@ -183,6 +191,7 @@ export interface PageProps {
     locale: Locale;
     translations: Record<string, any>;
     navCourses: NavCourseItem[];
+    navigation: NavigationSettings;
     flash: {
         success?: string | null;
         error?: string | null;

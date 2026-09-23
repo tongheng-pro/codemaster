@@ -11,6 +11,7 @@ import {
     Terminal,
     HelpCircle,
     Users,
+    Settings,
     Award,
     ArrowLeft,
     Menu,
@@ -39,6 +40,7 @@ export default function AdminLayout({ title, children }: Props) {
         { href: '/admin/quizzes', label: t('admin.manage_quizzes'), icon: HelpCircle },
         { href: '/admin/users', label: t('admin.manage_users'), icon: Users },
         { href: '/admin/certificates', label: t('admin.manage_certificates'), icon: Award },
+        { href: '/admin/settings', label: 'Settings', icon: Settings },
     ];
 
     return (
@@ -125,7 +127,7 @@ export default function AdminLayout({ title, children }: Props) {
             {/* Admin Content Area */}
             <div className="flex-1 flex flex-col min-w-0">
                 <header className="h-16 bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-neutral-200 dark:border-neutral-800 px-4 sm:px-8 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
                         <button
                             type="button"
                             onClick={() => setSidebarOpen(true)}
@@ -133,7 +135,7 @@ export default function AdminLayout({ title, children }: Props) {
                         >
                             <Menu className="w-5 h-5" />
                         </button>
-                        <h1 className="text-lg font-bold text-neutral-800 dark:text-white">{title}</h1>
+                        <h1 className="text-base sm:text-lg font-bold text-neutral-800 dark:text-white truncate">{title}</h1>
                     </div>
                     <div className="flex items-center gap-3">
                         <ThemeToggle />

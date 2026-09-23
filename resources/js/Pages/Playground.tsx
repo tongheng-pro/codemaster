@@ -13,7 +13,7 @@ import {
     Code2,
     Sparkles,
 } from 'lucide-react';
-import { cn } from '@/Utils';
+import { cn, copyToClipboard } from '@/Utils';
 
 interface StarterTemplate {
     title: string;
@@ -136,7 +136,7 @@ console.log('Playground initialized!');`;
         if (activeTab === 'css') codeToCopy = cssCode;
         if (activeTab === 'js') codeToCopy = jsCode;
 
-        navigator.clipboard.writeText(codeToCopy);
+        copyToClipboard(codeToCopy);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     }

@@ -28,7 +28,7 @@ import {
     Image as ImageIcon,
     Quote,
 } from 'lucide-react';
-import { cn } from '@/Utils';
+import { cn, copyToClipboard } from '@/Utils';
 
 interface ContentBlockData {
     id: number;
@@ -135,6 +135,10 @@ export default function Show({
     // Reader view: extracted text or original PDF page snapshots
     const [viewMode, setViewMode] = useState<'text' | 'pdf'>('text');
 
+    // On phones the table of contents is collapsed so the section text comes first
+    const [isMobileTocOpen, setIsMobileTocOpen] = useState(false);
+    useEffect(() => setIsMobileTocOpen(false), [section?.id]);
+
     // Keep the active section visible in the sidebar instead of resetting it to the top on every visit
     const tocContainerRef = useRef<HTMLDivElement>(null);
     const isTocVisible = searchQuery.trim().length < 2;
@@ -198,7 +202,7 @@ export default function Show({
     };
 
     const handleCopyCode = (blockId: number, code: string) => {
-        navigator.clipboard.writeText(code);
+        copyToClipboard(code);
         setCopiedBlockId(blockId);
         setTimeout(() => setCopiedBlockId(null), 2000);
     };
@@ -344,10 +348,23 @@ export default function Show({
                 />
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col lg:flex-row gap-8">
+            <div className="w-full min-w-0 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col lg:flex-row gap-4 lg:gap-8">
+                <button
+                    type="button"
+                    onClick={() => setIsMobileTocOpen(!isMobileTocOpen)}
+                    className="lg:hidden flex items-center justify-between gap-2 w-full px-4 py-3 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 text-sm font-semibold text-neutral-800 dark:text-neutral-100"
+                    aria-expanded={isMobileTocOpen}
+                >
+                    <span className="flex items-center gap-2 min-w-0">
+                        <ListOrdered className="w-4 h-4 shrink-0 text-primary-500" />
+                        <span className="truncate">{t('books.table_of_contents')}</span>
+                    </span>
+                    <ChevronRight className={cn('w-4 h-4 shrink-0 transition-transform', isMobileTocOpen && 'rotate-90')} />
+                </button>
+
                 {/* Left Sidebar: Table of Contents & In-Book Search */}
-                <aside className="w-full lg:w-80 shrink-0">
-                    <div className="sticky top-24 bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 p-4 shadow-sm max-h-[calc(100vh-7rem)] flex flex-col">
+                <aside className={cn('w-full min-w-0 lg:w-80 shrink-0 lg:block', isMobileTocOpen ? 'block' : 'hidden')}>
+                    <div className="lg:sticky lg:top-24 bg-white dark:bg-neutral-900 rounded-2xl border border-neutral-200 dark:border-neutral-800 p-4 shadow-sm max-h-[70vh] lg:max-h-[calc(100vh-7rem)] flex flex-col">
                         {/* Book Header Link */}
                         <Link
                             href={`/books/${book.slug}`}

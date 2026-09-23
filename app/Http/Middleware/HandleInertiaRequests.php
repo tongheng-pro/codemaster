@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Course;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -84,6 +85,7 @@ class HandleInertiaRequests extends Middleware
             'locale' => $locale,
             'translations' => $translations,
             'navCourses' => $navCourses,
+            'navigation' => Setting::navigation(),
             'flash' => [
                 'success' => $request->session()->get('success'),
                 'error' => $request->session()->get('error'),

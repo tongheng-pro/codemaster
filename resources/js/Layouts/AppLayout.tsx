@@ -64,7 +64,7 @@ export default function AppLayout({ title, children }: Props) {
                 </div>
             )}
 
-            <main className="flex-1 flex flex-col">
+            <main className="flex-1 flex flex-col min-w-0">
                 {children}
             </main>
 

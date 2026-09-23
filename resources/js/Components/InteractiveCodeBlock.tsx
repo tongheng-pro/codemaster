@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MonacoCodeEditor from '@/Components/MonacoCodeEditor';
 import { useTranslation } from '@/Hooks/useTranslation';
 import { Play, RotateCcw, Copy, Check, Eye } from 'lucide-react';
-import { cn } from '@/Utils';
+import { cn, copyToClipboard } from '@/Utils';
 
 interface Props {
     title?: string;
@@ -125,7 +125,7 @@ export default function InteractiveCodeBlock({
     }
 
     function handleCopy() {
-        navigator.clipboard.writeText(code);
+        copyToClipboard(code);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     }

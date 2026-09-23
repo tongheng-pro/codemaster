@@ -146,7 +146,7 @@ export default function Index({ books: initialBooks }: Props) {
                                 <thead className="bg-neutral-50 dark:bg-neutral-800/60 text-xs font-semibold uppercase text-neutral-500 dark:text-neutral-400 border-b border-neutral-200 dark:border-neutral-800">
                                     <tr>
                                         <th className="px-6 py-4">Book Title / Author</th>
-                                        <th className="px-6 py-4">Pages / Chapters</th>
+                                        <th className="hidden md:table-cell px-6 py-4">Pages / Chapters</th>
                                         <th className="px-6 py-4">AI Processing Status</th>
                                         <th className="px-6 py-4">Status</th>
                                         <th className="px-6 py-4 text-right">Actions</th>
@@ -165,7 +165,7 @@ export default function Index({ books: initialBooks }: Props) {
                                                         {b.author || 'Author unspecified'} &bull; {b.created_at}
                                                     </div>
                                                 </td>
-                                                <td className="px-6 py-4">
+                                                <td className="hidden md:table-cell px-6 py-4">
                                                     <div className="flex items-center gap-3 text-xs font-mono">
                                                         <span>{b.total_pages} pages</span>
                                                         <span>&bull;</span>

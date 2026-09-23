@@ -3,9 +3,10 @@ import { Link, usePage } from '@inertiajs/react';
 import { useTranslation } from '@/Hooks/useTranslation';
 import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import ThemeToggle from '@/Components/ThemeToggle';
-import { PageProps } from '@/Types';
+import { NavigationSettings, PageProps } from '@/Types';
 import {
     Code2,
+    BookOpen,
     Terminal,
     HelpCircle,
     Search,
@@ -24,9 +25,18 @@ import { cn } from '@/Utils';
 
 export default function Navbar() {
     const { t } = useTranslation();
-    const { auth } = usePage<PageProps>().props;
+    const { auth, navigation } = usePage<PageProps>().props;
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+
+    // Admins switch these on or off in Admin → Settings
+    const navLinks = [
+        { key: 'courses', href: '/courses', label: t('nav.courses'), icon: BookOpen, iconColor: 'text-primary-500' },
+        { key: 'books', href: '/books', label: t('nav.books'), icon: Library, iconColor: 'text-primary-500' },
+        { key: 'exercises', href: '/exercises', label: t('nav.exercises'), icon: Terminal, iconColor: 'text-blue-500' },
+        { key: 'quizzes', href: '/quizzes', label: t('nav.quizzes'), icon: HelpCircle, iconColor: 'text-purple-500' },
+        { key: 'playground', href: '/playground', label: t('nav.playground'), icon: Code2, iconColor: 'text-amber-500' },
+    ].filter((item) => navigation?.[item.key as keyof NavigationSettings] ?? true);
 
     return (
         <header className="sticky top-0 z-40 w-full border-b border-neutral-200 dark:border-neutral-800 bg-white/95 dark:bg-neutral-900/95 backdrop-blur-md">
@@ -44,7 +54,7 @@ export default function Navbar() {
                                 <span className="font-bold text-lg leading-tight tracking-tight text-neutral-900 dark:text-white">
                                     Code<span className="text-primary-500">Master</span>
                                 </span>
-                                <span className="text-[10px] font-medium text-neutral-400 dark:text-neutral-500 -mt-0.5">
+                                <span className="hidden sm:block text-[10px] font-medium text-neutral-400 dark:text-neutral-500 -mt-0.5">
                                     EN &bull; ភាសាខ្មែរ
                                 </span>
                             </div>
@@ -52,37 +62,16 @@ export default function Navbar() {
 
                         {/* Desktop Navigation Links */}
                         <nav className="hidden xl:flex items-center gap-0.5">
-                            <Link
-                                href="/books"
-                                className="flex items-center gap-1.5 px-2.5 py-2 text-sm font-medium whitespace-nowrap text-neutral-700 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 transition-colors"
-                            >
-                                <Library className="hidden 2xl:block w-4 h-4 shrink-0 text-primary-500" />
-                                <span>{t('nav.books')}</span>
-                            </Link>
-
-                            <Link
-                                href="/exercises"
-                                className="flex items-center gap-1.5 px-2.5 py-2 text-sm font-medium whitespace-nowrap text-neutral-700 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 transition-colors"
-                            >
-                                <Terminal className="hidden 2xl:block w-4 h-4 shrink-0 text-blue-500" />
-                                <span>{t('nav.exercises')}</span>
-                            </Link>
-
-                            <Link
-                                href="/quizzes"
-                                className="flex items-center gap-1.5 px-2.5 py-2 text-sm font-medium whitespace-nowrap text-neutral-700 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 transition-colors"
-                            >
-                                <HelpCircle className="hidden 2xl:block w-4 h-4 shrink-0 text-purple-500" />
-                                <span>{t('nav.quizzes')}</span>
-                            </Link>
-
-                            <Link
-                                href="/playground"
-                                className="flex items-center gap-1.5 px-2.5 py-2 text-sm font-medium whitespace-nowrap text-neutral-700 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 transition-colors"
-                            >
-                                <Code2 className="hidden 2xl:block w-4 h-4 shrink-0 text-amber-500" />
-                                <span>{t('nav.playground')}</span>
-                            </Link>
+                            {navLinks.map((item) => (
+                                <Link
+                                    key={item.key}
+                                    href={item.href}
+                                    className="flex items-center gap-1.5 px-2.5 py-2 text-sm font-medium whitespace-nowrap text-neutral-700 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 transition-colors"
+                                >
+                                    <item.icon className={cn('hidden 2xl:block w-4 h-4 shrink-0', item.iconColor)} />
+                                    <span>{item.label}</span>
+                                </Link>
+                            ))}
                         </nav>
                     </div>
 
@@ -99,8 +88,8 @@ export default function Navbar() {
                         </Link>
 
                         {/* Theme and Language Switchers */}
-                        <ThemeToggle />
-                        <LanguageSwitcher />
+                        <ThemeToggle className="hidden sm:flex" />
+                        <LanguageSwitcher className="hidden sm:inline-block" />
 
                         {/* User Authentication Menu */}
                         {auth.user ? (
@@ -193,7 +182,7 @@ export default function Navbar() {
                                 )}
                             </div>
                         ) : (
-                            <div className="flex items-center gap-2">
+                            <div className="hidden sm:flex items-center gap-2">
                                 <Link
                                     href="/login"
                                     className="px-3 py-1.5 whitespace-nowrap text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 transition-colors"
@@ -225,6 +214,12 @@ export default function Navbar() {
             {/* Mobile Drawer */}
             {mobileMenuOpen && (
                 <div className="xl:hidden border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 px-4 pt-3 pb-6 space-y-3">
+                    {/* Theme and language live here on phones, where the top bar has no room for them */}
+                    <div className="flex items-center gap-2 sm:hidden">
+                        <ThemeToggle />
+                        <LanguageSwitcher />
+                    </div>
+
                     <Link
                         href="/search"
                         className="flex items-center gap-2 w-full px-3 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 text-sm"
@@ -235,39 +230,37 @@ export default function Navbar() {
                     </Link>
 
                     <div className="space-y-1">
-                        <Link
-                            href="/books"
-                            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            <Library className="w-4 h-4 text-primary-500" />
-                            <span>{t('nav.books')}</span>
-                        </Link>
-                        <Link
-                            href="/exercises"
-                            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            <Terminal className="w-4 h-4 text-blue-500" />
-                            <span>{t('nav.exercises')}</span>
-                        </Link>
-                        <Link
-                            href="/quizzes"
-                            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            <HelpCircle className="w-4 h-4 text-purple-500" />
-                            <span>{t('nav.quizzes')}</span>
-                        </Link>
-                        <Link
-                            href="/playground"
-                            className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
-                            onClick={() => setMobileMenuOpen(false)}
-                        >
-                            <Code2 className="w-4 h-4 text-amber-500" />
-                            <span>{t('nav.playground')}</span>
-                        </Link>
+                        {navLinks.map((item) => (
+                            <Link
+                                key={item.key}
+                                href={item.href}
+                                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                <item.icon className={cn('w-4 h-4', item.iconColor)} />
+                                <span>{item.label}</span>
+                            </Link>
+                        ))}
                     </div>
+
+                    {!auth.user && (
+                        <div className="grid grid-cols-2 gap-2 pt-3 border-t border-neutral-200 dark:border-neutral-800 sm:hidden">
+                            <Link
+                                href="/login"
+                                className="px-3 py-2 text-center rounded-lg border border-neutral-200 dark:border-neutral-700 text-sm font-medium text-neutral-700 dark:text-neutral-200"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                {t('nav.login')}
+                            </Link>
+                            <Link
+                                href="/register"
+                                className="px-3 py-2 text-center rounded-lg bg-primary-600 text-sm font-semibold text-white"
+                                onClick={() => setMobileMenuOpen(false)}
+                            >
+                                {t('nav.register')}
+                            </Link>
+                        </div>
+                    )}
                 </div>
             )}
         </header>
