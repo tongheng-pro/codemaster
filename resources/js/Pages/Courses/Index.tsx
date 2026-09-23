@@ -52,11 +52,13 @@ export default function Index({ courses = [] }: Props) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filtered.map((course) => {
+                    {filtered.map((course, aosIndex) => {
                         const hasProgress = course.completed_percentage !== null && course.completed_percentage !== undefined;
                         return (
                             <Link
                                 key={course.id}
+                                data-aos="fade-up"
+                                data-aos-delay={(aosIndex % 3) * 80}
                                 href={`/${course.slug}`}
                                 className="group p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-primary-500/60 shadow-xs hover:shadow-xl hover: transition-all flex flex-col justify-between"
                             >

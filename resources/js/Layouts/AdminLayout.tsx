@@ -56,7 +56,7 @@ export default function AdminLayout({ title, children }: Props) {
             >
                 <div className="p-4 flex items-center justify-between border-b border-neutral-200 dark:border-neutral-800">
                     <div className="flex items-center gap-2">
-                        <img src="/images/dynosures-logo.png" alt="CodeMaster" className="w-8 h-8 object-contain" />
+                        <img src="/images/mylogo-logo.png" alt="CodeMaster" className="w-8 h-8 object-contain" />
                         <div>
                             <div className="font-semibold text-sm text-neutral-900 dark:text-white">CodeMaster</div>
                             <div className="text-[10px] text-neutral-500 font-medium tracking-wider uppercase">

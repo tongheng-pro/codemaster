@@ -29,9 +29,11 @@ export default function Index({ quizzes = [] }: Props) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {quizzes.map((quiz) => (
+                    {quizzes.map((quiz, aosIndex) => (
                         <Link
                             key={quiz.id}
+                            data-aos="fade-up"
+                            data-aos-delay={(aosIndex % 3) * 80}
                             href={`/quizzes/${quiz.slug}`}
                             className="group p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-purple-500/60 shadow-xs hover:shadow-xl hover: transition-all flex flex-col justify-between"
                         >

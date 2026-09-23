@@ -278,9 +278,11 @@ export default function Show({
                     </h2>
 
                     <div className="space-y-4">
-                        {tableOfContents.map((chap) => (
+                        {tableOfContents.map((chap, aosIndex) => (
                             <div
                                 key={chap.id}
+                                data-aos="fade-up"
+                                data-aos-delay={(aosIndex % 3) * 80}
                                 className="bg-white dark:bg-neutral-800 rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 shadow-sm"
                             >
                                 <div className="flex items-center justify-between border-b border-neutral-100 dark:border-neutral-700/60 pb-3 mb-4">

@@ -96,9 +96,11 @@ export default function Index({ books, filters }: Props) {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {books.map((book) => (
+                        {books.map((book, aosIndex) => (
                             <div
                                 key={book.id}
+                                data-aos="fade-up"
+                                data-aos-delay={(aosIndex % 3) * 80}
                                 className="bg-white dark:bg-neutral-800/80 rounded-2xl border border-neutral-200 dark:border-neutral-700/60 p-6 flex flex-col justify-between hover:shadow-xl hover:border-primary-500/50 transition-all group"
                             >
                                 <div>

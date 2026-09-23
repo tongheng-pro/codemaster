@@ -13,7 +13,7 @@ export default function Footer() {
                     {/* Brand */}
                     <div className="md:col-span-1 space-y-3">
                         <Link href="/" className="flex items-center gap-2 group">
-                            <img src="/images/dynosures-logo.png" alt="CodeMaster" className="w-8 h-8 object-contain" />
+                            <img src="/images/mylogo-logo.png" alt="CodeMaster" className="w-8 h-8 object-contain" />
                             <span className="font-bold text-base text-neutral-900 dark:text-white">
                                 Code<span className="text-primary-500">Master</span>
                             </span>

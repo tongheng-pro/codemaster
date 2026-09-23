@@ -46,7 +46,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-4 2xl:gap-6 min-w-0">
                         <Link href="/" className="flex items-center gap-2.5 group">
                             <img
-                                src="/images/dynosures-logo.png"
+                                src="/images/mylogo-logo.png"
                                 alt="CodeMaster"
                                 className="w-10 h-10 shrink-0 object-contain group-hover:scale-105 transition-transform"
                             />

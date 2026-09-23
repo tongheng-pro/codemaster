@@ -153,9 +153,11 @@ export default function Dashboard({
 
                     {inProgressCourses.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {inProgressCourses.map((c) => (
+                            {inProgressCourses.map((c, aosIndex) => (
                                 <Link
                                     key={c.id}
+                                    data-aos="fade-up"
+                                    data-aos-delay={(aosIndex % 3) * 80}
                                     href={`/${c.slug}`}
                                     className="p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 hover:border-primary-500 shadow-xs transition-all space-y-4 group"
                                 >

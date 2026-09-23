@@ -56,3 +56,12 @@
 ::-webkit-scrollbar-thumb:hover {
     background: rgba(100, 116, 139, 0.6);
 }
+
+/* AOS hides elements until they animate in; with reduced motion they must simply be visible */
+@media (prefers-reduced-motion: reduce) {
+    [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}

@@ -93,7 +93,7 @@ export default function Home({ stats }: Props) {
             <section className="bg-white dark:bg-neutral-950 relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 border-b border-neutral-200 dark:border-neutral-800 ">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                        <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        <div className="lg:col-span-7 space-y-6 text-center lg:text-left" data-aos="fade-up">
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-primary-100/80 dark:bg-primary-950/80 text-primary-800 dark:text-primary-300 border border-primary-300 dark:border-primary-700">
                                 <Sparkles className="w-3.5 h-3.5" />
                                 <span>Native Bilingual Coding Education &bull; EN + KM</span>
@@ -147,7 +147,7 @@ export default function Home({ stats }: Props) {
                         </div>
 
                         {/* Interactive Hero Code Block */}
-                        <div className="lg:col-span-5">
+                        <div className="lg:col-span-5" data-aos="fade-up" data-aos-delay="150">
                             <div className="relative">
                                 <div className="relative">
                                     <InteractiveCodeBlock
@@ -166,7 +166,7 @@ export default function Home({ stats }: Props) {
             {/* 3. Why Learn Here Features */}
             <section className="py-16 sm:py-24 border-y border-neutral-200 dark:border-neutral-800 bg-neutral-100/60 dark:bg-neutral-900/40">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                    <div className="text-center max-w-2xl mx-auto mb-16 space-y-3" data-aos="fade-up">
                         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-neutral-900 dark:text-white">
                             {t('home.why_learn_title')}
                         </h2>
@@ -181,6 +181,8 @@ export default function Home({ stats }: Props) {
                             return (
                                 <div
                                     key={idx}
+                                    data-aos="fade-up"
+                                    data-aos-delay={(idx % 3) * 100}
                                     className="p-6 rounded-2xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xs space-y-3"
                                 >
                                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${feat.color}`}>
@@ -201,7 +203,7 @@ export default function Home({ stats }: Props) {
 
             {/* 4. Practice & Playground Callout */}
             <section className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="bg-neutral-900 rounded-3xl p-8 sm:p-12 text-white border border-neutral-800 shadow-2xl relative overflow-hidden">
+                <div data-aos="fade-up" className="bg-neutral-900 rounded-3xl p-8 sm:p-12 text-white border border-neutral-800 shadow-2xl relative overflow-hidden">
 
                     <div className="relative z-10 max-w-2xl space-y-6">
                         <span className="px-3 py-1 rounded-full text-xs font-semibold bg-primary-500/20 text-primary-400 border border-primary-500/30">
