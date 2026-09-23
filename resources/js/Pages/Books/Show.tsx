@@ -245,12 +245,20 @@ export default function Show({
                 <div className="bg-neutral-900 text-white py-12 border-b border-neutral-800">
                     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
-                            <div className="bg-primary-600 w-40 h-56 rounded-2xl shadow-2xl flex flex-col items-center justify-center p-4 text-center text-white shrink-0">
-                                <BookOpen className="w-12 h-12 mb-3 opacity-90" />
-                                <span className="text-xs font-bold uppercase tracking-wider line-clamp-2">
-                                    {book.title}
-                                </span>
-                            </div>
+                            {book.cover_image ? (
+                                <img
+                                    src={book.cover_image}
+                                    alt={`${book.title} cover`}
+                                    className="w-40 h-56 rounded-2xl shadow-2xl object-cover bg-white shrink-0"
+                                />
+                            ) : (
+                                <div className="bg-primary-600 w-40 h-56 rounded-2xl shadow-2xl flex flex-col items-center justify-center p-4 text-center text-white shrink-0">
+                                    <BookOpen className="w-12 h-12 mb-3 opacity-90" />
+                                    <span className="text-xs font-bold uppercase tracking-wider line-clamp-2">
+                                        {book.title}
+                                    </span>
+                                </div>
+                            )}
 
                             <div className="flex-1 text-center md:text-left">
                                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-500/20 text-primary-300 text-xs font-semibold mb-3">
@@ -451,7 +459,7 @@ export default function Show({
                             <div ref={tocContainerRef} className="overflow-y-auto flex-1 space-y-4 pr-1">
                                 {tableOfContents.map((chap) => (
                                     <div key={chap.id} className="space-y-1">
-                                        <div className="text-xs font-bold text-neutral-900 dark:text-white flex items-center justify-between py-1">
+                                        <div className="text-sm font-bold text-neutral-900 dark:text-white flex items-center justify-between py-1">
                                             <span className="truncate">
                                                 {chap.chapter_number}. {chap.title}
                                             </span>
@@ -465,7 +473,7 @@ export default function Show({
                                                         data-active={isActive}
                                                         href={`/books/${book.slug}/${chap.slug}/${sec.slug}`}
                                                         className={cn(
-                                                            'block px-2.5 py-1.5 rounded-lg text-xs transition-colors',
+                                                            'block px-2.5 py-1.5 rounded-lg text-sm transition-colors',
                                                             isActive
                                                                 ? 'bg-primary-50 dark:bg-primary-950/70 text-primary-600 dark:text-primary-400 font-semibold border-l-2 border-primary-500'
                                                                 : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800'
@@ -476,7 +484,7 @@ export default function Show({
                                                                 {sec.section_number} {sec.title}
                                                             </span>
                                                             {sec.page_number && (
-                                                                <span className="text-[10px] font-mono opacity-60 shrink-0 ml-1">
+                                                                <span className="text-[11px] font-mono opacity-60 shrink-0 ml-1">
                                                                     p.{sec.page_number}
                                                                 </span>
                                                             )}

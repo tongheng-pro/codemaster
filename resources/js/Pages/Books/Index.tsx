@@ -100,9 +100,18 @@ export default function Index({ books, filters }: Props) {
                                 <div>
                                     {/* Cover / Header Icon */}
                                     <div className="flex items-start justify-between gap-4 mb-4">
-                                        <div className="bg-primary-500 w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
-                                            <BookOpen className="w-6 h-6" />
-                                        </div>
+                                        {book.cover_image ? (
+                                            <img
+                                                src={book.cover_image}
+                                                alt={`${book.title} cover`}
+                                                loading="lazy"
+                                                className="w-16 h-[5.5rem] rounded-lg object-cover bg-white shadow-md group-hover:scale-105 transition-transform"
+                                            />
+                                        ) : (
+                                            <div className="bg-primary-500 w-12 h-12 rounded-xl flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                                                <BookOpen className="w-6 h-6" />
+                                            </div>
+                                        )}
                                         <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-full bg-neutral-100 dark:bg-neutral-700 text-neutral-600 dark:text-neutral-300">
                                             {book.total_pages} {t('books.page_ref')}s
                                         </span>

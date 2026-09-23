@@ -17,14 +17,17 @@ import {
     Globe,
     Layers,
     ChevronRight,
+    Camera,
+    BookOpen,
 } from 'lucide-react';
-import { cn } from '@/Utils';
+import { cn, showToast } from '@/Utils';
 
 interface AdminBook {
     id: number;
     slug: string;
     title: string;
     author: string | null;
+    cover_url: string | null;
     status: string;
     processing_progress: number;
     current_step: string | null;
@@ -100,6 +103,24 @@ export default function Index({ books: initialBooks, maxUploadMb }: Props) {
         }
     };
 
+    const handleCoverChange = (bookId: number, file: File | undefined) => {
+        if (!file) return;
+        if (file.size > 5 * 1024 * 1024) {
+            showToast('Cover images can be up to 5 MB.', 'error');
+            return;
+        }
+        router.post(
+            `/admin/books/${bookId}/cover`,
+            { cover_image: file },
+            {
+                forceFormData: true,
+                preserveScroll: true,
+                onSuccess: () => showToast('Cover updated'),
+                onError: (errors) => showToast(errors.cover_image || 'Could not update the cover.', 'error'),
+            }
+        );
+    };
+
     const handleDelete = (bookId: number) => {
         if (confirm('Are you sure you want to permanently delete this book and its chapters?')) {
             router.delete(`/admin/books/${bookId}`);
@@ -163,11 +184,36 @@ export default function Index({ books: initialBooks, maxUploadMb }: Props) {
                                         return (
                                             <tr key={b.id} className="hover:bg-neutral-50/70 dark:hover:bg-neutral-800/40 transition-colors">
                                                 <td className="px-6 py-4">
-                                                    <div className="font-bold text-neutral-900 dark:text-white">
-                                                        {b.title}
-                                                    </div>
-                                                    <div className="text-xs text-neutral-400 mt-0.5">
-                                                        {b.author || 'Author unspecified'} &bull; {b.created_at}
+                                                    <div className="flex items-center gap-3">
+                                                        {/* Cover: click to upload a new image */}
+                                                        <label
+                                                            className="group/cover relative w-10 h-14 shrink-0 rounded-md overflow-hidden bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 cursor-pointer"
+                                                            title={b.cover_url ? 'Change cover' : 'Add cover'}
+                                                        >
+                                                            {b.cover_url ? (
+                                                                <img src={b.cover_url} alt="" className="w-full h-full object-cover" />
+                                                            ) : (
+                                                                <BookOpen className="w-4 h-4 absolute inset-0 m-auto text-neutral-400" />
+                                                            )}
+                                                            <span className="absolute inset-0 flex items-center justify-center bg-black/50 text-white opacity-0 group-hover/cover:opacity-100 transition-opacity">
+                                                                <Camera className="w-4 h-4" />
+                                                            </span>
+                                                            <input
+                                                                type="file"
+                                                                accept="image/*"
+                                                                className="sr-only"
+                                                                onChange={(e) => {
+                                                                    handleCoverChange(b.id, e.target.files?.[0]);
+                                                                    e.target.value = '';
+                                                                }}
+                                                            />
+                                                        </label>
+                                                        <div className="min-w-0">
+                                                            <div className="font-bold text-neutral-900 dark:text-white">{b.title}</div>
+                                                            <div className="text-xs text-neutral-400 mt-0.5">
+                                                                {b.author || 'Author unspecified'} &bull; {b.created_at}
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </td>
                                                 <td className="hidden md:table-cell px-6 py-4">
@@ -345,6 +391,20 @@ export default function Index({ books: initialBooks, maxUploadMb }: Props) {
                                     placeholder="Brief book overview..."
                                     className="w-full px-3.5 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white focus:ring-2 focus:ring-primary-500 focus:outline-none"
                                 />
+                            </div>
+
+                            <div>
+                                <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
+                                    Cover image (optional, max 5 MB)
+                                </label>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) => setData('cover_image', e.target.files ? e.target.files[0] : null)}
+                                    className="w-full text-xs text-neutral-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-neutral-100 file:text-neutral-700 hover:file:bg-neutral-200 dark:file:bg-neutral-800 dark:file:text-neutral-300"
+                                />
+                                <p className="text-[11px] text-neutral-400 mt-1">Leave empty to add one later from the book list.</p>
+                                {errors.cover_image && <div className="text-xs text-rose-500 mt-1">{errors.cover_image}</div>}
                             </div>
 
                             <div>

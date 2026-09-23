@@ -39,6 +39,7 @@ class AdminBookController extends Controller
                     'slug' => $book->slug,
                     'title' => $book->getTranslated('title', 'en') ?: $book->slug,
                     'author' => $book->author,
+                    'cover_url' => $book->cover_image ? asset($book->cover_image) : null,
                     'status' => $book->status,
                     'processing_progress' => $book->processing_progress,
                     'current_step' => $book->current_step,
@@ -337,10 +338,37 @@ class AdminBookController extends Controller
     }
 
     /**
+     * Replace a book's cover image.
+     */
+    public function updateCover(Request $request, Book $book): RedirectResponse
+    {
+        $request->validate([
+            'cover_image' => ['required', 'image', 'max:5120'], // 5MB
+        ]);
+
+        $this->deleteUploadedCover($book);
+        $book->update(['cover_image' => 'storage/'.$request->file('cover_image')->store('books/covers', 'public')]);
+
+        return back()->with('success', 'Book cover updated.');
+    }
+
+    /**
+     * Delete a cover uploaded by an admin. Covers generated from the PDF's first page live with the page images.
+     */
+    protected function deleteUploadedCover(Book $book): void
+    {
+        if ($book->cover_image && str_starts_with($book->cover_image, 'storage/books/covers/')) {
+            Storage::disk('public')->delete(substr($book->cover_image, strlen('storage/')));
+        }
+    }
+
+    /**
      * Delete book and all associated files.
      */
     public function destroy(Book $book): RedirectResponse
     {
+        $this->deleteUploadedCover($book);
+
         if (Storage::disk('local')->exists($book->original_pdf_path)) {
             Storage::disk('local')->delete($book->original_pdf_path);
         }

@@ -125,7 +125,7 @@ class BookProcessingTest extends TestCase
         $response->assertStatus(302);
 
         $book->refresh();
-        $this->assertEquals(!$initialStatus, $book->is_published);
+        $this->assertEquals(! $initialStatus, $book->is_published);
     }
 
     public function test_admin_pdf_upload_validation_and_job_dispatch(): void
@@ -182,5 +182,29 @@ class BookProcessingTest extends TestCase
             'original_language' => 'en',
             'pdf_file' => UploadedFile::fake()->create('too-large.pdf', 2049 * 1024, 'application/pdf'),
         ])->assertSessionHasErrors('pdf_file');
+    }
+
+    public function test_admin_can_change_a_book_cover(): void
+    {
+        Storage::fake('public');
+        $this->actingAs(User::where('email', 'admin@example.com')->first());
+        $book = Book::first();
+
+        $this->post("/admin/books/{$book->id}/cover", [
+            'cover_image' => UploadedFile::fake()->image('cover.jpg', 400, 560),
+        ])->assertRedirect()->assertSessionHasNoErrors();
+
+        $book->refresh();
+        $this->assertStringStartsWith('storage/books/covers/', $book->cover_image);
+        Storage::disk('public')->assertExists(substr($book->cover_image, strlen('storage/')));
+    }
+
+    public function test_book_cover_must_be_an_image(): void
+    {
+        $this->actingAs(User::where('email', 'admin@example.com')->first());
+
+        $this->post('/admin/books/'.Book::first()->id.'/cover', [
+            'cover_image' => UploadedFile::fake()->create('notes.pdf', 10, 'application/pdf'),
+        ])->assertSessionHasErrors('cover_image');
     }
 }

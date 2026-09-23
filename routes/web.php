@@ -172,6 +172,7 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admi
     Route::post('/books/{book}/translate', [AdminBookController::class, 'translateBook'])->name('books.translate');
     Route::post('/books/{book}/reprocess', [AdminBookController::class, 'reprocess'])->name('books.reprocess');
     Route::post('/books/{book}/publish', [AdminBookController::class, 'togglePublish'])->name('books.publish');
+    Route::post('/books/{book}/cover', [AdminBookController::class, 'updateCover'])->name('books.cover');
     Route::delete('/books/{book}', [AdminBookController::class, 'destroy'])->name('books.destroy');
 });
 
