@@ -26,6 +26,10 @@ import { cn } from '@/Utils';
 export default function Navbar() {
     const { t } = useTranslation();
     const { auth, navigation } = usePage<PageProps>().props;
+    const { url } = usePage();
+
+    // The current section stays highlighted on its sub-pages too (e.g. Books while reading a book)
+    const isActiveLink = (href: string) => url === href || url.startsWith(`${href}/`) || url.startsWith(`${href}?`);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [userDropdownOpen, setUserDropdownOpen] = useState(false);
 
@@ -66,7 +70,13 @@ export default function Navbar() {
                                 <Link
                                     key={item.key}
                                     href={item.href}
-                                    className="flex items-center gap-1.5 px-2.5 py-2 text-sm font-medium whitespace-nowrap text-neutral-700 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60 transition-colors"
+                                    aria-current={isActiveLink(item.href) ? 'page' : undefined}
+                                    className={cn(
+                                        'flex items-center gap-1.5 px-2.5 py-2 text-sm font-medium whitespace-nowrap rounded-lg transition-colors',
+                                        isActiveLink(item.href)
+                                            ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/50'
+                                            : 'text-neutral-700 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-neutral-100/70 dark:hover:bg-neutral-800/60'
+                                    )}
                                 >
                                     <item.icon className={cn('hidden 2xl:block w-4 h-4 shrink-0', item.iconColor)} />
                                     <span>{item.label}</span>
@@ -234,7 +244,13 @@ export default function Navbar() {
                             <Link
                                 key={item.key}
                                 href={item.href}
-                                className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800"
+                                aria-current={isActiveLink(item.href) ? 'page' : undefined}
+                                className={cn(
+                                    'flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium',
+                                    isActiveLink(item.href)
+                                        ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/50'
+                                        : 'text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800'
+                                )}
                                 onClick={() => setMobileMenuOpen(false)}
                             >
                                 <item.icon className={cn('w-4 h-4', item.iconColor)} />

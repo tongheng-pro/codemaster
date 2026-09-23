@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Head, Link, router } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
 import MonacoCodeEditor from '@/Components/MonacoCodeEditor';
 import { useTranslation } from '@/Hooks/useTranslation';
@@ -15,7 +15,7 @@ import {
     Check,
     Award,
 } from 'lucide-react';
-import { cn } from '@/Utils';
+import { cn, showToast } from '@/Utils';
 
 interface Props {
     exercise: Exercise;
@@ -94,12 +94,33 @@ export default function Show({ exercise }: Props) {
 <body>${code}</body>
 </html>`);
 
-        // Record attempt to server
-        router.post(
-            `/exercises/${exercise.id}/attempt`,
-            { submitted_code: code, passed: allPassed },
-            { preserveScroll: true, preserveState: true }
-        );
+        recordAttempt(allPassed);
+    }
+
+    // The attempt endpoint returns JSON (not an Inertia page), so send it with fetch like the quiz page does
+    async function recordAttempt(passed: boolean) {
+        try {
+            const csrfToken = (document.querySelector('meta[name="csrf-token"]') as HTMLMetaElement)?.content || '';
+            const response = await fetch(`/exercises/${exercise.id}/attempt`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    Accept: 'application/json',
+                },
+                body: JSON.stringify({ submitted_code: code, passed }),
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            const data: { passed: boolean; points: number } = await response.json();
+            if (data.passed && data.points > 0) {
+                showToast(`Passed! +${data.points} points`);
+            }
+        } catch (error) {
+            console.error('Could not save the exercise attempt:', error);
+            showToast('Your result could not be saved. Please try again.', 'error');
+        }
     }
 
     function handleReset() {

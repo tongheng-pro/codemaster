@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from '@inertiajs/react';
 import { useTranslation } from '@/Hooks/useTranslation';
-import { Heart } from 'lucide-react';
 
 export default function Footer() {
     const { t } = useTranslation();
@@ -65,8 +64,8 @@ export default function Footer() {
 
                 <div className="border-t border-neutral-100 dark:border-neutral-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 dark:text-neutral-400 gap-3">
                     <div className="flex items-center gap-1">
-                        <span>Crafted with</span>
-                        <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500 inline" />
+                        <span>Crafted by</span>
+                        <span className="font-semibold text-neutral-800 dark:text-neutral-200">@HENG</span>
                         <span>for developers worldwide &bull; English &amp; ភាសាខ្មែរ</span>
                     </div>
                     <div>

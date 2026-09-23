@@ -133,19 +133,19 @@ export default function InteractiveCodeBlock({
     return (
         <div className={cn('rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-xs overflow-hidden my-6', className)}>
             {/* Header / Language Badge */}
-            <div className="flex items-center justify-between px-4 py-2.5 bg-neutral-100/80 dark:bg-neutral-800/80 border-b border-neutral-200 dark:border-neutral-800 text-xs">
-                <div className="flex items-center gap-2">
-                    <span className="font-mono uppercase font-bold text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/60 px-2 py-0.5 rounded border border-primary-200 dark:border-primary-800">
+            <div className="flex items-center justify-between gap-3 px-4 py-2.5 bg-neutral-100/80 dark:bg-neutral-800/80 border-b border-neutral-200 dark:border-neutral-800 text-xs">
+                <div className="flex items-center gap-2 min-w-0">
+                    <span className="shrink-0 font-mono uppercase font-bold text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-950/60 px-2 py-0.5 rounded border border-primary-200 dark:border-primary-800">
                         {language}
                     </span>
-                    {title && <span className="font-medium text-neutral-700 dark:text-neutral-200">{title}</span>}
+                    {title && <span className="font-medium text-neutral-700 dark:text-neutral-200 truncate">{title}</span>}
                 </div>
 
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center gap-1 shrink-0">
                     <button
                         type="button"
                         onClick={handleRun}
-                        className="flex items-center gap-1 px-3 py-1 bg-primary-600 hover:bg-primary-500 text-white rounded-lg font-semibold text-xs transition-colors shadow-xs"
+                        className="flex items-center gap-1 px-3 py-1 whitespace-nowrap bg-primary-600 hover:bg-primary-500 text-white rounded-lg font-semibold text-xs transition-colors shadow-xs"
                     >
                         <Play className="w-3.5 h-3.5 fill-white" />
                         <span>{t('common.run')}</span>
@@ -153,20 +153,20 @@ export default function InteractiveCodeBlock({
                     <button
                         type="button"
                         onClick={handleReset}
-                        className="flex items-center gap-1 px-2.5 py-1 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg text-xs transition-colors"
+                        className="p-1.5 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg transition-colors"
                         title={t('common.reset')}
+                        aria-label={t('common.reset')}
                     >
                         <RotateCcw className="w-3.5 h-3.5" />
-                        <span className="hidden sm:inline">{t('common.reset')}</span>
                     </button>
                     <button
                         type="button"
                         onClick={handleCopy}
-                        className="flex items-center gap-1 px-2.5 py-1 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg text-xs transition-colors"
-                        title={t('common.copy')}
+                        className="p-1.5 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg transition-colors"
+                        title={copied ? t('common.copied') : t('common.copy')}
+                        aria-label={t('common.copy')}
                     >
                         {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
-                        <span className="hidden sm:inline">{copied ? t('common.copied') : t('common.copy')}</span>
                     </button>
                 </div>
             </div>

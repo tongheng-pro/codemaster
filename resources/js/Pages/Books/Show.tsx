@@ -3,6 +3,9 @@ import { Head, Link, router } from '@inertiajs/react';
 import AppLayout from '@/Layouts/AppLayout';
 import { useTranslation } from '@/Hooks/useTranslation';
 import MonacoCodeEditor from '@/Components/MonacoCodeEditor';
+import CodeRunOutput from '@/Components/CodeRunOutput';
+import { findLanguage, monacoLanguageFor, runModeFor } from '@/Utils/languages';
+import { runCode, RunResult, RunnableMode } from '@/Utils/codeRunner';
 import {
     BookOpen,
     ChevronLeft,
@@ -131,6 +134,31 @@ export default function Show({
     // Interactive Code Example state
     const [editorCodes, setEditorCodes] = useState<Record<number, string>>({});
     const [copiedBlockId, setCopiedBlockId] = useState<number | null>(null);
+
+    // Running code blocks in the browser: output (JS/Python/SQL) or a live preview (HTML)
+    const [blockRuns, setBlockRuns] = useState<Record<number, { result?: RunResult; previewHtml?: string }>>({});
+    const [runningBlockId, setRunningBlockId] = useState<number | null>(null);
+    const [blockRunStatus, setBlockRunStatus] = useState('');
+
+    const handleRunBlock = async (blockId: number, code: string, languageId: string) => {
+        const runMode = runModeFor(languageId);
+        if (runMode === 'web') {
+            setBlockRuns((previous) => ({
+                ...previous,
+                [blockId]: {
+                    previewHtml: `<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;margin:16px;color:#1d1d1f;line-height:1.5}</style></head><body>${code}</body></html>`,
+                },
+            }));
+            return;
+        }
+        if (!runMode || runningBlockId !== null) return;
+
+        setRunningBlockId(blockId);
+        setBlockRunStatus('');
+        const result = await runCode(runMode as RunnableMode, code, setBlockRunStatus);
+        setBlockRuns((previous) => ({ ...previous, [blockId]: { result } }));
+        setRunningBlockId(null);
+    };
 
     // Reader view: extracted text or original PDF page snapshots
     const [viewMode, setViewMode] = useState<'text' | 'pdf'>('text');
@@ -693,6 +721,10 @@ export default function Show({
             case 'code':
             case 'example':
                 const lang = block.metadata?.language || 'html';
+                const languageLabel = findLanguage(lang)?.label ?? (lang === 'plaintext' ? 'Code' : lang);
+                const canRun = runModeFor(lang) !== null;
+                const blockRun = blockRuns[block.id];
+                const isBlockRunning = runningBlockId === block.id;
                 return (
                     <div
                         key={block.id}
@@ -703,22 +735,35 @@ export default function Show({
                                 <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
                                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500" />
                                 <span className="w-2.5 h-2.5 rounded-full bg-primary-500" />
-                                <span className="uppercase font-semibold ml-2 text-primary-400">{lang}</span>
+                                <span className="uppercase font-semibold ml-2 text-primary-400">{languageLabel}</span>
                             </div>
 
-                            <button
-                                type="button"
-                                onClick={() => handleCopyCode(block.id, currentCode)}
-                                className="flex items-center gap-1 hover:text-white px-2 py-1 rounded bg-neutral-700/50 hover:bg-neutral-700 transition-colors"
-                            >
-                                {isCopied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
-                                <span>{isCopied ? t('common.copied') : t('common.copy')}</span>
-                            </button>
+                            <div className="flex items-center gap-1.5">
+                                {canRun && (
+                                    <button
+                                        type="button"
+                                        onClick={() => handleRunBlock(block.id, currentCode, lang)}
+                                        disabled={runningBlockId !== null}
+                                        className="flex items-center gap-1 px-2.5 py-1 rounded bg-primary-600 hover:bg-primary-500 disabled:opacity-50 text-white font-semibold transition-colors"
+                                    >
+                                        <Play className="w-3 h-3 fill-white" />
+                                        <span>{t('common.run')}</span>
+                                    </button>
+                                )}
+                                <button
+                                    type="button"
+                                    onClick={() => handleCopyCode(block.id, currentCode)}
+                                    className="flex items-center gap-1 hover:text-white px-2 py-1 rounded bg-neutral-700/50 hover:bg-neutral-700 transition-colors"
+                                >
+                                    {isCopied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
+                                    <span>{isCopied ? t('common.copied') : t('common.copy')}</span>
+                                </button>
+                            </div>
                         </div>
 
                         <MonacoCodeEditor
                             value={currentCode}
-                            language={lang}
+                            language={monacoLanguageFor(lang)}
                             onChange={(val) => setEditorCodes((prev) => ({ ...prev, [block.id]: val }))}
                             height={`${Math.min(block.content.split('\n').length * 20 + 2 * 14, 560)}px`}
                             lineHeight={20}
@@ -726,6 +771,20 @@ export default function Show({
                             autoHeightMax={560}
                             readOnly={false}
                         />
+
+                        {blockRun?.previewHtml && (
+                            <div className="border-t border-neutral-700/60 bg-white">
+                                <iframe srcDoc={blockRun.previewHtml} title="Code preview" sandbox="allow-scripts" className="w-full h-48 border-0 bg-white" />
+                            </div>
+                        )}
+                        {(isBlockRunning || blockRun?.result) && (
+                            <CodeRunOutput
+                                result={blockRun?.result ?? null}
+                                isRunning={isBlockRunning}
+                                status={blockRunStatus}
+                                className="max-h-80 border-t border-neutral-700/60"
+                            />
+                        )}
                     </div>
                 );
 

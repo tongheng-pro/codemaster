@@ -384,19 +384,48 @@ class LocalRuleAIProvider implements AIProviderInterface
     }
 
     /**
-     * Detect language from code content.
+     * Detect the programming language of a code sample (used for highlighting and the in-browser Run button).
      */
-    protected function detectLanguage(string $code): string
+    public function detectLanguage(string $code): string
     {
         $trimmed = ltrim($code);
+
+        // Languages with unmistakable markers come first
+        $markers = [
+            'php' => '/<\?php|^\s*\$[a-z_]\w*\s*=.*;\s*$/mi',
+            'cpp' => '/#include\s*<(iostream|vector|string|map)>|std::|\bcout\s*<</',
+            'c' => '/#include\s*<\w+\.h>|\bprintf\s*\(|\bint\s+main\s*\(/',
+            'go' => '/^package\s+main\b|\bfmt\.Print|\bfunc\s+\w+\(.*\)\s*\{/m',
+            'rust' => '/\bfn\s+main\s*\(|\bprintln!\s*\(|\blet\s+mut\b/',
+            'java' => '/\bpublic\s+(static\s+)?(class|void)\b|System\.out\.print/',
+            'csharp' => '/^\s*using\s+System|Console\.Write(Line)?\s*\(/m',
+            'kotlin' => '/\bfun\s+main\s*\(|\bval\s+\w+\s*=\s*listOf\(/',
+            'sql' => '/^\s*(SELECT\s.+\sFROM|INSERT\s+INTO|UPDATE\s+\w+\s+SET|DELETE\s+FROM|CREATE\s+(TABLE|INDEX|VIEW|DATABASE)|ALTER\s+TABLE|DROP\s+TABLE)\b/mi',
+            'bash' => '/^#!.*\b(ba)?sh\b|^\s*\$\s+\w|^\s*(sudo|apt(-get)?|npm|npx|composer|git|mkdir|chmod|export)\s/m',
+        ];
+        foreach ($markers as $language => $pattern) {
+            if (preg_match($pattern, $code)) {
+                return $language;
+            }
+        }
 
         if (str_starts_with($trimmed, '<') || preg_match('/<\/?[a-z][\w-]*[\s>]/i', $code)) {
             return 'html';
         }
+        if (preg_match('/^\s*(def\s+\w+\(|class\s+\w+.*:\s*$|from\s+\w+\s+import\s|import\s+\w+\s*$|elif\s|print\()/m', $code)
+            && ! preg_match('/[;{]\s*$/m', $code)) {
+            return 'python';
+        }
+        if (in_array($trimmed[0] ?? '', ['{', '['], true) && json_decode($code) !== null) {
+            return 'json';
+        }
+        if (preg_match('/\binterface\s+\w+\s*\{|:\s*(string|number|boolean)(\[\])?\s*[,;)=]/', $code)) {
+            return 'typescript';
+        }
         if (preg_match('/^[^=()]*\{/m', $code) && preg_match('/^\s*[a-z-]+\s*:\s*[^;]+;/m', $code)) {
             return 'css';
         }
-        if (preg_match('/(function|const |let |var |console\.|=>|\);)/', $code)) {
+        if (preg_match('/(function|const |let |var |console\.|=>|\);|document\.|window\.|===|!==|\.addEventListener\()/', $code)) {
             return 'javascript';
         }
 

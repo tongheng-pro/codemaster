@@ -1,5 +1,4 @@
-import React, { Suspense, lazy, useState } from 'react';
-import { Loader2 } from 'lucide-react';
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 
 const Editor = lazy(() => import('@monaco-editor/react'));
 
@@ -32,56 +31,93 @@ export default function MonacoCodeEditor({
     const [contentHeight, setContentHeight] = useState<number | null>(null);
     const effectiveHeight = autoHeightMax && contentHeight !== null ? `${Math.min(contentHeight, autoHeightMax)}px` : height;
 
-    return (
-        <div className={className} style={{ height: effectiveHeight }}>
-            <Suspense
-                fallback={
-                    <div className="w-full h-full flex items-center justify-center bg-neutral-900 text-neutral-400 text-xs gap-2">
-                        <Loader2 className="w-4 h-4 animate-spin text-primary-500" />
-                        <span>Loading Code Editor...</span>
-                    </div>
-                }
-            >
-                <Editor
-                    height={effectiveHeight}
-                    language={language === 'js' ? 'javascript' : language}
-                    value={value}
-                    theme="vs-dark"
-                    onChange={(val) => onChange && onChange(val || '')}
-                    onMount={(editor, monaco) => {
-                        // Fira Code loads after Monaco measures text, which misaligns code with line numbers; re-measure once fonts are ready
-                        document.fonts?.ready.then(() => monaco.editor.remeasureFonts());
+    // Monaco is heavy, so only start it when the block is about to scroll into view; until then show the plain code
+    const containerRef = useRef<HTMLDivElement>(null);
+    const [isNearViewport, setIsNearViewport] = useState(false);
 
-                        if (autoHeightMax) {
-                            setContentHeight(editor.getContentHeight());
-                            editor.onDidContentSizeChange((event) => {
-                                if (event.contentHeightChanged) {
-                                    setContentHeight(event.contentHeight);
-                                }
-                            });
-                        }
-                    }}
-                    options={{
-                        readOnly,
-                        minimap: { enabled: false },
-                        fontSize: 13,
-                        ...(lineHeight ? { lineHeight } : {}),
-                        ...(verticalPadding ? { padding: { top: verticalPadding, bottom: verticalPadding } } : {}),
-                        lineNumbers: 'on',
-                        scrollBeyondLastLine: false,
-                        automaticLayout: true,
-                        tabSize: 2,
-                        wordWrap: 'on',
-                        fontFamily: "'Fira Code', monospace",
-                        fontLigatures: true,
-                        scrollbar: {
-                            verticalScrollbarSize: 6,
-                            horizontalScrollbarSize: 6,
-                        },
-                    }}
-                />
-            </Suspense>
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container || isNearViewport) return;
+        if (typeof IntersectionObserver === 'undefined') {
+            setIsNearViewport(true);
+            return;
+        }
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries.some((entry) => entry.isIntersecting)) {
+                    setIsNearViewport(true);
+                    observer.disconnect();
+                }
+            },
+            { rootMargin: '600px 0px' },
+        );
+        observer.observe(container);
+
+        return () => observer.disconnect();
+    }, [isNearViewport]);
+
+    const placeholder = (
+        <pre
+            className="w-full h-full m-0 overflow-hidden bg-[#1e1e1e] text-[#d4d4d4] text-[13px] whitespace-pre-wrap"
+            style={{
+                fontFamily: "'Fira Code', monospace",
+                lineHeight: lineHeight ? `${lineHeight}px` : undefined,
+                padding: `${verticalPadding ?? 0}px 16px ${verticalPadding ?? 0}px 64px`,
+            }}
+        >
+            {value}
+        </pre>
+    );
+
+    return (
+        <div ref={containerRef} className={className} style={{ height: effectiveHeight }}>
+            {!isNearViewport ? (
+                placeholder
+            ) : (
+                <Suspense fallback={placeholder}>
+                    <Editor
+                        height={effectiveHeight}
+                        language={language === 'js' ? 'javascript' : language}
+                        value={value}
+                        theme="vs-dark"
+                        onChange={(val) => onChange && onChange(val || '')}
+                        onMount={(editor, monaco) => {
+                            // Fira Code loads after Monaco measures text, which misaligns code with line numbers; re-measure once fonts are ready
+                            document.fonts?.ready.then(() => monaco.editor.remeasureFonts());
+
+                            if (autoHeightMax) {
+                                setContentHeight(editor.getContentHeight());
+                                editor.onDidContentSizeChange((event) => {
+                                    if (event.contentHeightChanged) {
+                                        setContentHeight(event.contentHeight);
+                                    }
+                                });
+                            }
+                        }}
+                        options={{
+                            readOnly,
+                            minimap: { enabled: false },
+                            fontSize: 13,
+                            ...(lineHeight ? { lineHeight } : {}),
+                            ...(verticalPadding ? { padding: { top: verticalPadding, bottom: verticalPadding } } : {}),
+                            lineNumbers: 'on',
+                            scrollBeyondLastLine: false,
+                            automaticLayout: true,
+                            tabSize: 2,
+                            wordWrap: 'on',
+                            fontFamily: "'Fira Code', monospace",
+                            fontLigatures: true,
+                            scrollbar: {
+                                verticalScrollbarSize: 6,
+                                horizontalScrollbarSize: 6,
+                                // Let the mouse wheel scroll the page when the editor itself has nothing left to scroll
+                                alwaysConsumeMouseWheel: false,
+                            },
+                        }}
+                    />
+                </Suspense>
+            )}
         </div>
     );
 }
-
