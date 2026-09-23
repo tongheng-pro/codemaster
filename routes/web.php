@@ -123,6 +123,7 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->name('admi
     // Site Settings
     Route::get('/settings', [AdminSettingController::class, 'index'])->name('settings.index');
     Route::put('/settings/navigation', [AdminSettingController::class, 'updateNavigation'])->name('settings.navigation');
+    Route::put('/settings/effects', [AdminSettingController::class, 'updateEffects'])->name('settings.effects');
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
 
     // Courses CRUD

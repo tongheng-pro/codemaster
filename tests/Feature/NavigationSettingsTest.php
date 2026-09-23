@@ -47,4 +47,24 @@ class NavigationSettingsTest extends TestCase
             ->put('/admin/settings/navigation', ['navigation' => ['courses' => true]])
             ->assertForbidden();
     }
+
+    public function test_admin_can_disable_and_enable_the_sakura_effect(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $this->get('/books')->assertSee('/sakura/sakura.js', false);
+
+        $this->actingAs($admin)->put('/admin/settings/effects', ['sakura' => false])->assertRedirect();
+        $this->get('/books')->assertDontSee('/sakura/sakura.js', false);
+
+        $this->actingAs($admin)->put('/admin/settings/effects', ['sakura' => true])->assertRedirect();
+        $this->get('/books')->assertSee('/sakura/sakura.js', false);
+    }
+
+    public function test_students_cannot_change_the_sakura_effect(): void
+    {
+        $student = User::factory()->create(['role' => 'student']);
+
+        $this->actingAs($student)->put('/admin/settings/effects', ['sakura' => false])->assertForbidden();
+    }
 }

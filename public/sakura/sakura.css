@@ -1,0 +1,50 @@
+/*
+ * Sakura Breeze — cherry blossom mouse effect (styles)
+ * Only transform and opacity are animated, so everything stays on the GPU compositor.
+ */
+
+.sakura-breeze {
+    position: fixed;
+    inset: 0;
+    z-index: var(--sakura-z-index, 45);
+    overflow: hidden; /* petals drifting off-screen never create scrollbars */
+    pointer-events: none; /* never blocks clicks, hovers or text selection */
+    contain: strict;
+}
+
+.sakura-breeze__petal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.sakura-breeze__inner {
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    backface-visibility: visible;
+}
+
+.sakura-breeze__inner svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    /* A barely-there shadow gives petals depth without looking like a glow */
+    filter: drop-shadow(0 1px 1px rgba(190, 90, 120, 0.12));
+}
+
+.sakura-breeze__sprite {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sakura-breeze {
+        display: none;
+    }
+}

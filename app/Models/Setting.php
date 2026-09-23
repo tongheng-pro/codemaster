@@ -49,6 +49,14 @@ class Setting extends Model
     }
 
     /**
+     * Whether the Sakura Breeze cherry blossom mouse effect is shown (on by default).
+     */
+    public static function isSakuraEnabled(): bool
+    {
+        return (bool) static::get('sakura_enabled', true);
+    }
+
+    /**
      * Which navbar items are enabled, falling back to the defaults for items never saved.
      *
      * @return array<string, bool>

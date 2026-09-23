@@ -23,6 +23,13 @@
         })();
     </script>
 
+    {{-- Sakura Breeze: cherry blossom petals that follow the mouse (desktop only, off with reduced motion; toggled in Admin → Settings) --}}
+    @if (\App\Models\Setting::isSakuraEnabled())
+        <link rel="stylesheet" href="/sakura/sakura.css">
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+        <script src="/sakura/sakura.js" defer></script>
+    @endif
+
     @viteReactRefresh
     @vite(['resources/css/app.css', 'resources/js/app.tsx'])
     @inertiaHead

@@ -13,7 +13,6 @@ import {
     ArrowRight,
     Search,
     Play,
-    Sparkles,
 } from 'lucide-react';
 import InteractiveCodeBlock from '@/Components/InteractiveCodeBlock';
 
@@ -94,10 +93,6 @@ export default function Home({ stats }: Props) {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                         <div className="lg:col-span-7 space-y-6 text-center lg:text-left" data-aos="fade-up">
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-primary-100/80 dark:bg-primary-950/80 text-primary-800 dark:text-primary-300 border border-primary-300 dark:border-primary-700">
-                                <Sparkles className="w-3.5 h-3.5" />
-                                <span>Native Bilingual Coding Education &bull; EN + KM</span>
-                            </div>
 
                             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-neutral-900 dark:text-white leading-[1.15]">
                                 {t('home.hero_title')}

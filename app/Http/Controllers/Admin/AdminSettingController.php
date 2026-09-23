@@ -18,6 +18,7 @@ class AdminSettingController extends Controller
     {
         return Inertia::render('Admin/Settings/Index', [
             'navigation' => Setting::navigation(),
+            'sakuraEnabled' => Setting::isSakuraEnabled(),
         ]);
     }
 
@@ -36,5 +37,19 @@ class AdminSettingController extends Controller
         Setting::set('navigation', array_map('boolval', $validated['navigation']));
 
         return back()->with('success', 'Navigation updated.');
+    }
+
+    /**
+     * Turn the Sakura Breeze mouse effect on or off for the whole site.
+     */
+    public function updateEffects(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'sakura' => ['required', 'boolean'],
+        ]);
+
+        Setting::set('sakura_enabled', (bool) $validated['sakura']);
+
+        return back()->with('success', $validated['sakura'] ? 'Sakura effect enabled.' : 'Sakura effect disabled.');
     }
 }
