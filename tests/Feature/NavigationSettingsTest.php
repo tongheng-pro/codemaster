@@ -48,23 +48,36 @@ class NavigationSettingsTest extends TestCase
             ->assertForbidden();
     }
 
-    public function test_admin_can_disable_and_enable_the_sakura_effect(): void
+    public function test_sakura_is_the_default_site_effect(): void
+    {
+        $this->get('/books')->assertSee('/sakura/sakura.js', false)->assertDontSee('/effects/effects.js', false);
+    }
+
+    public function test_admin_can_choose_another_effect_or_turn_effects_off(): void
     {
         $admin = User::factory()->create(['role' => 'admin']);
 
-        $this->get('/books')->assertSee('/sakura/sakura.js', false);
+        $this->actingAs($admin)->put('/admin/settings/effects', ['effect' => 'snow'])->assertRedirect();
+        $this->get('/books')
+            ->assertSee('/effects/effects.js', false)
+            ->assertSee('window.SITE_EFFECT = \'snow\'', false)
+            ->assertDontSee('/sakura/sakura.js', false);
 
-        $this->actingAs($admin)->put('/admin/settings/effects', ['sakura' => false])->assertRedirect();
-        $this->get('/books')->assertDontSee('/sakura/sakura.js', false);
-
-        $this->actingAs($admin)->put('/admin/settings/effects', ['sakura' => true])->assertRedirect();
-        $this->get('/books')->assertSee('/sakura/sakura.js', false);
+        $this->actingAs($admin)->put('/admin/settings/effects', ['effect' => 'none'])->assertRedirect();
+        $this->get('/books')->assertDontSee('/effects/effects.js', false)->assertDontSee('/sakura/sakura.js', false);
     }
 
-    public function test_students_cannot_change_the_sakura_effect(): void
+    public function test_unknown_effects_are_rejected(): void
+    {
+        $admin = User::factory()->create(['role' => 'admin']);
+
+        $this->actingAs($admin)->put('/admin/settings/effects', ['effect' => 'fireworks'])->assertSessionHasErrors('effect');
+    }
+
+    public function test_students_cannot_change_the_site_effect(): void
     {
         $student = User::factory()->create(['role' => 'student']);
 
-        $this->actingAs($student)->put('/admin/settings/effects', ['sakura' => false])->assertForbidden();
+        $this->actingAs($student)->put('/admin/settings/effects', ['effect' => 'none'])->assertForbidden();
     }
 }

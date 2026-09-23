@@ -152,5 +152,35 @@ class BookProcessingTest extends TestCase
         $this->assertDatabaseHas('books', ['author' => 'Robert C. Martin']);
         $this->assertDatabaseHas('book_translations', ['title' => 'Clean Code Principles']);
     }
-}
 
+    public function test_admin_can_upload_pdfs_larger_than_the_old_150mb_limit(): void
+    {
+        Storage::fake('local');
+        Queue::fake();
+
+        $this->actingAs(User::where('email', 'admin@example.com')->first());
+
+        $this->post('/admin/books', [
+            'title' => 'Large Scanned Manual',
+            'original_language' => 'en',
+            'pdf_file' => UploadedFile::fake()->create('large-manual.pdf', 1800 * 1024, 'application/pdf'), // 1.8 GB
+        ])->assertRedirect('/admin/books')->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('book_translations', ['title' => 'Large Scanned Manual']);
+    }
+
+    public function test_pdf_uploads_over_the_configured_limit_are_rejected(): void
+    {
+        Storage::fake('local');
+        Queue::fake();
+        config(['books.max_upload_mb' => 2048]);
+
+        $this->actingAs(User::where('email', 'admin@example.com')->first());
+
+        $this->post('/admin/books', [
+            'title' => 'Too Large',
+            'original_language' => 'en',
+            'pdf_file' => UploadedFile::fake()->create('too-large.pdf', 2049 * 1024, 'application/pdf'),
+        ])->assertSessionHasErrors('pdf_file');
+    }
+}

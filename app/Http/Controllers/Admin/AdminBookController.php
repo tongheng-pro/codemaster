@@ -52,6 +52,7 @@ class AdminBookController extends Controller
 
         return Inertia::render('Admin/Books/Index', [
             'books' => $books,
+            'maxUploadMb' => config('books.max_upload_mb'),
         ]);
     }
 
@@ -66,7 +67,7 @@ class AdminBookController extends Controller
             'description' => ['nullable', 'string'],
             'original_language' => ['required', 'string', 'in:en,km'],
             'cover_image' => ['nullable', 'image', 'max:5120'], // 5MB
-            'pdf_file' => ['required', 'file', 'mimes:pdf', 'max:153600'], // 150MB
+            'pdf_file' => ['required', 'file', 'mimes:pdf', 'max:'.config('books.max_upload_mb') * 1024], // kilobytes
             'auto_translate' => ['nullable', 'boolean'],
         ]);
 

@@ -23,11 +23,17 @@
         })();
     </script>
 
-    {{-- Sakura Breeze: cherry blossom petals that follow the mouse (desktop only, off with reduced motion; toggled in Admin → Settings) --}}
-    @if (\App\Models\Setting::isSakuraEnabled())
+    {{-- Site effect chosen in Admin → Settings (GSAP particles; off with reduced motion). Nothing loads when set to "none". --}}
+    @php($siteEffect = \App\Models\Setting::siteEffect())
+    @if ($siteEffect === 'sakura')
         <link rel="stylesheet" href="/sakura/sakura.css">
         <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
         <script src="/sakura/sakura.js" defer></script>
+    @elseif ($siteEffect !== 'none')
+        <link rel="stylesheet" href="/effects/effects.css">
+        <script>window.SITE_EFFECT = @js($siteEffect);</script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+        <script src="/effects/effects.js" defer></script>
     @endif
 
     @viteReactRefresh

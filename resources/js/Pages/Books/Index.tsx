@@ -10,7 +10,6 @@ import {
     Layers,
     FileText,
     ArrowRight,
-    Sparkles,
     CheckCircle2,
 } from 'lucide-react';
 
@@ -48,11 +47,6 @@ export default function Index({ books, filters }: Props) {
             {/* Hero Section */}
             <div className="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800 py-12 sm:py-16">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-50 dark:bg-primary-950/50 border border-primary-200 dark:border-primary-800/60 text-xs font-semibold text-primary-700 dark:text-primary-300 mb-4">
-                        <Sparkles className="w-3.5 h-3.5 text-primary-500" />
-                        <span>AI-Structured Books & References</span>
-                    </div>
-
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 dark:text-white tracking-tight">
                         {t('books.title')}
                     </h1>

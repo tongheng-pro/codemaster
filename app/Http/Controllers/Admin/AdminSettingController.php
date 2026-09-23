@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -18,7 +19,7 @@ class AdminSettingController extends Controller
     {
         return Inertia::render('Admin/Settings/Index', [
             'navigation' => Setting::navigation(),
-            'sakuraEnabled' => Setting::isSakuraEnabled(),
+            'siteEffect' => Setting::siteEffect(),
         ]);
     }
 
@@ -40,16 +41,16 @@ class AdminSettingController extends Controller
     }
 
     /**
-     * Turn the Sakura Breeze mouse effect on or off for the whole site.
+     * Choose the site-wide visual effect (or none).
      */
     public function updateEffects(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'sakura' => ['required', 'boolean'],
+            'effect' => ['required', 'string', Rule::in(Setting::EFFECTS)],
         ]);
 
-        Setting::set('sakura_enabled', (bool) $validated['sakura']);
+        Setting::set('site_effect', $validated['effect']);
 
-        return back()->with('success', $validated['sakura'] ? 'Sakura effect enabled.' : 'Sakura effect disabled.');
+        return back()->with('success', $validated['effect'] === 'none' ? 'Effects turned off.' : 'Site effect updated.');
     }
 }

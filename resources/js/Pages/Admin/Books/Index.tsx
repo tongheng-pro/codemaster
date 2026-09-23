@@ -37,9 +37,14 @@ interface AdminBook {
 
 interface Props {
     books: AdminBook[];
+    maxUploadMb: number;
 }
 
-export default function Index({ books: initialBooks }: Props) {
+function formatMegabytes(megabytes: number): string {
+    return megabytes >= 1024 ? `${+(megabytes / 1024).toFixed(1)} GB` : `${megabytes} MB`;
+}
+
+export default function Index({ books: initialBooks, maxUploadMb }: Props) {
     const { t } = useTranslation();
     const [books, setBooks] = useState<AdminBook[]>(initialBooks);
     // Open the upload form straight away when arriving from the dashboard's "Upload book" button
@@ -65,7 +70,7 @@ export default function Index({ books: initialBooks }: Props) {
     }, [books]);
 
     // Upload Form
-    const { data, setData, post, processing, errors, reset, progress } = useForm({
+    const { data, setData, post, processing, errors, reset, progress, setError, clearErrors } = useForm({
         title: '',
         author: '',
         description: '',
@@ -344,13 +349,24 @@ export default function Index({ books: initialBooks }: Props) {
 
                             <div>
                                 <label className="block text-xs font-semibold text-neutral-700 dark:text-neutral-300 mb-1">
-                                    PDF File * (Max: 150MB)
+                                    PDF File * (Max: {formatMegabytes(maxUploadMb)})
                                 </label>
                                 <input
                                     type="file"
                                     required
                                     accept="application/pdf"
-                                    onChange={(e) => setData('pdf_file', e.target.files ? e.target.files[0] : null)}
+                                    onChange={(e) => {
+                                        const file = e.target.files ? e.target.files[0] : null;
+                                        // Reject oversized files right away instead of after a long upload
+                                        if (file && file.size > maxUploadMb * 1024 * 1024) {
+                                            e.target.value = '';
+                                            setData('pdf_file', null);
+                                            setError('pdf_file', `This PDF is ${formatMegabytes(Math.ceil(file.size / 1024 / 1024))}. The limit is ${formatMegabytes(maxUploadMb)}.`);
+                                            return;
+                                        }
+                                        clearErrors('pdf_file');
+                                        setData('pdf_file', file);
+                                    }}
                                     className="w-full text-xs text-neutral-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100 dark:file:bg-primary-950 dark:file:text-primary-300"
                                 />
                                 {errors.pdf_file && <div className="text-xs text-rose-500 mt-1">{errors.pdf_file}</div>}
@@ -370,8 +386,14 @@ export default function Index({ books: initialBooks }: Props) {
                             </div>
 
                             {progress && (
-                                <div className="w-full bg-neutral-100 rounded-full h-2 overflow-hidden">
-                                    <div className="bg-primary-600 h-2" style={{ width: `${progress.percentage}%` }} />
+                                <div className="space-y-1">
+                                    <div className="flex justify-between text-xs text-neutral-500">
+                                        <span>Uploading… keep this tab open</span>
+                                        <span className="font-mono">{progress.percentage ?? 0}%</span>
+                                    </div>
+                                    <div className="w-full bg-neutral-100 dark:bg-neutral-800 rounded-full h-2 overflow-hidden">
+                                        <div className="bg-primary-600 h-2 transition-all" style={{ width: `${progress.percentage ?? 0}%` }} />
+                                    </div>
                                 </div>
                             )}
 

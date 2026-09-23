@@ -1,0 +1,77 @@
+/*
+ * Site Effects — shared styles for the particle layer.
+ * Only transform and opacity are animated, so everything stays on the GPU compositor.
+ */
+
+.site-fx {
+    --fx-snow: #9dbde3; /* light mode: soft blue so white snow is visible on white pages */
+    --fx-ripple: #0a84ff;
+
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    overflow: hidden; /* particles leaving the screen never create scrollbars */
+    pointer-events: none; /* never blocks clicks, hovers or text selection */
+    contain: strict;
+}
+
+html.dark .site-fx {
+    --fx-snow: #ffffff;
+}
+
+.site-fx__p {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    line-height: 1;
+    will-change: transform, opacity;
+}
+
+.site-fx__p svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.site-fx__glow {
+    border-radius: 50%;
+    background: radial-gradient(circle, #fffbd1 0%, rgba(255, 214, 90, 0.85) 28%, rgba(255, 190, 60, 0.25) 55%, transparent 72%);
+}
+
+.site-fx__bubble {
+    border: 1px solid rgba(110, 165, 230, 0.55);
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9) 0 12%, rgba(170, 210, 255, 0.28) 35%, rgba(170, 210, 255, 0.08) 70%);
+}
+
+.site-fx__ring {
+    border: 2px solid var(--fx-ripple);
+    border-radius: 50%;
+}
+
+.site-fx__dust {
+    border-radius: 50%;
+    background: #ffcf5c;
+    box-shadow: 0 0 6px 1px rgba(255, 196, 70, 0.55);
+}
+
+.site-fx__confetti {
+    border-radius: 1px;
+}
+
+.site-fx__code {
+    font-family: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-fx {
+        display: none;
+    }
+}

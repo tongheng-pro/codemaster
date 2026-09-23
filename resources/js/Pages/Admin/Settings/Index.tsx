@@ -8,8 +8,29 @@ import { cn } from '@/Utils';
 
 interface Props {
     navigation: NavigationSettings;
-    sakuraEnabled: boolean;
+    siteEffect: string;
 }
+
+const EFFECT_OPTIONS: Array<{ value: string; emoji: string; name: string; kind: string; description: string }> = [
+    { value: 'none', emoji: '🚫', name: 'None', kind: 'Off', description: 'No effect. Nothing extra is loaded.' },
+    { value: 'sakura', emoji: '🌸', name: 'Sakura petals', kind: 'Mouse', description: 'Cherry blossom petals drift behind the cursor.' },
+    { value: 'snow', emoji: '❄️', name: 'Snowfall', kind: 'Background', description: 'Soft snowflakes fall across the page.' },
+    { value: 'leaves', emoji: '🍂', name: 'Autumn leaves', kind: 'Background', description: 'Warm-coloured leaves tumble down.' },
+    {
+        value: 'fireflies',
+        emoji: '✨',
+        name: 'Fireflies',
+        kind: 'Background',
+        description: 'Glowing dots wander and blink. Best in dark mode.',
+    },
+    { value: 'sparkles', emoji: '⭐', name: 'Sparkles', kind: 'Mouse', description: 'Twinkling stars pop out behind the cursor.' },
+    { value: 'bubbles', emoji: '🫧', name: 'Bubbles', kind: 'Mouse', description: 'Soap bubbles rise from the cursor and pop.' },
+    { value: 'magic-dust', emoji: '🪄', name: 'Magic dust', kind: 'Mouse', description: 'Golden fairy dust falls from the cursor.' },
+    { value: 'hearts', emoji: '💗', name: 'Hearts', kind: 'Mouse', description: 'Little hearts float up and fade.' },
+    { value: 'code', emoji: '⌨️', name: 'Code symbols', kind: 'Mouse', description: 'Symbols like { } and </> float up from the cursor.' },
+    { value: 'confetti', emoji: '🎉', name: 'Confetti', kind: 'Click', description: 'A confetti burst on every click or tap.' },
+    { value: 'ripple', emoji: '💧', name: 'Ripple', kind: 'Click', description: 'A soft ring spreads out where you click.' },
+];
 
 function Switch({ isOn, onToggle, disabled }: { isOn: boolean; onToggle: () => void; disabled?: boolean }) {
     return (
@@ -34,19 +55,20 @@ function Switch({ isOn, onToggle, disabled }: { isOn: boolean; onToggle: () => v
     );
 }
 
-export default function SettingsIndex({ navigation, sakuraEnabled }: Props) {
-    const [isSavingSakura, setIsSavingSakura] = React.useState(false);
+export default function SettingsIndex({ navigation, siteEffect }: Props) {
+    const [savingEffect, setSavingEffect] = React.useState<string | null>(null);
 
     // The effect's scripts are included by the page template, so reload for the change to apply everywhere at once
-    const toggleSakura = () => {
-        setIsSavingSakura(true);
+    const chooseEffect = (effect: string) => {
+        if (effect === siteEffect || savingEffect) return;
+        setSavingEffect(effect);
         router.put(
             '/admin/settings/effects',
-            { sakura: !sakuraEnabled },
+            { effect },
             {
                 preserveScroll: true,
                 onSuccess: () => window.location.reload(),
-                onFinish: () => setIsSavingSakura(false),
+                onFinish: () => setSavingEffect(null),
             },
         );
     };
@@ -120,20 +142,66 @@ export default function SettingsIndex({ navigation, sakuraEnabled }: Props) {
                 </form>
 
                 <div className="max-w-2xl rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 overflow-hidden">
-                    <div className="p-5 border-b border-neutral-100 dark:border-neutral-800">
+                    <div className="p-5 pb-0">
                         <h2 className="text-sm font-semibold text-neutral-900 dark:text-white flex items-center gap-2">
                             <Flower2 className="w-4 h-4 text-pink-500" />
                             <span>Effects</span>
                         </h2>
                     </div>
-                    <div className="flex items-center justify-between gap-4 p-4">
-                        <span className="min-w-0">
-                            <span className="block text-sm font-medium text-neutral-900 dark:text-white">Sakura petals</span>
-                            <span className="block text-xs text-neutral-400">
-                                Cherry blossom petals follow the mouse on desktop. Saves immediately.
-                            </span>
-                        </span>
-                        <Switch isOn={sakuraEnabled} onToggle={toggleSakura} disabled={isSavingSakura} />
+                    <p className="px-5 pt-4 text-xs text-neutral-500">
+                        Pick one effect for the whole site; it saves immediately. Mouse effects only run on computers, and every effect is
+                        skipped for visitors who turn on &ldquo;reduce motion&rdquo;.
+                    </p>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-5">
+                        {EFFECT_OPTIONS.map((option) => {
+                            const isSelected = option.value === siteEffect;
+                            const isSaving = option.value === savingEffect;
+                            return (
+                                <div
+                                    key={option.value}
+                                    className={cn(
+                                        'relative rounded-xl border p-3 transition-colors',
+                                        isSelected
+                                            ? 'border-primary-500 bg-primary-50/60 dark:bg-primary-950/40'
+                                            : 'border-neutral-200 dark:border-neutral-800 hover:border-neutral-300 dark:hover:border-neutral-700',
+                                    )}
+                                >
+                                    <button
+                                        type="button"
+                                        onClick={() => chooseEffect(option.value)}
+                                        disabled={savingEffect !== null}
+                                        aria-pressed={isSelected}
+                                        className="w-full flex items-start gap-3 text-left disabled:cursor-wait"
+                                    >
+                                        <span className="text-2xl leading-none shrink-0" aria-hidden="true">
+                                            {option.emoji}
+                                        </span>
+                                        <span className="min-w-0 flex-1">
+                                            <span className="flex items-center gap-2">
+                                                <span className="text-sm font-medium text-neutral-900 dark:text-white">{option.name}</span>
+                                                <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wide bg-neutral-100 dark:bg-neutral-800 text-neutral-500">
+                                                    {option.kind}
+                                                </span>
+                                            </span>
+                                            <span className="block text-xs text-neutral-500 mt-0.5">{option.description}</span>
+                                        </span>
+                                        <span className="shrink-0 text-xs font-semibold text-primary-600 dark:text-primary-400">
+                                            {isSaving ? 'Saving…' : isSelected ? 'Active' : ''}
+                                        </span>
+                                    </button>
+                                    {option.value !== 'none' && (
+                                        <a
+                                            href={`/effects/demo.html?effect=${option.value}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="inline-block mt-2 ml-10 text-xs font-medium text-primary-600 dark:text-primary-400 hover:underline"
+                                        >
+                                            Preview
+                                        </a>
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </div>

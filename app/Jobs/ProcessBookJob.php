@@ -17,9 +17,10 @@ class ProcessBookJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
-     * Timeout after 15 minutes for large books.
+     * Timeout after 2 hours: very large PDFs (up to the 2 GB upload limit) can have thousands of pages.
+     * Keep the queue's retry_after above this so a running job is never started twice.
      */
-    public int $timeout = 900;
+    public int $timeout = 7200;
 
     /**
      * Number of attempts.

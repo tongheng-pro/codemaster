@@ -20,6 +20,26 @@ class Setting extends Model
         'playground' => true,
     ];
 
+    /**
+     * Site-wide visual effects an admin can choose from; only one runs at a time.
+     *
+     * @var list<string>
+     */
+    public const EFFECTS = [
+        'none',
+        'sakura',
+        'snow',
+        'leaves',
+        'fireflies',
+        'sparkles',
+        'bubbles',
+        'magic-dust',
+        'hearts',
+        'code',
+        'confetti',
+        'ripple',
+    ];
+
     protected $fillable = ['key', 'value'];
 
     protected function casts(): array
@@ -49,11 +69,17 @@ class Setting extends Model
     }
 
     /**
-     * Whether the Sakura Breeze cherry blossom mouse effect is shown (on by default).
+     * The active site effect. Falls back to the older on/off Sakura setting, and to Sakura when nothing was saved.
      */
-    public static function isSakuraEnabled(): bool
+    public static function siteEffect(): string
     {
-        return (bool) static::get('sakura_enabled', true);
+        $effect = static::get('site_effect');
+
+        if (is_string($effect) && in_array($effect, self::EFFECTS, true)) {
+            return $effect;
+        }
+
+        return static::get('sakura_enabled', true) ? 'sakura' : 'none';
     }
 
     /**
