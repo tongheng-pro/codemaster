@@ -206,11 +206,12 @@ export default function Index({ books: initialBooks }: Props) {
                                                     <button
                                                         type="button"
                                                         onClick={() => handleTogglePublish(b.id)}
+                                                        title={b.is_published ? 'Click to unpublish (hide from website)' : 'Click to publish on the website'}
                                                         className={cn(
-                                                            'px-2.5 py-1 rounded-full text-xs font-semibold inline-flex items-center gap-1 transition-colors',
+                                                            'px-2.5 py-1 rounded-full text-xs font-semibold inline-flex items-center gap-1 transition-colors cursor-pointer',
                                                             b.is_published
-                                                                ? 'bg-primary-50 dark:bg-primary-950/60 text-primary-600 dark:text-primary-400 border border-primary-200 dark:border-primary-800'
-                                                                : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-500 border border-neutral-200 dark:border-neutral-700'
+                                                                ? 'bg-primary-50 dark:bg-primary-950/60 text-primary-600 dark:text-primary-400 border border-primary-200 dark:border-primary-800 hover:bg-primary-100 dark:hover:bg-primary-900/60'
+                                                                : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-500 border border-neutral-200 dark:border-neutral-700 hover:bg-primary-600 hover:text-white hover:border-primary-600'
                                                         )}
                                                     >
                                                         {b.is_published ? (
@@ -221,7 +222,7 @@ export default function Index({ books: initialBooks }: Props) {
                                                         ) : (
                                                             <>
                                                                 <Clock className="w-3 h-3" />
-                                                                <span>Draft</span>
+                                                                <span>Draft &middot; Publish</span>
                                                             </>
                                                         )}
                                                     </button>
